@@ -1,6 +1,6 @@
-package GUI;
+package gui;
 
-import Autocompleter.Autocomplete;
+import autocompleter.Autocomplete;
 import java.util.ArrayList;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
@@ -11,11 +11,11 @@ import javax.swing.table.DefaultTableModel;
 
 public class Search extends javax.swing.JPanel {
     
-    String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
+    private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     
-    ArrayList<String> keywords = new ArrayList<>();
-    String COMMIT_ACTION = "commit";
+    private final ArrayList<String> keywords = new ArrayList<>();
+    private final String COMMIT_ACTION = "commit";
     /**
      * Creates new form Search
      */
@@ -43,7 +43,7 @@ public class Search extends javax.swing.JPanel {
             }
         }
         
-        Autocomplete autoComplete = new Autocomplete(GenreSearchTextField, keywords);
+        Autocomplete autoComplete = new Autocomplete(GenreSearchTextField, keywords) {};
         GenreSearchTextField.getDocument().addDocumentListener(autoComplete);
         
         GenreSearchTextField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
@@ -72,7 +72,7 @@ public class Search extends javax.swing.JPanel {
         ChangeGenreButton.setText("Search");
         ChangeGenreButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeGenreButtonActionPerformed(evt);
+                changeGenreButtonActionPerformed();
             }
         });
 
@@ -82,14 +82,14 @@ public class Search extends javax.swing.JPanel {
         GenreSearchTextField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         GenreSearchTextField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                GenreSearchTextFieldMouseClicked(evt);
+                genreSearchTextFieldMouseClicked();
             }
         });
 
         ChangeActorButton.setText("Search");
         ChangeActorButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChangeActorButtonActionPerformed(evt);
+                changeActorButtonActionPerformed();
             }
         });
 
@@ -112,7 +112,7 @@ public class Search extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ChangeGenreButton)
                     .addComponent(ChangeActorButton))
-                .addContainerGap(293, Short.MAX_VALUE))
+                .addContainerGap(259, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +130,7 @@ public class Search extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new DefaultTableModel(
             new Object [][] {
 
             },
@@ -158,7 +158,7 @@ public class Search extends javax.swing.JPanel {
         jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                jTable1MouseClicked();
             }
         });
         jScrollPane1.setViewportView(jTable1);
@@ -182,8 +182,8 @@ public class Search extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ChangeGenreButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeGenreButtonActionPerformed
+    
+    private void changeGenreButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         String genre = (String) GenreSearchCombobox.getSelectedItem();
@@ -194,9 +194,9 @@ public class Search extends javax.swing.JPanel {
                     movies.PlayTime, "Image"});
             }
         }
-    }//GEN-LAST:event_ChangeGenreButtonActionPerformed
+    }                                                 
 
-    private void ChangeActorButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChangeActorButtonActionPerformed
+    private void changeActorButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         String actor = GenreSearchTextField.getText();
@@ -207,18 +207,17 @@ public class Search extends javax.swing.JPanel {
                     movies.PlayTime, "Image"});
                 } 
         }
-    }//GEN-LAST:event_ChangeActorButtonActionPerformed
+    }                                                 
 
-    private void GenreSearchTextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GenreSearchTextFieldMouseClicked
+    private void genreSearchTextFieldMouseClicked() {                                                  
         createAutocompete();
-    }//GEN-LAST:event_GenreSearchTextFieldMouseClicked
+    }                                                 
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jTable1MouseClicked() {                                     
         int row = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
         int column = jTable1.convertColumnIndexToModel(0);
         Integer x = (Integer) jTable1.getModel().getValueAt(row, column);
-    }//GEN-LAST:event_jTable1MouseClicked
-    
+    }    
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> GenreSearchCombobox;

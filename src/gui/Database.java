@@ -1,6 +1,6 @@
-package GUI;
+package gui;
 
-import Writer.IOFile;
+import writer.IOFile;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -13,7 +13,7 @@ public class Database extends javax.swing.JPanel {
      */
     public Database() {
         initComponents();
-        IOFile.Readfile("E:\\torrentz\\test.csv");
+        IOFile.readfile("E:\\torrentz\\test.csv");
         Database.FillDatabase();
       
     }
@@ -24,7 +24,7 @@ public class Database extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new DefaultTableModel(
             new Object [][] {
 
             },
@@ -47,6 +47,7 @@ public class Database extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setColumnSelectionAllowed(true);
         jTable1.setAutoCreateRowSorter(true);
         jTable1.getRowSorter().toggleSortOrder(0);
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();

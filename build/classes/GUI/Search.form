@@ -64,7 +64,7 @@
                       <Component id="ChangeGenreButton" min="-2" max="-2" attributes="0"/>
                       <Component id="ChangeActorButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="293" max="32767" attributes="0"/>
+                  <EmptySpace pref="259" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -113,12 +113,12 @@
         </Component>
         <Component class="javax.swing.JButton" name="ChangeGenreButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Search"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;Search&quot;" type="code"/>
+            </Property>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeGenreButtonActionPerformed"/>
-          </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ChangeGenreButton.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        changeGenreButtonActionPerformed();&#xa;    }&#xa;});"/>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
           </AuxValues>
@@ -141,18 +141,16 @@
               <Font name="Tahoma" size="18" style="0"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="GenreSearchTextFieldMouseClicked"/>
-          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="GenreSearchTextField.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;    public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        genreSearchTextFieldMouseClicked();&#xa;    }&#xa;});"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JButton" name="ChangeActorButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ChangeActorButtonActionPerformed"/>
-          </Events>
           <AuxValues>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="ChangeActorButton.addActionListener(new java.awt.event.ActionListener() {&#xa;    public void actionPerformed(java.awt.event.ActionEvent evt) {&#xa;        changeActorButtonActionPerformed();&#xa;    }&#xa;});"/>
             <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
           </AuxValues>
@@ -169,15 +167,8 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="jTable1">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="0">
-                <Column editable="true" title="ID" type="java.lang.Integer"/>
-                <Column editable="true" title="Name" type="java.lang.String"/>
-                <Column editable="true" title="Actors" type="java.lang.String"/>
-                <Column editable="true" title="Genre" type="java.lang.String"/>
-                <Column editable="true" title="Play time" type="java.lang.Integer"/>
-                <Column editable="true" title="Image" type="java.lang.String"/>
-              </Table>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;ID&quot;, &quot;Name&quot;, &quot;Actors&quot;, &quot;Genre&quot;, &quot;Play time&quot;, &quot;Image&quot;&#xa;    }&#xa;) {&#xa;    Class[] types = new Class [] {&#xa;        java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class&#xa;    };&#xa;&#xa;    public Class getColumnClass(int columnIndex) {&#xa;        return types [columnIndex];&#xa;    }&#xa;}" type="code"/>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
@@ -217,11 +208,8 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
-          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable1.setAutoCreateRowSorter(true);&#xa;jTable1.getRowSorter().toggleSortOrder(1);&#xa;&#xa;DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();&#xa;rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);&#xa;jTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="jTable1.setAutoCreateRowSorter(true);&#xa;jTable1.getRowSorter().toggleSortOrder(1);&#xa;&#xa;DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();&#xa;rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);&#xa;jTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);&#xa;jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);&#xa;jTable1.addMouseListener(new java.awt.event.MouseAdapter() {&#xa;public void mouseClicked(java.awt.event.MouseEvent evt) {&#xa;        jTable1MouseClicked();&#xa;    }&#xa;});"/>
           </AuxValues>
         </Component>
       </SubComponents>

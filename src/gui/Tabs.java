@@ -1,9 +1,9 @@
-package GUI;
+package gui;
 
 import java.util.ArrayList;
 import javax.swing.JFrame;
 
-public class Tabs extends javax.swing.JFrame {
+public class Tabs extends JFrame {
     
     public static ArrayList<Movies> moviesArray;
     

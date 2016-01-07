@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Autocompleter;
+package autocompleter;
 
 import java.awt.event.ActionEvent;
 import java.util.Collections;
@@ -18,6 +18,8 @@ import javax.swing.text.BadLocationException;
 
 public class Autocomplete implements DocumentListener {
 
+
+
   private static enum Mode {
     INSERT,
     COMPLETION
@@ -26,18 +28,23 @@ public class Autocomplete implements DocumentListener {
   private final JTextField textField;
   private final List<String> keywords;
   private Mode mode = Mode.INSERT;
+  private String content;
 
   public Autocomplete(JTextField textField, List<String> keywords) {
     this.textField = textField;
     this.keywords = keywords;
     Collections.sort(keywords);
   }
+  
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-  @Override
-  public void changedUpdate(DocumentEvent ev) { }
-
-  @Override
-  public void removeUpdate(DocumentEvent ev) { }
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
   @Override
   public void insertUpdate(DocumentEvent ev) {
@@ -45,7 +52,6 @@ public class Autocomplete implements DocumentListener {
       return;
 
     int pos = ev.getOffset();
-    String content = new String();
     try {
       content = textField.getText(0, pos + 1);
     } catch (BadLocationException e) {

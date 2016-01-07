@@ -1,7 +1,7 @@
-package Writer;
+package writer;
 
-import GUI.Movies;
-import GUI.Tabs;
+import gui.Movies;
+import gui.Tabs;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class IOFile {
     
-    public static void Createfile(String path, String fileName, ArrayList<Movies> movies){
+    public static void createfile(String path, String fileName, ArrayList<Movies> movies){
         try(FileWriter writer = new FileWriter(path + File.separator + fileName)) {
                         
             for (int i=0; i<movies.size();i++){
@@ -39,7 +39,7 @@ public class IOFile {
         }
     }
     
-    public static void Readfile(String path){
+    public static void readfile(String path){
         BufferedReader br = null;
         String line;
         String SplitBy = ",";

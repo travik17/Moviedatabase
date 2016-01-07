@@ -3,17 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package gui;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,9 +18,9 @@ import javax.swing.JPanel;
  *
  * @author Bas
  */
-public class NewEntry extends javax.swing.JPanel {
+public class NewEntry extends JPanel {
     
-    String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
+    private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     public ArrayList<Movies> Movies;
     
@@ -65,7 +61,7 @@ public class NewEntry extends javax.swing.JPanel {
         ImageLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ImageLabel1.setText("Image:");
 
-        NameEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        NameEditText1.setFont(new java.awt.Font("Tahoma", 0, 18));
 
         ActorsEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
@@ -76,7 +72,7 @@ public class NewEntry extends javax.swing.JPanel {
         SaveEntry1.setText("Save");
         SaveEntry1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveEntry1ActionPerformed(evt);
+                saveEntry1ActionPerformed();
             }
         });
 
@@ -138,19 +134,21 @@ public class NewEntry extends javax.swing.JPanel {
                         .addComponent(ImageEditText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(69, 69, 69)
                     .addComponent(SaveEntry1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(83, Short.MAX_VALUE)))
+                    .addContainerGap(87, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void SaveEntry1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveEntry1ActionPerformed
+    
+    private void saveEntry1ActionPerformed() {                                           
         ArrayList<String> Actorlist = new ArrayList<>();
         BufferedImage img = null;
+        
+        
         try {
             img = ImageIO.read(URI.create("http://www.gravatar.com/avatar/d5f91983a9d9cfb69981b6108a63b412?s=32&d=identicon&r=PG").toURL());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        
+
         try{
             String Actors = ActorsEditText1.getText();
             String[] splitter = Actors.split(",");
@@ -165,10 +163,9 @@ public class NewEntry extends javax.swing.JPanel {
             System.out.println("User entered a invalid number: " + e.getMessage());
             JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
-                    JOptionPane.WARNING_MESSAGE);
+                JOptionPane.WARNING_MESSAGE);
         }
-    }//GEN-LAST:event_SaveEntry1ActionPerformed
-
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ActorsEditText1;
