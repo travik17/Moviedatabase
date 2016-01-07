@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package Autocompleter;
 
 import java.awt.event.ActionEvent;
 import java.util.Collections;
@@ -45,11 +45,11 @@ public class Autocomplete implements DocumentListener {
       return;
 
     int pos = ev.getOffset();
-    String content = null;
+    String content = new String();
     try {
       content = textField.getText(0, pos + 1);
     } catch (BadLocationException e) {
-      e.printStackTrace();
+      e.printStackTrace(System.out);
     }
 
     // Find where the word starts
@@ -111,6 +111,7 @@ public class Autocomplete implements DocumentListener {
       this.position = position;
     }
 
+    @Override
     public void run() {
       StringBuilder sb = new StringBuilder(textField.getText());
       sb.insert(position, completion);

@@ -1,5 +1,7 @@
-package GUI;
+package Writer;
 
+import GUI.Movies;
+import GUI.Tabs;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -41,6 +43,7 @@ public class IOFile {
         BufferedReader br = null;
         String line;
         String SplitBy = ",";
+
         
         try {
 		br = new BufferedReader(new FileReader(path));
@@ -48,7 +51,7 @@ public class IOFile {
                         
 			String[] splitline = line.split(SplitBy);
                         int size = splitline.length;
-                        int id = Integer.parseInt(splitline[0]);
+                        int id = Tabs.moviesArray.size();
                         String name = splitline[1];
                         ArrayList<String> actors = new ArrayList<>();
                         

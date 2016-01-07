@@ -38,16 +38,16 @@ public class NewEntry extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NameLabel1 = new javax.swing.JLabel();
-        ActorsLabel1 = new javax.swing.JLabel();
-        GenreLabel1 = new javax.swing.JLabel();
-        TimeLabel1 = new javax.swing.JLabel();
-        ImageLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel NameLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel ActorsLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel GenreLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel TimeLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel ImageLabel1 = new javax.swing.JLabel();
         NameEditText1 = new javax.swing.JTextField();
         ActorsEditText1 = new javax.swing.JTextField();
         TimeEditText1 = new javax.swing.JTextField();
-        ImageEditText1 = new javax.swing.JTextField();
-        SaveEntry1 = new javax.swing.JButton();
+        javax.swing.JTextField ImageEditText1 = new javax.swing.JTextField();
+        javax.swing.JButton SaveEntry1 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
 
         NameLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -156,7 +156,7 @@ public class NewEntry extends javax.swing.JPanel {
             String[] splitter = Actors.split(",");
             Actorlist.addAll(Arrays.asList(splitter));
             Movies movie;
-            movie = new Movies(0, NameEditText1.getText(), Actorlist,
+            movie = new Movies(Tabs.moviesArray.size() - 1, NameEditText1.getText(), Actorlist,
                 jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  img);
             Tabs.moviesArray.add(movie);
             Database.addDatabase(movie);
@@ -172,15 +172,8 @@ public class NewEntry extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ActorsEditText1;
-    private javax.swing.JLabel ActorsLabel1;
-    private javax.swing.JLabel GenreLabel1;
-    private javax.swing.JTextField ImageEditText1;
-    private javax.swing.JLabel ImageLabel1;
     private javax.swing.JTextField NameEditText1;
-    private javax.swing.JLabel NameLabel1;
-    private javax.swing.JButton SaveEntry1;
     private javax.swing.JTextField TimeEditText1;
-    private javax.swing.JLabel TimeLabel1;
     private javax.swing.JComboBox<String> jComboBox2;
     // End of variables declaration//GEN-END:variables
 }

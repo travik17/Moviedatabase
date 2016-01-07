@@ -52,6 +52,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTabbedPane()"/>
         <AuxValue name="JavaCodeGenerator_LayoutCodePre" type="java.lang.String" value="javax.swing.JPanel LocationTab = new Datalocation();&#xa;jTabbedPane1.addTab(&quot;File Location&quot;, LocationTab);&#xa;&#xa;javax.swing.JPanel DatabaseTab = new Database();&#xa;jTabbedPane1.addTab(&quot;Database&quot;, DatabaseTab);&#xa;&#xa;javax.swing.JPanel EntryTab = new NewEntry();&#xa;jTabbedPane1.addTab(&quot;New Entry&quot;, EntryTab);&#xa;&#xa;javax.swing.JPanel SearchTab = new Search();&#xa;jTabbedPane1.addTab(&quot;Search&quot;, SearchTab);"/>
+        <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
       </AuxValues>
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>

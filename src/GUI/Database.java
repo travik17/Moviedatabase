@@ -1,5 +1,6 @@
 package GUI;
 
+import Writer.IOFile;
 import java.util.ArrayList;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -86,7 +87,7 @@ public class Database extends javax.swing.JPanel {
         ArrayList<Movies> moviesArray = Tabs.moviesArray;
         for (int i = 0; i<moviesArray.size(); i++){
             Movies temp = moviesArray.get(i);
-            ArrayList<String> actors = temp.Actors;
+            //ArrayList<String> actors = temp.Actors;
             
             model.addRow(new Object[]{temp.Name, "Actors", temp.Genre,
                 temp.PlayTime, "Image"});
@@ -99,7 +100,6 @@ public class Database extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
     }
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
