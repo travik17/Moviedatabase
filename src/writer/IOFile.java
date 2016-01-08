@@ -39,13 +39,13 @@ public class IOFile {
         }
     }
     
-    public static void readfile(String path){
+    public static void readfile(File file){
         BufferedReader br = null;
         String line;
         String SplitBy = ",";
 
         try {
-		br = new BufferedReader(new FileReader(path));
+		br = new BufferedReader(new FileReader(file));
 		while ((line = br.readLine()) != null) {
                         
 			String[] splitline = line.split(SplitBy);

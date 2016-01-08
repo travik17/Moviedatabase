@@ -4,12 +4,11 @@ import writer.FileTypeFilter;
 import java.io.File;
 import writer.IOFile;
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 
 public class Datalocation extends JPanel {
     
     private String DefaultSaveLocation = "C:\\Users\\" + System.getProperty("user.name") + "\\Documents";
-    private String DefaultLoadLocation = "E:\\torrentz\\test.csv";
+    private final String DefaultLoadLocation = "E:\\torrentz\\test.csv";
     private final JButton LoadLocationButton1 = new JButton();
     private final JButton SaveLocationButton1 = new JButton();
     /**
@@ -67,16 +66,14 @@ public class Datalocation extends JPanel {
     }
     
     private void loadLocationButton1ActionPerformed() {                                                    
-        JFileChooser choose = new JFileChooser();
+        JFileChooser choose = new JFileChooser(DefaultLoadLocation);
         choose.setDialogTitle("Open a file");
         choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
         
         int returnval = choose.showOpenDialog(null);
         if (returnval == JFileChooser.APPROVE_OPTION){
             File file = choose.getSelectedFile();
-            String path = choose.getSelectedFile().getAbsolutePath();
-            DefaultLoadLocation = path;
-            IOFile.readfile(DefaultLoadLocation);
+            IOFile.readfile(file);
             Database.fillDatabase();
         }
     } 

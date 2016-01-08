@@ -1,6 +1,5 @@
 package gui;
 
-import writer.IOFile;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -13,10 +12,7 @@ public class Database extends JPanel {
      * Creates new form Database
      */
     public Database() {
-        initComponents();
-        IOFile.readfile("E:\\torrentz\\test.csv");
-        Database.fillDatabase();
-      
+        initComponents();  
     }
     
     private void initComponents() {

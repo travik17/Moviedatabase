@@ -36,7 +36,7 @@ public class Tabs extends JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Tabs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
