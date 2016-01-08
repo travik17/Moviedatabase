@@ -6,9 +6,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class Database extends javax.swing.JPanel {
+public class Database extends JPanel {
     
-    public static javax.swing.JTable jTable1;
+    public static JTable jTable1;
     /**
      * Creates new form Database
      */
@@ -20,12 +20,12 @@ public class Database extends javax.swing.JPanel {
     }
     
     private void initComponents() {
-        JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+        JScrollPane jScrollPane1 = new JScrollPane();
         
         createJtable();
         jScrollPane1.setViewportView(jTable1);
 
-        GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layoutSet(layout, jScrollPane1);
     }
