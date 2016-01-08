@@ -2,54 +2,71 @@ package gui;
 
 import writer.IOFile;
 import java.util.ArrayList;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class Database extends javax.swing.JPanel {
     
+    public static javax.swing.JTable jTable1;
     /**
      * Creates new form Database
      */
     public Database() {
         initComponents();
         IOFile.readfile("E:\\torrentz\\test.csv");
-        Database.FillDatabase();
+        Database.fillDatabase();
       
     }
-
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
     private void initComponents() {
+        JScrollPane jScrollPane1 = new javax.swing.JScrollPane();
+        
+        createJtable();
+        jScrollPane1.setViewportView(jTable1);
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layoutSet(layout, jScrollPane1);
+    }
+    
+    private void layoutSet(GroupLayout layout, JScrollPane jScrollPane1){
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+    }
 
-        jTable1.setModel(new DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Actors", "Genre", "Play time", "Image"
-            }
-        ) {
+    private void createJtable(){
+        jTable1 = new JTable();
+        jTable1.setModel(new DefaultTableModel(new Object [][] {}, new String [] {
+                "Name", "Actors", "Genre", "Play time", "Image"}) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class};
+            boolean[] canEdit = new boolean [] {false, false, false, false, false};
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+            @Override
+            public Class getColumnClass(int columnIndex) {return types [columnIndex];}
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit [columnIndex];}
         });
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.getRowSorter().toggleSortOrder(0);
+        
+        setAlignment();
+        setColumnSelect();
+    }
+    
+    private void setAlignment(){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         jTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
@@ -57,33 +74,16 @@ public class Database extends javax.swing.JPanel {
         jTable1.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(2);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(1);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(2);
-        }
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-    }// </editor-fold>//GEN-END:initComponents
+        
+    }
     
-    public static void FillDatabase(){
+    private void setColumnSelect(){
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.getRowSorter().toggleSortOrder(0);
+    }
+    
+    public static void fillDatabase(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Movies> moviesArray = Tabs.moviesArray;
         for (int i = 0; i<moviesArray.size(); i++){
@@ -100,10 +100,5 @@ public class Database extends javax.swing.JPanel {
             temp.PlayTime, "Image"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
-    }
-    
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    public static javax.swing.JTable jTable1;
-    // End of variables declaration//GEN-END:variables
+    }               
 }

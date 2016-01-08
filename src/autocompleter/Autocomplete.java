@@ -28,7 +28,6 @@ public class Autocomplete implements DocumentListener {
   private final JTextField textField;
   private final List<String> keywords;
   private Mode mode = Mode.INSERT;
-  private String content;
 
   public Autocomplete(JTextField textField, List<String> keywords) {
     this.textField = textField;
@@ -48,6 +47,7 @@ public class Autocomplete implements DocumentListener {
 
   @Override
   public void insertUpdate(DocumentEvent ev) {
+    String content = "test";
     if (ev.getLength() != 1)
       return;
 

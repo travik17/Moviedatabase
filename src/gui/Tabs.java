@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 public class Tabs extends JFrame {
     
     public static ArrayList<Movies> moviesArray;
+    public static JFrame frame;
     
     public Tabs() {
         moviesArray = new ArrayList<>();
@@ -89,7 +90,7 @@ public class Tabs extends JFrame {
         });
     }
     
-    public static JFrame frame;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

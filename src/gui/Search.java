@@ -25,7 +25,7 @@ public class Search extends javax.swing.JPanel {
         model.addTableModelListener(new TableModelListener(){
             @Override
             public void tableChanged(TableModelEvent e){
-                String data = (String) model.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
+                //String data = (String) model.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
                                 
             }
         });

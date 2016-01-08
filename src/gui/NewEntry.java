@@ -34,7 +34,7 @@ public class NewEntry extends JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.JLabel NameLabel1 = new javax.swing.JLabel();
+        javax.swing.JLabel NameLabel = new javax.swing.JLabel();
         javax.swing.JLabel ActorsLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel GenreLabel1 = new javax.swing.JLabel();
         javax.swing.JLabel TimeLabel1 = new javax.swing.JLabel();
@@ -46,8 +46,8 @@ public class NewEntry extends JPanel {
         javax.swing.JButton SaveEntry1 = new javax.swing.JButton();
         jComboBox2 = new javax.swing.JComboBox<>();
 
-        NameLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        NameLabel1.setText("Name:");
+        NameLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        NameLabel.setText("Name:");
 
         ActorsLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         ActorsLabel1.setText("Actors:");
@@ -93,7 +93,7 @@ public class NewEntry extends JPanel {
                             .addGap(120, 120, 120))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(NameLabel1)
+                                .addComponent(NameLabel)
                                 .addComponent(ActorsLabel1)
                                 .addComponent(GenreLabel1)
                                 .addComponent(ImageLabel1)
@@ -114,7 +114,7 @@ public class NewEntry extends JPanel {
                 .addGroup(layout.createSequentialGroup()
                     .addGap(80, 80, 80)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(NameLabel1)
+                        .addComponent(NameLabel)
                         .addComponent(NameEditText1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

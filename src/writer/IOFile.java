@@ -44,7 +44,6 @@ public class IOFile {
         String line;
         String SplitBy = ",";
 
-        
         try {
 		br = new BufferedReader(new FileReader(path));
 		while ((line = br.readLine()) != null) {
