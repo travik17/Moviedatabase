@@ -12,9 +12,9 @@ import javax.swing.JPanel;
 
 public class IOFile {
     
-    public static void Createfile(String path, String fileName, ArrayList<Movies> movies){
-        try(FileWriter writer = new FileWriter(path + File.separator + fileName)) {
-                        
+    public static void Createfile(File file, ArrayList<Movies> movies){
+        try(FileWriter writer = new FileWriter(file)) {
+                System.out.println(file);
             for (int i=0; i<movies.size();i++){
                 Movies temp = movies.get(i);
                 writer.append(temp.getMovieId().toString() + ',');

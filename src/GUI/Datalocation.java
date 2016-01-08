@@ -42,54 +42,20 @@ public class Datalocation extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SaveLocationLabel1 = new javax.swing.JLabel();
-        LoadLocationLabel1 = new javax.swing.JLabel();
         LoadLocationButton1 = new javax.swing.JButton();
-        SaveLocationButton1 = new javax.swing.JButton();
-        LoadLocationEditText1 = new javax.swing.JLabel();
-        SaveLocationEditText1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
-        SaveLocationLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        SaveLocationLabel1.setText("Save location:");
-
-        LoadLocationLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        LoadLocationLabel1.setText("Load file:");
-
-        LoadLocationButton1.setText("....");
+        LoadLocationButton1.setText("Load file");
         LoadLocationButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoadLocationButton1ActionPerformed(evt);
             }
         });
 
-        SaveLocationButton1.setText("....");
-        SaveLocationButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SaveLocationButton1ActionPerformed(evt);
-            }
-        });
-
-        LoadLocationEditText1.setBorder(LineBorder.createGrayLineBorder());
-        LoadLocationEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        LoadLocationEditText1.setText(DefaultLoadLocation);
-
-        SaveLocationEditText1.setBorder(LineBorder.createGrayLineBorder());
-        SaveLocationEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        SaveLocationEditText1.setText(DefaultSaveLocation);
-
-        jButton1.setText("jButton1");
+        jButton1.setText("Save file");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
             }
         });
 
@@ -98,101 +64,59 @@ public class Datalocation extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LoadLocationEditText1, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LoadLocationButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LoadLocationLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(SaveLocationEditText1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SaveLocationButton1)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(324, 324, 324)
-                .addComponent(jButton1)
-                .addGap(56, 56, 56)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(SaveLocationLabel1)
-                    .addContainerGap(604, Short.MAX_VALUE)))
+                .addGap(111, 111, 111)
+                .addComponent(LoadLocationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(100, 100, 100)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveLocationEditText1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SaveLocationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(LoadLocationLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LoadLocationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoadLocationEditText1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(43, 43, 43))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(63, 63, 63)
-                    .addComponent(SaveLocationLabel1)
-                    .addContainerGap(408, Short.MAX_VALUE)))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoadLocationButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoadLocationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoadLocationButton1ActionPerformed
         JFileChooser choose = new JFileChooser();
-
-        int returnval = choose.showOpenDialog(Datalocation.this);
+        choose.setDialogTitle("Open a file");
+        choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
+        
+        int returnval = choose.showOpenDialog(null);
         if (returnval == JFileChooser.APPROVE_OPTION){
             File file = choose.getSelectedFile();
             String path = choose.getSelectedFile().getAbsolutePath();
-            LoadLocationEditText1.setText(path);
             DefaultLoadLocation = path;
-            System.out.println(DefaultLoadLocation);
+            IOFile.Readfile(DefaultLoadLocation);
+            Database.FillDatabase();
         }
+        
+        
     }//GEN-LAST:event_LoadLocationButton1ActionPerformed
 
-    private void SaveLocationButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveLocationButton1ActionPerformed
-        JFileChooser choose = new JFileChooser();
-        choose.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int returnval = choose.showOpenDialog(Datalocation.this);
-        if (returnval == JFileChooser.APPROVE_OPTION){
-            String path = choose.getSelectedFile().getAbsolutePath();
-            SaveLocationEditText1.setText(path);
-            DefaultSaveLocation = path;
-        }
-    }//GEN-LAST:event_SaveLocationButton1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        IOFile.Createfile(DefaultSaveLocation, "test.csv", Tabs.moviesArray);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        JFileChooser choose = new JFileChooser(DefaultSaveLocation);
+        choose.setDialogTitle("Save a file");
+        choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        IOFile.Readfile(DefaultLoadLocation);
-        Database.FillDatabase();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int returnval = choose.showSaveDialog(null);
+        if (returnval == JFileChooser.APPROVE_OPTION){
+            File file = choose.getSelectedFile();
+            file = new File(file.toString() + ".csv");
+            String path = choose.getSelectedFile().getAbsolutePath();
+            DefaultSaveLocation = path;
+            IOFile.Createfile(file, Tabs.moviesArray);
+            System.out.println("test");
+        }  
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LoadLocationButton1;
-    private javax.swing.JLabel LoadLocationEditText1;
-    private javax.swing.JLabel LoadLocationLabel1;
-    private javax.swing.JButton SaveLocationButton1;
-    private javax.swing.JLabel SaveLocationEditText1;
-    private javax.swing.JLabel SaveLocationLabel1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     // End of variables declaration//GEN-END:variables
 }
