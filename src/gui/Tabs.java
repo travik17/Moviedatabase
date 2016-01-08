@@ -9,10 +9,16 @@ public class Tabs extends JFrame {
     public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();;
     public static JFrame frame;
     
+    /**
+     * Constructor.
+     */
     public Tabs() {
         initComponents();
     }
-                    
+    
+    /**
+     * Add view components.
+     */
     private void initComponents() {
         JTabbedPane jTabbedPane1 = new JTabbedPane();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -26,13 +32,15 @@ public class Tabs extends JFrame {
     }                       
 
     /**
-     * @param args the command line arguments
+     * Main run function.
+     * 
+     * @param args the command line arguments.
      */
     public static void main(String args[]) {
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -50,6 +58,11 @@ public class Tabs extends JFrame {
         });
     }
     
+    /**
+     * Add the tabs to jTabbedPane.
+     * 
+     * @param jTabbedPane1 the jTabbedpane to which the tabs are added.
+     */
     private void addTabs(JTabbedPane jTabbedPane1){
         JPanel LocationTab = new Datalocation();
         JPanel DatabaseTab = new Database();
@@ -62,6 +75,12 @@ public class Tabs extends JFrame {
         jTabbedPane1.addTab("Search", SearchTab);
     }
     
+    /**
+     * set grouplayout.
+     * 
+     * @param layout the layout to add the parameters.
+     * @param jTabbedPane1 The jTabbedPane for the layout
+     */
     private void setGroupLayout(GroupLayout layout, JTabbedPane jTabbedPane1){
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)

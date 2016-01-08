@@ -9,12 +9,15 @@ public class Database extends JPanel {
     
     public static JTable jTable1;
     /**
-     * Creates new form Database
+     * Constructor.
      */
     public Database() {
         initComponents();  
     }
     
+    /**
+     * Build scrollpane and add view components.
+     */
     private void initComponents() {
         JScrollPane jScrollPane1 = new JScrollPane();
         
@@ -26,6 +29,12 @@ public class Database extends JPanel {
         layoutSet(layout, jScrollPane1);
     }
     
+    /**
+     * set layout parameters for view.
+     * 
+     * @param layout The layout for which the parameters are.
+     * @param jScrollPane1 The scrollpane in the layout.
+     */
     private void layoutSet(GroupLayout layout, JScrollPane jScrollPane1){
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -42,7 +51,10 @@ public class Database extends JPanel {
                 .addContainerGap())
         );
     }
-
+    
+    /**
+     * Create a jTable for the database
+     */
     private void createJtable(){
         jTable1 = new JTable();
         jTable1.setModel(new DefaultTableModel(new Object [][] {}, new String [] {
@@ -62,6 +74,9 @@ public class Database extends JPanel {
         setColumnSelect();
     }
     
+    /**
+     * set alignment of the text in jTable column.
+     */
     private void setAlignment(){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,12 +88,18 @@ public class Database extends JPanel {
         
     }
     
+    /**
+     * set jTable autosorter
+     */
     private void setColumnSelect(){
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setAutoCreateRowSorter(true);
         jTable1.getRowSorter().toggleSortOrder(0);
     }
     
+    /**
+     * Fill jTable after loading .csv.
+     */
     public static void fillDatabase(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         ArrayList<Movies> moviesArray = Tabs.MOVIESARRAY;
@@ -91,6 +112,11 @@ public class Database extends JPanel {
         }    
     }
     
+    /**
+     * Add a new row to jTable after new entry.
+     * 
+     * @param temp the movie to add to the jTable.
+     */
     public static void addDatabase(Movies temp){
         Object[] row = {temp.Name, "Actors", temp.Genre,
             temp.PlayTime, "Image"};

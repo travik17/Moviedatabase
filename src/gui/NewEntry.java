@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import java.awt.image.BufferedImage;
@@ -31,12 +26,15 @@ public class NewEntry extends JPanel {
     private final JButton SaveEntry1 = new JButton();
     
     /**
-     * Creates new form NewEntry
+     * Constructor.
      */
     public NewEntry() {
         initComponents();
     }
-                      
+    
+    /**
+     * Add view components.
+     */
     private void initComponents() { 
         setLabels();
         setEditText();
@@ -56,6 +54,9 @@ public class NewEntry extends JPanel {
         setVertical(layout);
     }    
     
+    /**
+     * Set the labels of the current view.
+     */
     private void setLabels(){
         NameLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
         ActorsLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
@@ -70,6 +71,9 @@ public class NewEntry extends JPanel {
         ImageLabel1.setText("Image:");
     }
     
+    /**
+     * set the TextField of the current view.
+     */
     private void setEditText(){
         NameEditText1.setFont(new java.awt.Font("Tahoma", 0, 18));
         ActorsEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); 
@@ -77,6 +81,11 @@ public class NewEntry extends JPanel {
         ImageEditText1.setFont(new java.awt.Font("Tahoma", 0, 18));
     }
     
+    /**
+     * set Horizontal layout parameters for view.
+     * 
+     * @param layout The layout for which the parameters are.
+     */
     private void setHorizontal(GroupLayout layout){
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -107,6 +116,11 @@ public class NewEntry extends JPanel {
         );
     }
     
+    /**
+     * set Horizontal layout parameters for view.
+     * 
+     * @param layout The layout for which the parameters are.
+     */
     private void setVertical(GroupLayout layout){
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -139,16 +153,22 @@ public class NewEntry extends JPanel {
         );
     }
     
+    /**
+     * Action when pressing the save button.
+     * Add the new movie to the movies array and to the add row.
+     */
     private void saveEntry1ActionPerformed() {                                           
         ArrayList<String> Actorlist = new ArrayList<>();
         BufferedImage img = null;
         
+        //set standaard images.
         try {
             img = ImageIO.read(URI.create("http://www.gravatar.com/avatar/d5f91983a9d9cfb69981b6108a63b412?s=32&d=identicon&r=PG").toURL());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
+        
+        //get the data from the view.
         try{
             String Actors = ActorsEditText1.getText();
             String[] splitter = Actors.split(",");

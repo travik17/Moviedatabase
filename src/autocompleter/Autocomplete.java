@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package autocompleter;
 
 import java.awt.event.ActionEvent;
@@ -17,115 +12,155 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
 public class Autocomplete implements DocumentListener {
+    
+    private static enum Mode {
+        INSERT,
+        COMPLETION
+    };
 
-
-
-  private static enum Mode {
-    INSERT,
-    COMPLETION
-  };
-
-  private final JTextField textField;
-  private final List<String> keywords;
-  private Mode mode = Mode.INSERT;
-
-  public Autocomplete(JTextField textField, List<String> keywords) {
-    this.textField = textField;
-    this.keywords = keywords;
-    Collections.sort(keywords);
-  }
+    private final JTextField textField;
+    private final List<String> keywords;
+    private Mode mode = Mode.INSERT;
   
+  /**
+   * Constructor.
+   * 
+   * @param textField TextField in which autocomplete is necessary.
+   * @param keywords  The list for autocomplete words.
+   */
+    public Autocomplete(JTextField textField, List<String> keywords) {
+        this.textField = textField;
+        this.keywords = keywords;
+        Collections.sort(keywords);
+    }
+
+  /**
+   * Gives notification that a portion of the document has been removed. 
+   * 
+   * @param e The document event.
+   */
     @Override
     public void removeUpdate(DocumentEvent e) {
         System.out.println("removeUpdate used");
     }
-
+    
+    /**
+     * Gives notification that an attribute or set of attributes changed.
+     * 
+     * @param e The document event.
+     */
     @Override
     public void changedUpdate(DocumentEvent e) {
         System.out.println("changedUpdate used");
     }
-
-  @Override
-  public void insertUpdate(DocumentEvent ev) {
-    String content = "test";
-    if (ev.getLength() != 1)
-      return;
-
-    int pos = ev.getOffset();
-    try {
-      content = textField.getText(0, pos + 1);
-    } catch (BadLocationException e) {
-      e.printStackTrace(System.out);
-    }
-
-    // Find where the word starts
-    int w;
-    for (w = pos; w >= 0; w--) {
-      if (!Character.isLetter(content.charAt(w))) {
-        break;
-      }
-    }
-
-    // Too few chars
-    if (pos - w < 2)
-      return;
-
-    String prefix = content.substring(w + 1).toLowerCase();
-    int n = Collections.binarySearch(keywords, prefix);
-    if (n < 0 && -n <= keywords.size()) {
-      String match = keywords.get(-n - 1);
-      if (match.startsWith(prefix)) {
-        // A completion is found
-        String completion = match.substring(pos - w);
-        // We cannot modify Document from within notification,
-        // so we submit a task that does the change later
-        SwingUtilities.invokeLater(new CompletionTask(completion, pos + 1));
-      }
-    } else {
-      // Nothing found
-      mode = Mode.INSERT;
-    }
-  }
-
-  public class CommitAction extends AbstractAction {
+    
     /**
+     * Gives notification that there was an insert into the document. 
      * 
+     * @param ev The document event.
      */
-    private static final long serialVersionUID = 5794543109646743416L;
-
     @Override
-    public void actionPerformed(ActionEvent ev) {
-      if (mode == Mode.COMPLETION) {
-        int pos = textField.getSelectionEnd();
-        StringBuilder sb = new StringBuilder(textField.getText());
-        sb.insert(pos, " ");
-        textField.setText(sb.toString());
-        textField.setCaretPosition(pos + 1);
-        mode = Mode.INSERT;
-      } else {
-        textField.replaceSelection("\t");
-      }
+    public void insertUpdate(DocumentEvent ev) {
+        String content = "test";
+        if (ev.getLength() != 1)
+            return;
+
+        int pos = ev.getOffset();
+        try {
+            content = textField.getText(0, pos + 1);
+        } catch (BadLocationException e) {
+            e.printStackTrace(System.out);
+        }
+
+        // Find where the word starts.
+        int w;
+        for (w = pos; w >= 0; w--) {
+          if (!Character.isLetter(content.charAt(w))) {
+                break;
+          }
+        }
+
+        // Too few chars.
+        if (pos - w < 2)
+            return;
+
+        String prefix = content.substring(w + 1).toLowerCase();
+        int n = Collections.binarySearch(keywords, prefix);
+        if (n < 0 && -n <= keywords.size()) {
+            String match = keywords.get(-n - 1);
+            if (match.startsWith(prefix)) {
+                // A completion is found.
+                String completion = match.substring(pos - w);
+                // We cannot modify Document from within notification,
+                // so we submit a task that does the change later.
+                SwingUtilities.invokeLater(new CompletionTask(completion, pos + 1));
+            }
+        } else {
+            // Nothing found.
+            mode = Mode.INSERT;
+        }
     }
-  }
 
-  private class CompletionTask implements Runnable {
-    private final String completion;
-    private final int position;
-
-    CompletionTask(String completion, int position) {
-      this.completion = completion;
-      this.position = position;
+    public class CommitAction extends AbstractAction {
+        /**
+        * serialVersionUID.
+        */
+        private static final long serialVersionUID = 5794543109646743416L;
+    
+        /**
+        * The actions when the user commits to the text.
+        * 
+        * @param ev The trigger actionevent.
+        */
+       @Override
+        public void actionPerformed(ActionEvent ev) {
+            try{
+                if (mode == Mode.COMPLETION) {
+                    int pos = textField.getSelectionEnd();
+                    StringBuilder sb = new StringBuilder(textField.getText());
+                    sb.insert(pos, "");
+                    textField.setText(sb.toString());
+                    textField.setCaretPosition(pos);
+                    mode = Mode.INSERT;
+                } else {
+                    textField.replaceSelection("\t");
+                }
+            } catch (IllegalArgumentException e){
+                System.out.println("IlegalArgumentException in CommitAction: " + e.getMessage());
+            }
+        }
     }
 
-    @Override
-    public void run() {
-      StringBuilder sb = new StringBuilder(textField.getText());
-      sb.insert(position, completion);
-      textField.setText(sb.toString());
-      textField.setCaretPosition(position + completion.length());
-      textField.moveCaretPosition(position);
-      mode = Mode.COMPLETION;
+    private class CompletionTask implements Runnable {
+        private final String completion;
+        private final int position;
+    
+        /**
+         * Constructor.
+         * 
+         * @param completion The string to complete.
+         * @param position The positie of the string already typed.
+         */
+        CompletionTask(String completion, int position) {
+            this.completion = completion;
+            this.position = position;
+        }
+    
+        /**
+         * Enter the text into the textfield.
+         */
+        @Override
+        public void run() {
+            try{
+                StringBuilder sb = new StringBuilder(textField.getText());
+                sb.insert(position, completion);
+                textField.setText(sb.toString());
+                textField.setCaretPosition(position + completion.length());
+                textField.moveCaretPosition(position);
+                mode = Mode.COMPLETION;
+            } catch (IllegalArgumentException e){
+                System.out.println("IlegalArgumentException in CompletionTask: " + e.getMessage());
+            }
+        }
     }
-  }
-
 }

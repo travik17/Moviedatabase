@@ -26,8 +26,9 @@ public class Search extends JPanel {
     private final JLabel ActorSearchLabel = new JLabel();
     private final JButton ChangeActorButton = new JButton();
     private final JScrollPane jScrollPane1 = new JScrollPane();
+    
     /**
-     * Creates new form Search
+     * Constructor with tableChanged listener.
      */
     public Search() {
         initComponents();
@@ -41,7 +42,11 @@ public class Search extends JPanel {
         });
     }
     
-    private void createAutocompete(){
+    /**
+     * Create the autocomplete files for the textfield.
+     */
+    private void createAutocomplete(){
+        //create the keywords file.
         GenreSearchTextField.setFocusTraversalKeysEnabled(false);
         for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
             Movies movies = Tabs.MOVIESARRAY.get(i);
@@ -52,28 +57,38 @@ public class Search extends JPanel {
             }
         }
         
+        //initialize class and commit key.
         Autocomplete autoComplete = new Autocomplete(GenreSearchTextField, keywords) {};
         GenreSearchTextField.getDocument().addDocumentListener(autoComplete);
         GenreSearchTextField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
         GenreSearchTextField.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
     }
-                      
+    
+    /**
+     * Add view components.
+     */
     private void initComponents() {
+        // set components.
         setLabels();
         setButton();
         modelSet();
         
+        //set layout of jTable.
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         setHorizontallayout(jPanel1Layout);
-        setVericallayout(jPanel1Layout);
+        setVerticallayout(jPanel1Layout);
         jScrollPane1.setViewportView(jTable1);
-
+        
+        // set layout of panel.
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         setGrouplayout(layout);
     }
     
+    /**
+     * Set the labels for this view.
+     */
     private void setLabels(){
         GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
         ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
@@ -82,6 +97,9 @@ public class Search extends JPanel {
         GenreSearchCombobox.setModel(new DefaultComboBoxModel<>(genres));
     }
     
+    /**
+     * Set the buttons for this view.
+     */
     private void setButton(){
         ChangeGenreButton.setText("Search");
         ChangeGenreButton.addActionListener(new ActionListener() {
@@ -108,6 +126,9 @@ public class Search extends JPanel {
         });
     }
     
+    /**
+     * Set the model of jTable.
+     */
     private void modelSet(){
         jTable1.setModel(new DefaultTableModel(
             new Object [][] {},
@@ -120,6 +141,7 @@ public class Search extends JPanel {
             }
         });
         
+        //set the autosorter,
         jTable1.setAutoCreateRowSorter(true);
         jTable1.getRowSorter().toggleSortOrder(1);
         setAlignment();
@@ -131,6 +153,11 @@ public class Search extends JPanel {
         });
     }
     
+    /**
+     * set horizontal layout for jPanel.
+     * 
+     * @param jPanel1Layout the jPanel layout
+     */
     private void setHorizontallayout(GroupLayout jPanel1Layout){
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -153,7 +180,12 @@ public class Search extends JPanel {
         );
     }
     
-    private void setVericallayout(GroupLayout jPanel1Layout){
+    /**
+     * set vertical layout of jPanel
+     * 
+     * @param jPanel1Layout the jPanel layout
+     */
+    private void setVerticallayout(GroupLayout jPanel1Layout){
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -171,6 +203,11 @@ public class Search extends JPanel {
         );
     }
     
+    /**
+     * set grouplayout
+     * 
+     * @param layout the layout for parameters
+     */
     private void setGrouplayout(GroupLayout layout){
          layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -190,6 +227,9 @@ public class Search extends JPanel {
         );
     }
     
+    /**
+     * set alignment of the text in the jTable
+     */
     private void setAlignment(){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
@@ -200,6 +240,9 @@ public class Search extends JPanel {
         jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
     }
     
+    /**
+     * Add the movies of the searched genre to the jTable.
+     */
     private void changeGenreButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -212,7 +255,10 @@ public class Search extends JPanel {
             }
         }
     }                                                 
-
+    
+    /**
+     * Add the movies of the searched actor to the jTable.
+     */
     private void changeActorButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
@@ -225,11 +271,17 @@ public class Search extends JPanel {
                 } 
         }
     }                                                 
-
+    
+    /**
+     * Textfield initialize autocomplete.
+     */
     private void genreSearchTextFieldMouseClicked() {                                                  
-        createAutocompete();
+        createAutocomplete();
     }                                                 
-
+    
+    /**
+     * Actions when the jTable is clicked.
+     */
     private void jTable1MouseClicked() {                                     
         int row = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
         int column = jTable1.convertColumnIndexToModel(0);

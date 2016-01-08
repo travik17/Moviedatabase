@@ -11,13 +11,17 @@ public class Datalocation extends JPanel {
     private final String DefaultLoadLocation = "E:\\torrentz\\test.csv";
     private final JButton LoadLocationButton1 = new JButton();
     private final JButton SaveLocationButton1 = new JButton();
+    
     /**
-     * Creates new form Datalocation
+     * Constructor.
      */
     public Datalocation() {
         initComponents();
     }
-                     
+    
+    /**
+     * Add view components.
+     */
     private void initComponents() {
         setButtons();
         
@@ -26,7 +30,11 @@ public class Datalocation extends JPanel {
         setGrouplayout(layout);
     }
     
+    /**
+     * Set text and actionlisteners of buttons in view.
+     */
     private void setButtons() {
+        //Load button
         LoadLocationButton1.setText("Load file");
         LoadLocationButton1.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -34,7 +42,8 @@ public class Datalocation extends JPanel {
                 loadLocationButton1ActionPerformed();
             }
         });
-
+        
+        //Save button
         SaveLocationButton1.setText("Save file");
         SaveLocationButton1.addActionListener(new java.awt.event.ActionListener() {
             @Override
@@ -88,7 +97,7 @@ public class Datalocation extends JPanel {
             file = new File(file.toString() + ".csv");
             String path = choose.getSelectedFile().getAbsolutePath();
             DefaultSaveLocation = path;
-            IOFile.createfile(file, Tabs.MOVIESARRAY);
+            IOFile.createfile(file);
         }  
     }                                                                           
 }
