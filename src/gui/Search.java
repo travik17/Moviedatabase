@@ -4,6 +4,7 @@ import autocompleter.Autocomplete;
 import java.awt.Font;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -32,14 +33,6 @@ public class Search extends JPanel {
      */
     public Search() {
         initComponents();
-        final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addTableModelListener(new TableModelListener(){
-            @Override
-            public void tableChanged(TableModelEvent e){
-                //String data = (String) model.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
-                                
-            }
-        });
     }
     
     /**
@@ -250,7 +243,12 @@ public class Search extends JPanel {
         for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
             Movies movies = Tabs.MOVIESARRAY.get(i);
             if(movies.Genre.equalsIgnoreCase(genre)){
-                model.addRow(new Object[]{movies.Id, movies.Name, "Actors", movies.Genre,
+                StringBuilder listofactors = new StringBuilder();
+                for (String s : movies.Actors){
+                    listofactors.append(s);
+                    listofactors.append(", ");
+                }
+                model.addRow(new Object[]{movies.Id, movies.Name, listofactors.toString(), movies.Genre,
                     movies.PlayTime, "Image"});
             }
         }
@@ -266,9 +264,14 @@ public class Search extends JPanel {
         for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
             Movies movies = Tabs.MOVIESARRAY.get(i);
             if (movies.Actors.contains(actor)){
-                model.addRow(new Object[]{movies.Id, movies.Name, "Actors", movies.Genre,
+                StringBuilder listofactors = new StringBuilder();
+                for (String s : movies.Actors){
+                    listofactors.append(s);
+                    listofactors.append(", ");
+                }
+                model.addRow(new Object[]{movies.Id, movies.Name, listofactors.toString(), movies.Genre,
                     movies.PlayTime, "Image"});
-                } 
+            } 
         }
     }                                                 
     
@@ -283,8 +286,66 @@ public class Search extends JPanel {
      * Actions when the jTable is clicked.
      */
     private void jTable1MouseClicked() {                                     
-        int row = jTable1.convertRowIndexToModel(jTable1.getSelectedRow());
-        int column = jTable1.convertColumnIndexToModel(0);
-        Integer x = (Integer) jTable1.getModel().getValueAt(row, column);
-    }                   
+        final int row = jTable1.getSelectedRow();
+        final int col = jTable1.getSelectedColumn();
+        
+        final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addTableModelListener(new TableModelListener(){
+            @Override
+            public void tableChanged(TableModelEvent e){
+                String idstring = jTable1.getValueAt(row, 0).toString();
+                Integer id = Integer.parseInt(idstring);
+                
+                if (col == 1 || col == 3){
+                    stringsChange(row, col, id);
+                }
+                if (col == 4){
+                    Integer value = Integer.parseInt((String) jTable1.getValueAt(row, col));
+                    Movies movie = Tabs.MOVIESARRAY.get(id);
+                    movie.setMoviePlayTime(value);
+                    Tabs.MOVIESARRAY.set(id, movie);
+                }
+                if (col == 2){
+                    actorChange(row, col, id);
+                }
+            }
+        });
+    }
+    
+    /**
+     * jTable changes in column 1 and 3.
+     * 
+     * @param row the row selected.
+     * @param col the col selected.
+     * @param id  the id of the array to change.
+     */
+    private void stringsChange(int row, int col, Integer id){
+        String value = jTable1.getValueAt(row, col).toString();
+        Movies movie = Tabs.MOVIESARRAY.get(id);
+        if (col == 1){
+             movie.setMovieName(value);
+        }
+        if (col == 3){
+            movie.setMovieGenre(value);
+        }
+        Tabs.MOVIESARRAY.set(id, movie);
+    }
+    
+    /**
+     * jTable changes in column 2.
+     * 
+     * @param row the row selected.
+     * @param col the col selected.
+     * @param id  the id of the array to change.
+     */
+    private void actorChange(int row, int col, Integer id){
+        ArrayList<String> Actorlist = new ArrayList<>();
+        String value = jTable1.getValueAt(row, col).toString();
+        Movies movie = Tabs.MOVIESARRAY.get(id);
+        String[] splitter = value.split(",");
+        Actorlist.addAll(Arrays.asList(splitter));
+        movie.setMovieActors(Actorlist);
+        Tabs.MOVIESARRAY.set(id, movie);                   
+        System.out.println("value: " + value + "id: " + id);
+    }
 }

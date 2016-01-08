@@ -69,7 +69,6 @@ public class Database extends JPanel {
             @Override
             public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit [columnIndex];}
         });
-        
         setAlignment();
         setColumnSelect();
     }
@@ -105,9 +104,12 @@ public class Database extends JPanel {
         ArrayList<Movies> moviesArray = Tabs.MOVIESARRAY;
         for (int i = 0; i<moviesArray.size(); i++){
             Movies temp = moviesArray.get(i);
-            //ArrayList<String> actors = temp.Actors;
-            
-            model.addRow(new Object[]{temp.Name, "Actors", temp.Genre,
+            StringBuilder listofactors = new StringBuilder();
+            for (String s : temp.Actors){
+                listofactors.append(s);
+                listofactors.append(", ");
+            }
+            model.addRow(new Object[]{temp.Name, listofactors.toString(), temp.Genre,
                 temp.PlayTime, "Image"});
         }    
     }
@@ -118,7 +120,12 @@ public class Database extends JPanel {
      * @param temp the movie to add to the jTable.
      */
     public static void addDatabase(Movies temp){
-        Object[] row = {temp.Name, "Actors", temp.Genre,
+        StringBuilder listofactors = new StringBuilder();
+        for (String s : temp.Actors){
+            listofactors.append(s);
+            listofactors.append(", ");
+        }
+        Object[] row = {temp.Name, listofactors.toString(), temp.Genre,
             temp.PlayTime, "Image"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
