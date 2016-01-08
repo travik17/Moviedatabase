@@ -346,6 +346,5 @@ public class Search extends JPanel {
         Actorlist.addAll(Arrays.asList(splitter));
         movie.setMovieActors(Actorlist);
         Tabs.MOVIESARRAY.set(id, movie);                   
-        System.out.println("value: " + value + "id: " + id);
     }
 }
