@@ -50,7 +50,7 @@ public class IOFile {
                         
 			String[] splitline = line.split(SplitBy);
                         int size = splitline.length;
-                        int id = Tabs.moviesArray.size();
+                        int id = Tabs.MOVIESARRAY.size();
                         String name = splitline[1];
                         ArrayList<String> actors = new ArrayList<>();
                         
@@ -61,7 +61,7 @@ public class IOFile {
                         String genre = splitline[size -2];
                         int playTime = Integer.parseInt(splitline[size-1]);
                         Movies movie = new Movies(id,name,actors,genre,playTime,null);
-                        Tabs.moviesArray.add(movie);
+                        Tabs.MOVIESARRAY.add(movie);
 		}
 	} catch (FileNotFoundException e) {
 		JPanel panel = new JPanel();

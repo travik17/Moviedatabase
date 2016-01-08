@@ -37,12 +37,12 @@ public class Autocomplete implements DocumentListener {
   
     @Override
     public void removeUpdate(DocumentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("removeUpdate used");
     }
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("changedUpdate used");
     }
 
   @Override

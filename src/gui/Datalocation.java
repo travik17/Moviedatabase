@@ -170,7 +170,7 @@ public class Datalocation extends JPanel {
     }                                                   
 
     private void saveButtonActionPerformed() {          
-        IOFile.createfile(DefaultSaveLocation, "test.csv", Tabs.moviesArray);
+        IOFile.createfile(DefaultSaveLocation, "test.csv", Tabs.MOVIESARRAY);
     }                                          
 
     private void loadButtonActionPerformed() {                                           

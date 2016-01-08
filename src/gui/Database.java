@@ -85,7 +85,7 @@ public class Database extends JPanel {
     
     public static void fillDatabase(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        ArrayList<Movies> moviesArray = Tabs.moviesArray;
+        ArrayList<Movies> moviesArray = Tabs.MOVIESARRAY;
         for (int i = 0; i<moviesArray.size(); i++){
             Movies temp = moviesArray.get(i);
             //ArrayList<String> actors = temp.Actors;

@@ -154,11 +154,11 @@ public class NewEntry extends JPanel {
             String[] splitter = Actors.split(",");
             Actorlist.addAll(Arrays.asList(splitter));
             Movies movie;
-            movie = new Movies(Tabs.moviesArray.size() - 1, NameEditText1.getText(), Actorlist,
+            movie = new Movies(Tabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
                 jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  img);
-            Tabs.moviesArray.add(movie);
+            Tabs.MOVIESARRAY.add(movie);
             Database.addDatabase(movie);
-            System.out.println(Tabs.moviesArray.size());
+            System.out.println(Tabs.MOVIESARRAY.size());
         } catch (NumberFormatException e){
             System.out.println("User entered a invalid number: " + e.getMessage());
             JPanel panel = new JPanel();
