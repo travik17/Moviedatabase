@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/GUI/Datalocation.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/Autocompleter/Autocomplete.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/GUI/Search.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/Writer/IOFile.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/GUI/Tabs.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/GUI/NewEntry.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/GUI/Database.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/NewEntry.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/writer/IOFile.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Search.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Database.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Movies.java</file>
         </group>
     </open-files>
 </project-private>

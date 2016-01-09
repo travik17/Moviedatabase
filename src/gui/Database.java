@@ -1,8 +1,6 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dialog;
-import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -119,7 +117,7 @@ public class Database extends JPanel {
         jTable1.getRowSorter().toggleSortOrder(1);
     }
     
-    private void jTable1MouseClicked() {
+    private void jTable1MouseClicked(){
         final int row = jTable1.getSelectedRow();
         final int col = jTable1.getSelectedColumn();
         String idstring = jTable1.getValueAt(row, 0).toString();
@@ -129,23 +127,28 @@ public class Database extends JPanel {
         BufferedImage img = null;
         
         //set standaard images.
-        if (col == 5){
-            try {
-                String url = movie.Cover;
-                img = ImageIO.read(URI.create(url).toURL());
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
+        try{
+            if (col == 5){
+                try {
+                    String url = movie.Cover;
+                    img = ImageIO.read(URI.create(url).toURL());
+                } catch (IOException e) {
+                    final JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, "Unsupported Image Type", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+                }
+
+                JDialog mydialog = new JDialog();
+                mydialog.setSize(750,500);
+                mydialog.setTitle("Cover of " + name);
+                JLabel label = new JLabel("", new ImageIcon(img), JLabel.CENTER);
+                mydialog.add(label, BorderLayout.CENTER);
+                mydialog.setVisible(true);
             }
+        } catch (NullPointerException e){
             
-            JDialog mydialog = new JDialog();
-            mydialog.setSize(new Dimension(750,500));
-            mydialog.setTitle("Cover of " + name);
-            JLabel label = new JLabel("", new ImageIcon(img), JLabel.CENTER);
-            mydialog.add(label, BorderLayout.CENTER);
-            mydialog.setVisible(true);
         }
     }
-    
     
     /**
      * Fill jTable after loading .csv.
@@ -165,7 +168,7 @@ public class Database extends JPanel {
                 listofactors.append(", ");
             }
             model.addRow(new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-                temp.PlayTime, "Cover"});
+                temp.PlayTime, "Click to see cover"});
         }    
     }
     
@@ -181,7 +184,7 @@ public class Database extends JPanel {
             listofactors.append(", ");
         }
         Object[] row = {temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-            temp.PlayTime, "Cover"};
+            temp.PlayTime, "Click to see cover"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
     }               
