@@ -5,25 +5,25 @@ import java.util.ArrayList;
 
 public final class Movies {
     
-    protected Integer Id;
-    protected String Name;
-    protected ArrayList<String> Actors;
-    protected String Genre;
-    protected Integer PlayTime;
-    protected Image Cover;
+    public Integer identification;
+    public String Name;
+    public ArrayList<String> Actors;
+    public String Genre;
+    public Integer PlayTime;
+    public Image Cover;
     
     /**
      * Constructor.
      * 
-     * @param id id of the movie.
+     * @param identification identification of the movie.
      * @param name name of the movie.
      * @param actors actors of the movie.
      * @param genre genre of the movie.
      * @param playTime play time of the movie.
      * @param cover cover of the movie.
      */
-    public Movies(Integer id, String name, ArrayList<String> actors, String genre, Integer playTime, Image cover){
-        setMovieId(id);
+    public Movies(Integer identification, String name, ArrayList<String> actors, String genre, Integer playTime, Image cover){
+        setMovieId(identification);
         setMovieName(name);
         setMovieActors(actors);
         setMovieGenre(genre);
@@ -37,7 +37,7 @@ public final class Movies {
      * @param id id of the movie.
      */
     public void setMovieId(Integer id){
-        this.Id = id;
+        this.identification = id;
     }
     
     /**
@@ -46,7 +46,7 @@ public final class Movies {
      * @return integer with the id of the movie.
      */
     public Integer getMovieId(){
-        return Id;
+        return identification;
     }
     
     /**
@@ -126,7 +126,7 @@ public final class Movies {
      * 
      * @param cover the cover of the movie
      */
-    public void setMovieCover(Image cover){
+    public void setMovieCover(final Image cover){
         this.Cover = cover;
     }
     

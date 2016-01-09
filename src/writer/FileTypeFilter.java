@@ -14,7 +14,8 @@ public class FileTypeFilter extends FileFilter {
      * @param extension the extension for the file type.
      * @param description the discription of the extension.
      */
-    public FileTypeFilter(String extension, String description) { 
+    public FileTypeFilter(String extension, String description) {
+        super();
         this.extension = extension; 
         this.description = description; 
     } 

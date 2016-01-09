@@ -1,7 +1,7 @@
 package writer;
 
 import gui.Movies;
-import gui.Tabs;
+import gui.JpaneTabs;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -15,12 +15,12 @@ public class IOFile {
      */
     public static void createfile(File file){
         try(FileWriter writer = new FileWriter(file)) {              
-            for (int i=0; i<Tabs.MOVIESARRAY.size();i++){
-                Movies temp = Tabs.MOVIESARRAY.get(i);
+            for (int i=0; i<JpaneTabs.MOVIESARRAY.size();i++){
+                Movies temp = JpaneTabs.MOVIESARRAY.get(i);
                 writer.append(temp.getMovieId().toString() + ',');
                 writer.append(temp.getMovieName() + ',');
                 
-                ArrayList<String> currentActors = temp.getMovieActors();
+                final ArrayList<String> currentActors = temp.getMovieActors();
                 for (int j=0; j<currentActors.size();j++){
                     writer.append(currentActors.get(j) + ',');
                 }
@@ -40,28 +40,28 @@ public class IOFile {
      * 
      * @param file the file to write to.
      */
-    public static void readfile(File file){
-        BufferedReader br = null;
+    public static void readfile(final File file){
+        BufferedReader buffer = null;
         String line;
-        String SplitBy = ",";
+        final String SplitBy = ",";
+        final ArrayList<String> actors = new ArrayList<>();
 
         try {
-            br = new BufferedReader(new FileReader(file));
-            while ((line = br.readLine()) != null) {
-		String[] splitline = line.split(SplitBy);
+            buffer = new BufferedReader(new FileReader(file));
+            while ((line = buffer.readLine()) != null) {
+		final String[] splitline = line.split(SplitBy);
                 int size = splitline.length;
-                int id = Tabs.MOVIESARRAY.size();
+                int identification = JpaneTabs.MOVIESARRAY.size();
                 String name = splitline[1];
-                ArrayList<String> actors = new ArrayList<>();
-                        
+                 
                 for (int i = 1; i< size - 3; i++){
                     actors.add(splitline[i]);
                 }
 
-                String genre = splitline[size -2];
-                int playTime = Integer.parseInt(splitline[size-1]);
-                Movies movie = new Movies(id,name,actors,genre,playTime,null);
-                Tabs.MOVIESARRAY.add(movie);
+                final String genre = splitline[size -2];
+                final int playTime = Integer.parseInt(splitline[size-1]);
+                Movies movie = new Movies(identification,name,actors,genre,playTime,null);
+                JpaneTabs.MOVIESARRAY.add(movie);
             }
 	} catch (FileNotFoundException e) {
 		JPanel panel = new JPanel();
@@ -70,9 +70,9 @@ public class IOFile {
 	} catch (IOException e) {
                 System.out.println(e.getMessage());
 	} finally {
-            if (br != null) {
+            if (buffer != null) {
 		try {
-                    br.close();
+                    buffer.close();
 		} catch (IOException e) {
                     System.out.println("br exception " + e.getMessage());
 		}

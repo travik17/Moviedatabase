@@ -17,9 +17,9 @@ public class Search extends JPanel {
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     
     private final ArrayList<String> keywords = new ArrayList<>();
-    private final String COMMIT_ACTION = "commit";
-    private final JComboBox<String> GenreSearchCombobox = new JComboBox<>();
-    private final JTextField GenreSearchTextField = new JTextField();
+    private static final String COMMIT_ACTION = "commit";
+    private final JComboBox<String> SearchGenCombo = new JComboBox<>();
+    private final JTextField SearchGenText = new JTextField();
     private final JTable jTable1 = new JTable();
     private final JPanel jPanel1 = new JPanel();
     private final JLabel GenreSearchLabel = new JLabel();
@@ -40,9 +40,9 @@ public class Search extends JPanel {
      */
     private void createAutocomplete(){
         //create the keywords file.
-        GenreSearchTextField.setFocusTraversalKeysEnabled(false);
-        for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
-            Movies movies = Tabs.MOVIESARRAY.get(i);
+        SearchGenText.setFocusTraversalKeysEnabled(false);
+        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
+            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
             for (int j=0; j<movies.Actors.size(); j++){  
                 if(!keywords.contains(movies.Actors.get(j))){
                     keywords.add(movies.Actors.get(j));
@@ -51,10 +51,10 @@ public class Search extends JPanel {
         }
         
         //initialize class and commit key.
-        Autocomplete autoComplete = new Autocomplete(GenreSearchTextField, keywords) {};
-        GenreSearchTextField.getDocument().addDocumentListener(autoComplete);
-        GenreSearchTextField.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
-        GenreSearchTextField.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
+        Autocomplete autoComplete = new Autocomplete(SearchGenText, keywords) {};
+        SearchGenText.getDocument().addDocumentListener(autoComplete);
+        SearchGenText.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
+        SearchGenText.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
     }
     
     /**
@@ -87,7 +87,7 @@ public class Search extends JPanel {
         ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
         GenreSearchLabel.setText("Search for genre: ");
         ActorSearchLabel.setText("Search for actor:");
-        GenreSearchCombobox.setModel(new DefaultComboBoxModel<>(genres));
+        SearchGenCombo.setModel(new DefaultComboBoxModel<>(genres));
     }
     
     /**
@@ -102,8 +102,8 @@ public class Search extends JPanel {
             }
         });
 
-        GenreSearchTextField.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-        GenreSearchTextField.addMouseListener(new MouseAdapter() {
+        SearchGenText.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        SearchGenText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 genreSearchTextFieldMouseClicked();
@@ -151,20 +151,19 @@ public class Search extends JPanel {
      * 
      * @param jPanel1Layout the jPanel layout
      */
-    private void setHorizontallayout(GroupLayout jPanel1Layout){
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+    private void setHorizontallayout(final GroupLayout jPanel1Layout){
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ActorSearchLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(GenreSearchTextField))
+                        .addComponent(SearchGenText))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(GenreSearchLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(GenreSearchCombobox, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(SearchGenCombo, GroupLayout.PREFERRED_SIZE, 154, GroupLayout.PREFERRED_SIZE)))
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(ChangeGenreButton)
@@ -179,18 +178,17 @@ public class Search extends JPanel {
      * @param jPanel1Layout the jPanel layout
      */
     private void setVerticallayout(GroupLayout jPanel1Layout){
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(GenreSearchLabel)
-                    .addComponent(GenreSearchCombobox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchGenCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeGenreButton))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(ActorSearchLabel)
-                    .addComponent(GenreSearchTextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchGenText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeActorButton))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -239,16 +237,16 @@ public class Search extends JPanel {
     private void changeGenreButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        String genre = (String) GenreSearchCombobox.getSelectedItem();
-        for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
-            Movies movies = Tabs.MOVIESARRAY.get(i);
+        final String genre = (String) SearchGenCombo.getSelectedItem();
+        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
+            final Movies movies = JpaneTabs.MOVIESARRAY.get(i);
             if(movies.Genre.equalsIgnoreCase(genre)){
                 StringBuilder listofactors = new StringBuilder();
                 for (String s : movies.Actors){
                     listofactors.append(s);
                     listofactors.append(", ");
                 }
-                model.addRow(new Object[]{movies.Id, movies.Name, listofactors.toString(), movies.Genre,
+                model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
                     movies.PlayTime, "Image"});
             }
         }
@@ -260,16 +258,16 @@ public class Search extends JPanel {
     private void changeActorButtonActionPerformed() {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        String actor = GenreSearchTextField.getText();
-        for (int i=0; i<Tabs.MOVIESARRAY.size(); i++){
-            Movies movies = Tabs.MOVIESARRAY.get(i);
+        String actor = SearchGenText.getText();
+        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
+            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
             if (movies.Actors.contains(actor)){
                 StringBuilder listofactors = new StringBuilder();
                 for (String s : movies.Actors){
                     listofactors.append(s);
                     listofactors.append(", ");
                 }
-                model.addRow(new Object[]{movies.Id, movies.Name, listofactors.toString(), movies.Genre,
+                model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
                     movies.PlayTime, "Image"});
             } 
         }
@@ -301,9 +299,9 @@ public class Search extends JPanel {
                 }
                 if (col == 4){
                     Integer value = Integer.parseInt((String) jTable1.getValueAt(row, col));
-                    Movies movie = Tabs.MOVIESARRAY.get(id);
+                    Movies movie = JpaneTabs.MOVIESARRAY.get(id);
                     movie.setMoviePlayTime(value);
-                    Tabs.MOVIESARRAY.set(id, movie);
+                    JpaneTabs.MOVIESARRAY.set(id, movie);
                 }
                 if (col == 2){
                     actorChange(row, col, id);
@@ -321,14 +319,14 @@ public class Search extends JPanel {
      */
     private void stringsChange(int row, int col, Integer id){
         String value = jTable1.getValueAt(row, col).toString();
-        Movies movie = Tabs.MOVIESARRAY.get(id);
+        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
         if (col == 1){
              movie.setMovieName(value);
         }
         if (col == 3){
             movie.setMovieGenre(value);
         }
-        Tabs.MOVIESARRAY.set(id, movie);
+        JpaneTabs.MOVIESARRAY.set(id, movie);
     }
     
     /**
@@ -341,10 +339,10 @@ public class Search extends JPanel {
     private void actorChange(int row, int col, Integer id){
         ArrayList<String> Actorlist = new ArrayList<>();
         String value = jTable1.getValueAt(row, col).toString();
-        Movies movie = Tabs.MOVIESARRAY.get(id);
+        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
         String[] splitter = value.split(",");
         Actorlist.addAll(Arrays.asList(splitter));
         movie.setMovieActors(Actorlist);
-        Tabs.MOVIESARRAY.set(id, movie);                   
+        JpaneTabs.MOVIESARRAY.set(id, movie);                   
     }
 }

@@ -35,7 +35,7 @@ public class Database extends JPanel {
      * @param layout The layout for which the parameters are.
      * @param jScrollPane1 The scrollpane in the layout.
      */
-    private void layoutSet(GroupLayout layout, JScrollPane jScrollPane1){
+    private void layoutSet(final GroupLayout layout, JScrollPane jScrollPane1){
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -100,12 +100,12 @@ public class Database extends JPanel {
      * Fill jTable after loading .csv.
      */
     public static void fillDatabase(){
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        ArrayList<Movies> moviesArray = Tabs.MOVIESARRAY;
+        final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        final StringBuilder listofactors = new StringBuilder();
+        ArrayList<Movies> moviesArray = JpaneTabs.MOVIESARRAY;
         for (int i = 0; i<moviesArray.size(); i++){
             Movies temp = moviesArray.get(i);
-            StringBuilder listofactors = new StringBuilder();
-            for (String s : temp.Actors){
+            for (final String s : temp.Actors){
                 listofactors.append(s);
                 listofactors.append(", ");
             }

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
 
-public class Tabs extends JFrame {
+public class JpaneTabs extends JFrame {
     
     public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();;
     public static JFrame frame;
@@ -12,7 +12,7 @@ public class Tabs extends JFrame {
     /**
      * Constructor.
      */
-    public Tabs() {
+    public JpaneTabs() {
         initComponents();
     }
     
@@ -20,7 +20,7 @@ public class Tabs extends JFrame {
      * Add view components.
      */
     private void initComponents() {
-        JTabbedPane jTabbedPane1 = new JTabbedPane();
+        final JTabbedPane jTabbedPane1 = new JTabbedPane();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jTabbedPane1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
         addTabs(jTabbedPane1);
@@ -45,14 +45,14 @@ public class Tabs extends JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Tabs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JpaneTabs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                frame = new Tabs();
+                frame = new JpaneTabs();
                 frame.setVisible(true);
             }
         });
@@ -63,10 +63,10 @@ public class Tabs extends JFrame {
      * 
      * @param jTabbedPane1 the jTabbedpane to which the tabs are added.
      */
-    private void addTabs(JTabbedPane jTabbedPane1){
+    private void addTabs(final JTabbedPane jTabbedPane1){
         JPanel LocationTab = new Datalocation();
         JPanel DatabaseTab = new Database();
-        JPanel EntryTab = new NewEntry();
+        final JPanel EntryTab = new NewEntry();
         JPanel SearchTab = new Search();
         
         jTabbedPane1.addTab("File Location", LocationTab);        

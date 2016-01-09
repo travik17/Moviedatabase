@@ -58,11 +58,12 @@ public class NewEntry extends JPanel {
      * Set the labels of the current view.
      */
     private void setLabels(){
-        NameLabel.setFont(new java.awt.Font("Tahoma", 0, 18));
-        ActorsLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        GenreLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        TimeLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        ImageLabel1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        final String font = "Tahoma";
+        NameLabel.setFont(new java.awt.Font(font, 0, 18));
+        ActorsLabel1.setFont(new java.awt.Font(font, 0, 18));
+        GenreLabel1.setFont(new java.awt.Font(font, 0, 18));
+        TimeLabel1.setFont(new java.awt.Font(font, 0, 18));
+        ImageLabel1.setFont(new java.awt.Font(font, 0, 18));
         
         NameLabel.setText("Name:");      
         ActorsLabel1.setText("Actors:");        
@@ -75,10 +76,11 @@ public class NewEntry extends JPanel {
      * set the TextField of the current view.
      */
     private void setEditText(){
-        NameEditText1.setFont(new java.awt.Font("Tahoma", 0, 18));
-        ActorsEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); 
-        TimeEditText1.setFont(new java.awt.Font("Tahoma", 0, 18)); 
-        ImageEditText1.setFont(new java.awt.Font("Tahoma", 0, 18));
+        final String font = "Tahoma";
+        NameEditText1.setFont(new java.awt.Font(font, 0, 18));
+        ActorsEditText1.setFont(new java.awt.Font(font, 0, 18)); 
+        TimeEditText1.setFont(new java.awt.Font(font, 0, 18)); 
+        ImageEditText1.setFont(new java.awt.Font(font, 0, 18));
     }
     
     /**
@@ -158,7 +160,7 @@ public class NewEntry extends JPanel {
      * Add the new movie to the movies array and to the add row.
      */
     private void saveEntry1ActionPerformed() {                                           
-        ArrayList<String> Actorlist = new ArrayList<>();
+        final ArrayList<String> Actorlist = new ArrayList<>();
         BufferedImage img = null;
         
         //set standaard images.
@@ -170,18 +172,17 @@ public class NewEntry extends JPanel {
         
         //get the data from the view.
         try{
-            String Actors = ActorsEditText1.getText();
-            String[] splitter = Actors.split(",");
+            final String Actors = ActorsEditText1.getText();
+            final String[] splitter = Actors.split(",");
             Actorlist.addAll(Arrays.asList(splitter));
             Movies movie;
-            movie = new Movies(Tabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
+            movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
                 jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  img);
-            Tabs.MOVIESARRAY.add(movie);
+            JpaneTabs.MOVIESARRAY.add(movie);
             Database.addDatabase(movie);
-            System.out.println(Tabs.MOVIESARRAY.size());
+            System.out.println(JpaneTabs.MOVIESARRAY.size());
         } catch (NumberFormatException e){
-            System.out.println("User entered a invalid number: " + e.getMessage());
-            JPanel panel = new JPanel();
+            final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
                 JOptionPane.WARNING_MESSAGE);
         }

@@ -28,7 +28,7 @@ public class Autocomplete implements DocumentListener {
    * @param textField TextField in which autocomplete is necessary.
    * @param keywords  The list for autocomplete words.
    */
-    public Autocomplete(JTextField textField, List<String> keywords) {
+    public Autocomplete(final JTextField textField, List<String> keywords) {
         this.textField = textField;
         this.keywords = keywords;
         Collections.sort(keywords);
@@ -37,35 +37,36 @@ public class Autocomplete implements DocumentListener {
   /**
    * Gives notification that a portion of the document has been removed. 
    * 
-   * @param e The document event.
+   * @param event The document event.
    */
     @Override
-    public void removeUpdate(DocumentEvent e) {
+    public void removeUpdate(DocumentEvent event) {
         System.out.println("removeUpdate used");
     }
     
     /**
      * Gives notification that an attribute or set of attributes changed.
      * 
-     * @param e The document event.
+     * @param event The document event.
      */
     @Override
-    public void changedUpdate(DocumentEvent e) {
+    public void changedUpdate(DocumentEvent event) {
         System.out.println("changedUpdate used");
     }
     
     /**
      * Gives notification that there was an insert into the document. 
      * 
-     * @param ev The document event.
+     * @param event The document event.
      */
     @Override
-    public void insertUpdate(DocumentEvent ev) {
+    public void insertUpdate(final DocumentEvent event) {
         String content = "test";
-        if (ev.getLength() != 1)
+        if (event.getLength() != 1){
             return;
+        }
 
-        int pos = ev.getOffset();
+        int pos = event.getOffset();
         try {
             content = textField.getText(0, pos + 1);
         } catch (BadLocationException e) {
@@ -73,24 +74,25 @@ public class Autocomplete implements DocumentListener {
         }
 
         // Find where the word starts.
-        int w;
-        for (w = pos; w >= 0; w--) {
-          if (!Character.isLetter(content.charAt(w))) {
+        int word;
+        for (word = pos; word >= 0; word--) {
+          if (!Character.isLetter(content.charAt(word))) {
                 break;
           }
         }
 
         // Too few chars.
-        if (pos - w < 2)
+        if (pos - word < 2){
             return;
+        }
 
-        String prefix = content.substring(w + 1).toLowerCase();
-        int n = Collections.binarySearch(keywords, prefix);
-        if (n < 0 && -n <= keywords.size()) {
-            String match = keywords.get(-n - 1);
+        String prefix = content.substring(word + 1).toLowerCase();
+        int number = Collections.binarySearch(keywords, prefix);
+        if (number < 0 && -number <= keywords.size()) {
+            String match = keywords.get(-number - 1);
             if (match.startsWith(prefix)) {
                 // A completion is found.
-                String completion = match.substring(pos - w);
+                final String completion = match.substring(pos - word);
                 // We cannot modify Document from within notification,
                 // so we submit a task that does the change later.
                 SwingUtilities.invokeLater(new CompletionTask(completion, pos + 1));
@@ -106,14 +108,16 @@ public class Autocomplete implements DocumentListener {
         * serialVersionUID.
         */
         private static final long serialVersionUID = 5794543109646743416L;
-    
+        
+        public void CommitAction(){
+        }
         /**
         * The actions when the user commits to the text.
         * 
-        * @param ev The trigger actionevent.
+        * @param event The trigger actionevent.
         */
        @Override
-        public void actionPerformed(ActionEvent ev) {
+        public void actionPerformed(ActionEvent event) {
             try{
                 if (mode == Mode.COMPLETION) {
                     int pos = textField.getSelectionEnd();
@@ -152,9 +156,9 @@ public class Autocomplete implements DocumentListener {
         @Override
         public void run() {
             try{
-                StringBuilder sb = new StringBuilder(textField.getText());
-                sb.insert(position, completion);
-                textField.setText(sb.toString());
+                StringBuilder builder = new StringBuilder(textField.getText());
+                builder.insert(position, completion);
+                textField.setText(builder.toString());
                 textField.setCaretPosition(position + completion.length());
                 textField.moveCaretPosition(position);
                 mode = Mode.COMPLETION;
