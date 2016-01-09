@@ -40,7 +40,7 @@ public class Autocomplete implements DocumentListener {
    * @param event The document event.
    */
     @Override
-    public void removeUpdate(DocumentEvent event) {
+    public void removeUpdate(final DocumentEvent event) {
         System.out.println("removeUpdate used");
     }
     
@@ -50,7 +50,7 @@ public class Autocomplete implements DocumentListener {
      * @param event The document event.
      */
     @Override
-    public void changedUpdate(DocumentEvent event) {
+    public void changedUpdate(final DocumentEvent event) {
         System.out.println("changedUpdate used");
     }
     
@@ -66,7 +66,7 @@ public class Autocomplete implements DocumentListener {
             return;
         }
 
-        int pos = event.getOffset();
+        final int pos = event.getOffset();
         try {
             content = textField.getText(0, pos + 1);
         } catch (BadLocationException e) {
@@ -145,7 +145,7 @@ public class Autocomplete implements DocumentListener {
          * @param completion The string to complete.
          * @param position The positie of the string already typed.
          */
-        CompletionTask(String completion, int position) {
+        CompletionTask(String completion, final int position) {
             this.completion = completion;
             this.position = position;
         }

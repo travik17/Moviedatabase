@@ -64,10 +64,10 @@ public class JpaneTabs extends JFrame {
      * @param jTabbedPane1 the jTabbedpane to which the tabs are added.
      */
     private void addTabs(final JTabbedPane jTabbedPane1){
-        JPanel LocationTab = new Datalocation();
-        JPanel DatabaseTab = new Database();
+        final JPanel LocationTab = new Datalocation();
+        final JPanel DatabaseTab = new Database();
         final JPanel EntryTab = new NewEntry();
-        JPanel SearchTab = new Search();
+        final JPanel SearchTab = new Search();
         
         jTabbedPane1.addTab("File Location", LocationTab);        
         jTabbedPane1.addTab("Database", DatabaseTab);        
@@ -81,7 +81,7 @@ public class JpaneTabs extends JFrame {
      * @param layout the layout to add the parameters.
      * @param jTabbedPane1 The jTabbedPane for the layout
      */
-    private void setGroupLayout(GroupLayout layout, JTabbedPane jTabbedPane1){
+    private void setGroupLayout(final GroupLayout layout, JTabbedPane jTabbedPane1){
         layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
