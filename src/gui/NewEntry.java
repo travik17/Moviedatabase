@@ -69,7 +69,7 @@ public class NewEntry extends JPanel {
         ActorsLabel1.setText("Actors:");        
         GenreLabel1.setText("Genre:");        
         TimeLabel1.setText("Time (in min):");        
-        ImageLabel1.setText("Image:");
+        ImageLabel1.setText("Image (enter url):");
     }
     
     /**
@@ -165,7 +165,8 @@ public class NewEntry extends JPanel {
         
         //set standaard images.
         try {
-            img = ImageIO.read(URI.create("http://www.gravatar.com/avatar/d5f91983a9d9cfb69981b6108a63b412?s=32&d=identicon&r=PG").toURL());
+            String url = ImageEditText1.getText();
+            img = ImageIO.read(URI.create(url).toURL());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

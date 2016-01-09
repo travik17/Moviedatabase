@@ -294,18 +294,27 @@ public class Search extends JPanel {
                 String idstring = jTable1.getValueAt(row, 0).toString();
                 Integer id = Integer.parseInt(idstring);
                 
-                if (col == 1 || col == 3){
-                    stringsChange(row, col, id);
-                }
-                if (col == 4){
-                    Integer value = Integer.parseInt((String) jTable1.getValueAt(row, col));
-                    Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-                    movie.setMoviePlayTime(value);
-                    JpaneTabs.MOVIESARRAY.set(id, movie);
-                }
-                if (col == 2){
-                    actorChange(row, col, id);
-                }
+                switch (col){
+                    case 1:
+                    case 3:
+                        stringsChange(row, col, id);
+                        break;
+                    case 2:
+                        actorChange(row, col, id);
+                        break;
+                    case 4:
+                        Integer value = Integer.parseInt((String) jTable1.getValueAt(row, col));
+                        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
+                        movie.setMoviePlayTime(value);
+                        JpaneTabs.MOVIESARRAY.set(id, movie);
+                        break;
+                    case 5:
+                        String value1 = jTable1.getValueAt(row, col).toString();
+                        movie = JpaneTabs.MOVIESARRAY.get(id);
+                        
+                        JpaneTabs.MOVIESARRAY.set(id, movie);
+                        break;
+                }              
             }
         });
     }

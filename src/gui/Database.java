@@ -1,5 +1,9 @@
 package gui;
 
+import java.awt.Dialog;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -71,6 +75,13 @@ public class Database extends JPanel {
         });
         setAlignment();
         setColumnSelect();
+        
+        jTable1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                jTable1MouseClicked();
+            }
+        });
     }
     
     /**
@@ -95,6 +106,24 @@ public class Database extends JPanel {
         jTable1.setAutoCreateRowSorter(true);
         jTable1.getRowSorter().toggleSortOrder(0);
     }
+    
+    private void jTable1MouseClicked() {
+        final int row = jTable1.getSelectedRow();
+        final int col = jTable1.getSelectedColumn();
+        System.out.println("col: " + col);
+        String idstring = jTable1.getValueAt(row, 0).toString();
+        Integer id = Integer.parseInt(idstring);
+        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
+        String name = movie.getMovieName();
+        if (col == 4){
+            JDialog mydialog = new JDialog();
+            mydialog.setSize(new Dimension(750,500));
+            mydialog.setTitle("Cover of " + name);
+            mydialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL); // prevent user from doing something else
+            mydialog.setVisible(true);
+        }
+    }
+    
     
     /**
      * Fill jTable after loading .csv.
