@@ -2,8 +2,11 @@ package writer;
 
 import gui.Movies;
 import gui.JpaneTabs;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URI;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class IOFile {
@@ -43,24 +46,29 @@ public class IOFile {
     public static void readfile(final File file){
         BufferedReader buffer = null;
         String line;
-        final String SplitBy = ",";
-        final ArrayList<String> actors = new ArrayList<>();
-
+        String SplitBy = ",";
+        
         try {
             buffer = new BufferedReader(new FileReader(file));
+            BufferedImage img = null;
             while ((line = buffer.readLine()) != null) {
-		final String[] splitline = line.split(SplitBy);
+                ArrayList<String> actors = new ArrayList<>();
+		String[] splitline = line.split(SplitBy);
                 int size = splitline.length;
                 int identification = JpaneTabs.MOVIESARRAY.size();
                 String name = splitline[1];
                  
-                for (int i = 1; i< size - 3; i++){
+                for (int i = 2; i< size - 3; i++){
                     actors.add(splitline[i]);
                 }
 
-                final String genre = splitline[size -2];
-                final int playTime = Integer.parseInt(splitline[size-1]);
-                Movies movie = new Movies(identification,name,actors,genre,playTime,null);
+                String genre = splitline[size -3];
+                int playTime = Integer.parseInt(splitline[size-2]);
+                
+                //set standaard images.
+                String url = splitline[size - 1];
+
+                Movies movie = new Movies(identification,name,actors,genre,playTime,url);
                 JpaneTabs.MOVIESARRAY.add(movie);
             }
 	} catch (FileNotFoundException e) {

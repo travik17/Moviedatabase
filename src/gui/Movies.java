@@ -1,6 +1,6 @@
 package gui;
 
-import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public final class Movies {
@@ -10,7 +10,7 @@ public final class Movies {
     public ArrayList<String> Actors;
     public String Genre;
     public Integer PlayTime;
-    public Image Cover;
+    public String Cover;
     
     /**
      * Constructor.
@@ -22,7 +22,7 @@ public final class Movies {
      * @param playTime play time of the movie.
      * @param cover cover of the movie.
      */
-    public Movies(Integer identification, String name, ArrayList<String> actors, String genre, Integer playTime, Image cover){
+    public Movies(Integer identification, String name, ArrayList<String> actors, String genre, Integer playTime, String cover){
         setMovieId(identification);
         setMovieName(name);
         setMovieActors(actors);
@@ -126,7 +126,7 @@ public final class Movies {
      * 
      * @param cover the cover of the movie
      */
-    public void setMovieCover(final Image cover){
+    public void setMovieCover(String cover){
         this.Cover = cover;
     }
     
@@ -135,7 +135,7 @@ public final class Movies {
      * 
      * @return image with the cover of the movie
      */
-    public Image getMovieCover(){
+    public String getMovieCover(){
         return Cover;
     }
     

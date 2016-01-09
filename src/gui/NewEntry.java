@@ -161,16 +161,8 @@ public class NewEntry extends JPanel {
      */
     private void saveEntry1ActionPerformed() {                                           
         final ArrayList<String> Actorlist = new ArrayList<>();
-        BufferedImage img = null;
-        
-        //set standaard images.
-        try {
-            String url = ImageEditText1.getText();
-            img = ImageIO.read(URI.create(url).toURL());
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
-        
+        String url = ImageEditText1.getText();
+
         //get the data from the view.
         try{
             final String Actors = ActorsEditText1.getText();
@@ -178,7 +170,7 @@ public class NewEntry extends JPanel {
             Actorlist.addAll(Arrays.asList(splitter));
             Movies movie;
             movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
-                jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  img);
+                jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  url);
             JpaneTabs.MOVIESARRAY.add(movie);
             Database.addDatabase(movie);
             System.out.println(JpaneTabs.MOVIESARRAY.size());

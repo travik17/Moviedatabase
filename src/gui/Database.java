@@ -1,10 +1,15 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -62,10 +67,10 @@ public class Database extends JPanel {
     private void createJtable(){
         jTable1 = new JTable();
         jTable1.setModel(new DefaultTableModel(new Object [][] {}, new String [] {
-                "Name", "Actors", "Genre", "Play time", "Image"}) {
+                "Id", "Name", "Actors", "Genre", "Play time", "Image"}) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class};
-            boolean[] canEdit = new boolean [] {false, false, false, false, false};
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class};
+            boolean[] canEdit = new boolean [] {false, false, false, false, false, false};
 
             @Override
             public Class getColumnClass(int columnIndex) {return types [columnIndex];}
@@ -95,7 +100,14 @@ public class Database extends JPanel {
         jTable1.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
         
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+        }        
     }
     
     /**
@@ -104,22 +116,32 @@ public class Database extends JPanel {
     private void setColumnSelect(){
         jTable1.setColumnSelectionAllowed(true);
         jTable1.setAutoCreateRowSorter(true);
-        jTable1.getRowSorter().toggleSortOrder(0);
+        jTable1.getRowSorter().toggleSortOrder(1);
     }
     
     private void jTable1MouseClicked() {
         final int row = jTable1.getSelectedRow();
         final int col = jTable1.getSelectedColumn();
-        System.out.println("col: " + col);
         String idstring = jTable1.getValueAt(row, 0).toString();
         Integer id = Integer.parseInt(idstring);
         Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        String name = movie.getMovieName();
-        if (col == 4){
+        String name = movie.Name;
+        BufferedImage img = null;
+        
+        //set standaard images.
+        if (col == 5){
+            try {
+                String url = movie.Cover;
+                img = ImageIO.read(URI.create(url).toURL());
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+            
             JDialog mydialog = new JDialog();
             mydialog.setSize(new Dimension(750,500));
             mydialog.setTitle("Cover of " + name);
-            mydialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL); // prevent user from doing something else
+            JLabel label = new JLabel("", new ImageIcon(img), JLabel.CENTER);
+            mydialog.add(label, BorderLayout.CENTER);
             mydialog.setVisible(true);
         }
     }
@@ -130,16 +152,20 @@ public class Database extends JPanel {
      */
     public static void fillDatabase(){
         final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        final StringBuilder listofactors = new StringBuilder();
+        
         ArrayList<Movies> moviesArray = JpaneTabs.MOVIESARRAY;
+        
+        BufferedImage img = null;
+        //set standaard images.
         for (int i = 0; i<moviesArray.size(); i++){
             Movies temp = moviesArray.get(i);
-            for (final String s : temp.Actors){
+            StringBuilder listofactors = new StringBuilder();
+            for (String s : temp.Actors){
                 listofactors.append(s);
                 listofactors.append(", ");
             }
-            model.addRow(new Object[]{temp.Name, listofactors.toString(), temp.Genre,
-                temp.PlayTime, "Image"});
+            model.addRow(new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
+                temp.PlayTime, "Cover"});
         }    
     }
     
@@ -154,8 +180,8 @@ public class Database extends JPanel {
             listofactors.append(s);
             listofactors.append(", ");
         }
-        Object[] row = {temp.Name, listofactors.toString(), temp.Genre,
-            temp.PlayTime, "Image"};
+        Object[] row = {temp.identification, temp.Name, listofactors.toString(), temp.Genre,
+            temp.PlayTime, "Cover"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
     }               
