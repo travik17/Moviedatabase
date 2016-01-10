@@ -72,7 +72,7 @@ public class JpaneTabs extends JFrame {
         jTabbedPane1.addTab("File Location", LocationTab);        
         jTabbedPane1.addTab("Database", DatabaseTab);        
         jTabbedPane1.addTab("New Entry", EntryTab);       
-        jTabbedPane1.addTab("Search", SearchTab);
+        jTabbedPane1.addTab("Search", SearchTab);    
     }
     
     /**
