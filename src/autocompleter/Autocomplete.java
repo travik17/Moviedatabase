@@ -108,10 +108,7 @@ public class Autocomplete implements DocumentListener {
         * serialVersionUID.
         */
         private static final long serialVersionUID = 5794543109646743416L;
-        
-        public CommitAction(){
-            super();
-        }
+    
         /**
         * The actions when the user commits to the text.
         * 

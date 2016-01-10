@@ -1,11 +1,7 @@
 package gui;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class NewEntry extends JPanel {

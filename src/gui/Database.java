@@ -124,14 +124,14 @@ public class Database extends JPanel {
         Integer id = Integer.parseInt(idstring);
         Movies movie = JpaneTabs.MOVIESARRAY.get(id);
         String name = movie.Name;
-        BufferedImage img = null;
+        BufferedImage image = null;
         
         //set standaard images.
         try{
             if (col == 5){
                 try {
                     String url = movie.Cover;
-                    img = ImageIO.read(URI.create(url).toURL());
+                    image = ImageIO.read(URI.create(url).toURL());
                 } catch (IOException e) {
                     final JPanel panel = new JPanel();
                     JOptionPane.showMessageDialog(panel, "Unsupported Image Type", "Warning",
@@ -141,7 +141,7 @@ public class Database extends JPanel {
                 JDialog mydialog = new JDialog();
                 mydialog.setSize(750,500);
                 mydialog.setTitle("Cover of " + name);
-                JLabel label = new JLabel("", new ImageIcon(img), JLabel.CENTER);
+                JLabel label = new JLabel("", new ImageIcon(image), JLabel.CENTER);
                 mydialog.add(label, BorderLayout.CENTER);
                 mydialog.setVisible(true);
             }

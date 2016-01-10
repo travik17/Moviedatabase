@@ -1,6 +1,5 @@
 package gui;
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public final class Movies {

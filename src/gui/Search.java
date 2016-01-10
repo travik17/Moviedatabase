@@ -309,10 +309,12 @@ public class Search extends JPanel {
                         JpaneTabs.MOVIESARRAY.set(id, movie);
                         break;
                     case 5:
-                        String value1 = jTable1.getValueAt(row, col).toString();
+                        String genrevalue = jTable1.getValueAt(row, col).toString();
                         movie = JpaneTabs.MOVIESARRAY.get(id);
                         
                         JpaneTabs.MOVIESARRAY.set(id, movie);
+                        break;
+                    default:
                         break;
                 }              
             }

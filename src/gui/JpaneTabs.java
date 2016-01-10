@@ -1,8 +1,10 @@
 package gui;
 
+import info.movito.themoviedbapi.TmdbApi;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
+import info.movito.themoviedbapi.TmdbMovies;
 
 public class JpaneTabs extends JFrame {
     
@@ -73,6 +75,8 @@ public class JpaneTabs extends JFrame {
         jTabbedPane1.addTab("Database", DatabaseTab);        
         jTabbedPane1.addTab("New Entry", EntryTab);       
         jTabbedPane1.addTab("Search", SearchTab);    
+        
+        TmdbMovies movies = new TmdbApi("0d11e0bc8db3815dc4cb914cba6e304d").getMovies();
     }
     
     /**

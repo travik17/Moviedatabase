@@ -4,9 +4,7 @@ import gui.Movies;
 import gui.JpaneTabs;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.URI;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class IOFile {
@@ -50,7 +48,6 @@ public class IOFile {
         
         try {
             buffer = new BufferedReader(new FileReader(file));
-            BufferedImage img = null;
             while ((line = buffer.readLine()) != null) {
                 ArrayList<String> actors = new ArrayList<>();
 		String[] splitline = line.split(SplitBy);
