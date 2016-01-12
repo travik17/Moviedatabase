@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Search;
+package search;
 
-import Model.Movies;
+import model.Movies;
 import autocompleter.Autocomplete;
 import gui.JpaneTabs;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class SearchInteraction {
 
-    public void ActorSearch(JTable jTable1, JTextField SearchGenText) {                                                  
+    public void actorSearch(JTable jTable1, JTextField SearchGenText) {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         String actor = SearchGenText.getText();
@@ -40,7 +40,7 @@ public class SearchInteraction {
     }
     
 
-    public void GenreSearch(JTable jTable1, JComboBox SearchGenCombo) {                                                  
+    public void genreSearch(JTable jTable1, JComboBox SearchGenCombo) {                                                  
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
         final String genre = (String) SearchGenCombo.getSelectedItem();

@@ -1,6 +1,6 @@
 package gui;
 
-import Database.DatabaseAdd;
+import database.DatabaseAdd;
 import writer.FileTypeFilter;
 import java.io.File;
 import writer.IOFile;

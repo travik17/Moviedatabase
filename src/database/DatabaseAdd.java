@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Database;
+package database;
 
-import Model.Movies;
+import model.Movies;
 import gui.JpaneTabs;
 import static gui.DatabaseUI.jTable1;
 import java.util.ArrayList;

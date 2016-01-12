@@ -1,6 +1,6 @@
 package gui;
 
-import Model.Movies;
+import model.Movies;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import java.awt.Color;
 import java.util.ArrayList;

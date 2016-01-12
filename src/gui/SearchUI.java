@@ -1,7 +1,7 @@
 package gui;
 
-import Search.SearchInteraction;
-import Search.SearchEdit;
+import search.SearchInteraction;
+import search.SearchEdit;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
@@ -73,7 +73,7 @@ public class SearchUI extends JPanel {
         ChangeGenreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                interaction.GenreSearch(jTable1, SearchGenCombo);
+                interaction.genreSearch(jTable1, SearchGenCombo);
             }
         });
 
@@ -89,7 +89,7 @@ public class SearchUI extends JPanel {
         ChangeActorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                interaction.ActorSearch(jTable1, SearchGenText);
+                interaction.actorSearch(jTable1, SearchGenText);
             }
         });
     }

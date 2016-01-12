@@ -1,7 +1,7 @@
 package gui;
 
-import Database.DatabaseAdd;
-import Model.Movies;
+import database.DatabaseAdd;
+import model.Movies;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package gui;
 
-import Database.DatabaseInteraction;
+import database.DatabaseInteraction;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
