@@ -23,7 +23,6 @@ public class SearchUI extends JPanel {
     private final JLabel ActorSearchLabel = new JLabel();
     private final JButton ChangeActorButton = new JButton();
     private final JScrollPane jScrollPane1 = new JScrollPane();
-    
     /**
      * Constructor with tableChanged listener.
      */
@@ -76,7 +75,7 @@ public class SearchUI extends JPanel {
                 interaction.genreSearch(jTable1, SearchGenCombo);
             }
         });
-
+        
         SearchGenText.setFont(new Font("Tahoma", 0, 18)); // NOI18N
         SearchGenText.addMouseListener(new MouseAdapter() {
             @Override

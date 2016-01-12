@@ -120,7 +120,7 @@ public class Autocomplete implements DocumentListener {
                 if (mode == Mode.COMPLETION) {
                     int pos = textField.getSelectionEnd();
                     StringBuilder sb = new StringBuilder(textField.getText());
-                    sb.insert(pos, "");
+                    sb.insert(pos, " ");
                     textField.setText(sb.toString());
                     textField.setCaretPosition(pos);
                     mode = Mode.INSERT;

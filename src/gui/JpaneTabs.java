@@ -8,7 +8,8 @@ import javax.swing.*;
 
 public class JpaneTabs extends JFrame {
     
-    public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();;
+    public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();
+    public static JFrame frame;
     
     /**
      * Constructor.
@@ -54,7 +55,7 @@ public class JpaneTabs extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                JFrame frame = new JpaneTabs();
+                frame = new JpaneTabs();
                 frame.setVisible(true);
             }
         });
