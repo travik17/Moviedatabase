@@ -1,5 +1,6 @@
 package gui;
 
+import Database.DatabaseAdd;
 import writer.FileTypeFilter;
 import java.io.File;
 import writer.IOFile;
@@ -7,8 +8,6 @@ import javax.swing.*;
 
 public class Datalocation extends JPanel {
     
-    private String DefaultSLoc = "C:\\Users\\" + System.getProperty("user.name") + "\\Documents";
-    private static final String DefaultLoc = "E:\\torrentz\\test.csv";
     private final JButton LoadLocBut = new JButton();
     private final JButton SaveLocBut = new JButton();
     
@@ -72,7 +71,8 @@ public class Datalocation extends JPanel {
         );
     }
     
-    private void loadLocationButton1ActionPerformed() {                                                    
+    private void loadLocationButton1ActionPerformed() {  
+        String DefaultLoc = "E:\\torrentz\\test.csv";
         JFileChooser choose = new JFileChooser(DefaultLoc);
         choose.setDialogTitle("Open a file");
         choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
@@ -81,10 +81,11 @@ public class Datalocation extends JPanel {
         if (returnval == JFileChooser.APPROVE_OPTION){
             final File file = choose.getSelectedFile();
             IOFile.readfile(file);
-            Database.fillDatabase();
+            DatabaseAdd.fillDatabase();
         }
     } 
-        private void saveLocationButton1ActionPerformed() {                                                    
+        private void saveLocationButton1ActionPerformed() {
+        String DefaultSLoc = "C:\\Users\\" + System.getProperty("user.name") + "\\Documents";
         JFileChooser choose = new JFileChooser(DefaultSLoc);
         choose.setDialogTitle("Save a file");
         choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
@@ -93,8 +94,6 @@ public class Datalocation extends JPanel {
         if (returnval == JFileChooser.APPROVE_OPTION){
             File file = choose.getSelectedFile();
             file = new File(file.toString() + ".csv");
-            String path = choose.getSelectedFile().getAbsolutePath();
-            DefaultSLoc = path;
             IOFile.createfile(file);
         }  
     }                                                                           

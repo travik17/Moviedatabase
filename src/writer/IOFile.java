@@ -1,6 +1,6 @@
 package writer;
 
-import gui.Movies;
+import Model.Movies;
 import gui.JpaneTabs;
 import java.io.*;
 import java.util.ArrayList;

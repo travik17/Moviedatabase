@@ -1,5 +1,7 @@
 package gui;
 
+import Database.DatabaseAdd;
+import Model.Movies;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.*;
@@ -156,7 +158,7 @@ public class NewEntry extends JPanel {
             movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
                 jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()));
             JpaneTabs.MOVIESARRAY.add(movie);
-            Database.addDatabase(movie);
+            DatabaseAdd.addDatabase(movie);
             System.out.println(JpaneTabs.MOVIESARRAY.size());
         } catch (NumberFormatException e){
             final JPanel panel = new JPanel();

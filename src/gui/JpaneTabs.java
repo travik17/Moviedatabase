@@ -1,5 +1,6 @@
 package gui;
 
+import Model.Movies;
 import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -8,14 +9,12 @@ import javax.swing.*;
 public class JpaneTabs extends JFrame {
     
     public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();;
-    public static JFrame frame;
     
     /**
      * Constructor.
      */
     public JpaneTabs() {
         initComponents();
-        
     }
     
     /**
@@ -41,7 +40,7 @@ public class JpaneTabs extends JFrame {
     public static void main(String args[]) {
         NativeInterface.open();
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
@@ -55,7 +54,7 @@ public class JpaneTabs extends JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                frame = new JpaneTabs();
+                JFrame frame = new JpaneTabs();
                 frame.setVisible(true);
             }
         });
@@ -76,9 +75,9 @@ public class JpaneTabs extends JFrame {
      */
     private void addTabs(final JTabbedPane jTabbedPane1){
         final JPanel LocationTab = new Datalocation();
-        final JPanel DatabaseTab = new Database();
+        final JPanel DatabaseTab = new DatabaseUI();
         final JPanel EntryTab = new NewEntry();
-        final JPanel SearchTab = new Search();
+        final JPanel SearchTab = new SearchUI();
         
         jTabbedPane1.addTab("File Location", LocationTab);        
         jTabbedPane1.addTab("Database", DatabaseTab);        

@@ -1,23 +1,19 @@
 package gui;
 
-import autocompleter.Autocomplete;
+import Search.SearchInteraction;
+import Search.SearchEdit;
 import java.awt.Font;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class Search extends JPanel {
+public class SearchUI extends JPanel {
     
     private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     
-    private final ArrayList<String> keywords = new ArrayList<>();
-    private static final String COMMIT_ACTION = "commit";
+    
     private final JComboBox<String> SearchGenCombo = new JComboBox<>();
     private final JTextField SearchGenText = new JTextField();
     private final JTable jTable1 = new JTable();
@@ -31,32 +27,10 @@ public class Search extends JPanel {
     /**
      * Constructor with tableChanged listener.
      */
-    public Search() {
+    public SearchUI() {
         initComponents();
     }
-    
-    /**
-     * Create the autocomplete files for the textfield.
-     */
-    private void createAutocomplete(){
-        //create the keywords file.
-        SearchGenText.setFocusTraversalKeysEnabled(false);
-        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
-            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
-            for (int j=0; j<movies.Actors.size(); j++){  
-                if(!keywords.contains(movies.Actors.get(j))){
-                    keywords.add(movies.Actors.get(j));
-                }
-            }
-        }
-        
-        //initialize class and commit key.
-        Autocomplete autoComplete = new Autocomplete(SearchGenText, keywords) {};
-        SearchGenText.getDocument().addDocumentListener(autoComplete);
-        SearchGenText.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
-        SearchGenText.getActionMap().put(COMMIT_ACTION, autoComplete.new CommitAction());
-    }
-    
+       
     /**
      * Add view components.
      */
@@ -94,11 +68,12 @@ public class Search extends JPanel {
      * Set the buttons for this view.
      */
     private void setButton(){
+        final SearchInteraction interaction = new SearchInteraction();
         ChangeGenreButton.setText("Search");
         ChangeGenreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                changeGenreButtonActionPerformed();
+                interaction.GenreSearch(jTable1, SearchGenCombo);
             }
         });
 
@@ -106,7 +81,7 @@ public class Search extends JPanel {
         SearchGenText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                genreSearchTextFieldMouseClicked();
+                interaction.createAutocomplete(SearchGenText);
             }
         });
 
@@ -114,7 +89,7 @@ public class Search extends JPanel {
         ChangeActorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
-                changeActorButtonActionPerformed();
+                interaction.ActorSearch(jTable1, SearchGenText);
             }
         });
     }
@@ -141,7 +116,8 @@ public class Search extends JPanel {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                jTable1MouseClicked();
+                SearchEdit edit = new SearchEdit();
+                edit.jTable1MouseClicked(jTable1);
             }
         });
     }
@@ -224,136 +200,8 @@ public class Search extends JPanel {
     private void setAlignment(){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        jTable1.getColumnModel().getColumn(0).setCellRenderer(rightRenderer);
-        jTable1.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
-        jTable1.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
-        jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
-        jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-    }
-    
-    /**
-     * Add the movies of the searched genre to the jTable.
-     */
-    private void changeGenreButtonActionPerformed() {                                                  
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        final String genre = (String) SearchGenCombo.getSelectedItem();
-        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
-            final Movies movies = JpaneTabs.MOVIESARRAY.get(i);
-            if(movies.Genre.equalsIgnoreCase(genre)){
-                StringBuilder listofactors = new StringBuilder();
-                for (String s : movies.Actors){
-                    listofactors.append(s);
-                    listofactors.append(", ");
-                }
-                model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
-                    movies.PlayTime, "Image"});
-            }
+        for (int i=0;i<4;i++){
+            jTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         }
-    }                                                 
-    
-    /**
-     * Add the movies of the searched actor to the jTable.
-     */
-    private void changeActorButtonActionPerformed() {                                                  
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        String actor = SearchGenText.getText();
-        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
-            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
-            if (movies.Actors.contains(actor)){
-                StringBuilder listofactors = new StringBuilder();
-                for (String s : movies.Actors){
-                    listofactors.append(s);
-                    listofactors.append(", ");
-                }
-                model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
-                    movies.PlayTime, "Image"});
-            } 
-        }
-    }                                                 
-    
-    /**
-     * Textfield initialize autocomplete.
-     */
-    private void genreSearchTextFieldMouseClicked() {                                                  
-        createAutocomplete();
-    }                                                 
-    
-    /**
-     * Actions when the jTable is clicked.
-     */
-    private void jTable1MouseClicked() {                                     
-        final int row = jTable1.getSelectedRow();
-        final int col = jTable1.getSelectedColumn();
-        
-        final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addTableModelListener(new TableModelListener(){
-            @Override
-            public void tableChanged(TableModelEvent e){
-                String idstring = jTable1.getValueAt(row, 0).toString();
-                Integer id = Integer.parseInt(idstring);
-                
-                switch (col){
-                    case 1:
-                    case 3:
-                        stringsChange(row, col, id);
-                        break;
-                    case 2:
-                        actorChange(row, col, id);
-                        break;
-                    case 4:
-                        Integer value = Integer.parseInt((String) jTable1.getValueAt(row, col));
-                        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-                        movie.setMoviePlayTime(value);
-                        JpaneTabs.MOVIESARRAY.set(id, movie);
-                        break;
-                    case 5:
-                        String genrevalue = jTable1.getValueAt(row, col).toString();
-                        movie = JpaneTabs.MOVIESARRAY.get(id);
-                        
-                        JpaneTabs.MOVIESARRAY.set(id, movie);
-                        break;
-                    default:
-                        break;
-                }              
-            }
-        });
-    }
-    
-    /**
-     * jTable changes in column 1 and 3.
-     * 
-     * @param row the row selected.
-     * @param col the col selected.
-     * @param id  the id of the array to change.
-     */
-    private void stringsChange(int row, int col, Integer id){
-        String value = jTable1.getValueAt(row, col).toString();
-        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        if (col == 1){
-             movie.setMovieName(value);
-        }
-        if (col == 3){
-            movie.setMovieGenre(value);
-        }
-        JpaneTabs.MOVIESARRAY.set(id, movie);
-    }
-    
-    /**
-     * jTable changes in column 2.
-     * 
-     * @param row the row selected.
-     * @param col the col selected.
-     * @param id  the id of the array to change.
-     */
-    private void actorChange(int row, int col, Integer id){
-        ArrayList<String> Actorlist = new ArrayList<>();
-        String value = jTable1.getValueAt(row, col).toString();
-        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        String[] splitter = value.split(",");
-        Actorlist.addAll(Arrays.asList(splitter));
-        movie.setMovieActors(Actorlist);
-        JpaneTabs.MOVIESARRAY.set(id, movie);                   
     }
 }
