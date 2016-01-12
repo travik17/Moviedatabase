@@ -1,12 +1,29 @@
 package gui;
 
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
+import chrriis.dj.nativeswing.swtimpl.components.JWebBrowser;
+import static com.sun.java.accessibility.util.AWTEventMonitor.addWindowListener;
+import info.movito.themoviedbapi.TmdbApi;
+import info.movito.themoviedbapi.TmdbMovies;
+import info.movito.themoviedbapi.TmdbSearch;
+import info.movito.themoviedbapi.model.Artwork;
+import info.movito.themoviedbapi.model.MovieDb;
+import info.movito.themoviedbapi.model.MovieImages;
+import info.movito.themoviedbapi.model.Video;
+import info.movito.themoviedbapi.model.core.MovieResultsPage;
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -65,10 +82,10 @@ public class Database extends JPanel {
     private void createJtable(){
         jTable1 = new JTable();
         jTable1.setModel(new DefaultTableModel(new Object [][] {}, new String [] {
-                "Id", "Name", "Actors", "Genre", "Play time", "Image"}) {
+                "Id", "Name", "Actors", "Genre", "Play time", "Image", "trailer"}) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class};
-            boolean[] canEdit = new boolean [] {false, false, false, false, false, false};
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class};
+            boolean[] canEdit = new boolean [] {false, false, false, false, false, false, false};
 
             @Override
             public Class getColumnClass(int columnIndex) {return types [columnIndex];}
@@ -99,6 +116,7 @@ public class Database extends JPanel {
         jTable1.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
         jTable1.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+        jTable1.getColumnModel().getColumn(6).setCellRenderer(rightRenderer);
         
         jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
@@ -124,30 +142,87 @@ public class Database extends JPanel {
         Integer id = Integer.parseInt(idstring);
         Movies movie = JpaneTabs.MOVIESARRAY.get(id);
         String name = movie.Name;
-        BufferedImage image = null;
+
         
         //set standaard images.
         try{
             if (col == 5){
+                Integer movieId = tmdbid(name);
+                String path = coverCreate(movieId);
+                Image image = null;
                 try {
-                    String url = movie.Cover;
-                    image = ImageIO.read(URI.create(url).toURL());
-                } catch (IOException e) {
-                    final JPanel panel = new JPanel();
-                    JOptionPane.showMessageDialog(panel, "Unsupported Image Type", "Warning",
-                    JOptionPane.WARNING_MESSAGE);
+                    image = ImageIO.read(URI.create("https://image.tmdb.org/t/p/w185" + path).toURL());
+                } catch (IOException ex) {
+                    Logger.getLogger(JpaneTabs.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
                 JDialog mydialog = new JDialog();
-                mydialog.setSize(750,500);
+                mydialog.setSize(200,300);
                 mydialog.setTitle("Cover of " + name);
                 JLabel label = new JLabel("", new ImageIcon(image), JLabel.CENTER);
                 mydialog.add(label, BorderLayout.CENTER);
                 mydialog.setVisible(true);
             }
-        } catch (NullPointerException e){
-            
+            if(col == 6){
+               Integer movieId = tmdbid(name);
+               String trailerPath = trailerCreate(movieId);
+               if (trailerPath == null){
+                   JPanel panel = new JPanel();
+                   JOptionPane.showMessageDialog(panel, "No trailer available", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+               } else {
+                   createSwing(trailerPath);
+               }
+            }
+        } catch (NullPointerException e){}     
+    }
+    
+        private void createSwing(String trailerPath){
+            JFrame frame = new JFrame();
+            frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            frame.setSize(800, 600);
+            frame.setVisible(true);
+            frame.add(getBrowserPanel(trailerPath));
+}
+
+    public static JPanel getBrowserPanel(String trailerPath) {
+        JPanel webBrowserPanel = new JPanel(new BorderLayout());
+        JWebBrowser webBrowser = new JWebBrowser();
+        webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
+        webBrowser.setBarsVisible(false);
+        webBrowser.navigate("https://youtu.be/" + trailerPath);
+        return webBrowserPanel;
+    }
+
+    
+    private Integer tmdbid(String name){
+        TmdbSearch search = new TmdbApi("0d11e0bc8db3815dc4cb914cba6e304d").getSearch();
+        MovieResultsPage result = search.searchMovie(name, 0, null, false, 0);
+        List<MovieDb> list = result.getResults();
+        MovieDb dbmovie = list.get(0);
+        Integer i = dbmovie.getId();
+        return i ;
+    }
+    
+    private String trailerCreate(Integer i){
+        TmdbMovies movies = new TmdbApi("0d11e0bc8db3815dc4cb914cba6e304d").getMovies();
+        List<Video> videos = movies.getVideos(i, "nl");
+        String key;
+        if (videos.isEmpty()){
+            key = null;
+        } else {
+            Video video = videos.get(0);
+            key = video.getKey();
         }
+        return key;
+    }
+    
+    private String coverCreate(Integer i){
+        TmdbMovies movies = new TmdbApi("0d11e0bc8db3815dc4cb914cba6e304d").getMovies();
+        MovieImages imagetest = movies.getImages(i, null);
+        List<Artwork> test = imagetest.getPosters();
+        Artwork art = test.get(0);
+        String x = art.getFilePath();
+        return x;
     }
     
     /**
@@ -168,7 +243,7 @@ public class Database extends JPanel {
                 listofactors.append(", ");
             }
             model.addRow(new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-                temp.PlayTime, "Click to see cover"});
+                temp.PlayTime, "Click to see cover", "Click to see trailer"});
         }    
     }
     
@@ -184,7 +259,7 @@ public class Database extends JPanel {
             listofactors.append(", ");
         }
         Object[] row = {temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-            temp.PlayTime, "Click to see cover"};
+            temp.PlayTime, "Click to see cover", "Click to see trailer"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.addRow(row);
     }               

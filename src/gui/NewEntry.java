@@ -17,8 +17,6 @@ public class NewEntry extends JPanel {
     private final JLabel ActorsLabel1 = new JLabel();
     private final JLabel GenreLabel1 = new JLabel();
     private final JLabel TimeLabel1 = new JLabel();
-    private final JLabel ImageLabel1 = new JLabel();
-    private final JTextField ImageEditText1 = new JTextField();
     private final JButton SaveEntry1 = new JButton();
     
     /**
@@ -59,13 +57,11 @@ public class NewEntry extends JPanel {
         ActorsLabel1.setFont(new java.awt.Font(font, 0, 18));
         GenreLabel1.setFont(new java.awt.Font(font, 0, 18));
         TimeLabel1.setFont(new java.awt.Font(font, 0, 18));
-        ImageLabel1.setFont(new java.awt.Font(font, 0, 18));
         
         NameLabel.setText("Name:");      
         ActorsLabel1.setText("Actors:");        
         GenreLabel1.setText("Genre:");        
         TimeLabel1.setText("Time (in min):");        
-        ImageLabel1.setText("Image (enter url):");
     }
     
     /**
@@ -76,7 +72,6 @@ public class NewEntry extends JPanel {
         NameEditText1.setFont(new java.awt.Font(font, 0, 18));
         ActorsEditText1.setFont(new java.awt.Font(font, 0, 18)); 
         TimeEditText1.setFont(new java.awt.Font(font, 0, 18)); 
-        ImageEditText1.setFont(new java.awt.Font(font, 0, 18));
     }
     
     /**
@@ -101,14 +96,12 @@ public class NewEntry extends JPanel {
                                 .addComponent(NameLabel)
                                 .addComponent(ActorsLabel1)
                                 .addComponent(GenreLabel1)
-                                .addComponent(ImageLabel1)
                                 .addComponent(TimeLabel1))
                             .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                 .addComponent(NameEditText1)
                                 .addComponent(ActorsEditText1)
                                 .addComponent(TimeEditText1)
-                                .addComponent(ImageEditText1, GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
                                 .addComponent(jComboBox2, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addContainerGap(168, Short.MAX_VALUE)))
         );
@@ -141,10 +134,6 @@ public class NewEntry extends JPanel {
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(TimeLabel1)
                         .addComponent(TimeEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(ImageLabel1)
-                        .addComponent(ImageEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(69, 69, 69)
                     .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(87, Short.MAX_VALUE)))
@@ -157,7 +146,6 @@ public class NewEntry extends JPanel {
      */
     private void saveEntry1ActionPerformed() {                                           
         final ArrayList<String> Actorlist = new ArrayList<>();
-        String url = ImageEditText1.getText();
 
         //get the data from the view.
         try{
@@ -166,7 +154,7 @@ public class NewEntry extends JPanel {
             Actorlist.addAll(Arrays.asList(splitter));
             Movies movie;
             movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
-                jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()),  url);
+                jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()));
             JpaneTabs.MOVIESARRAY.add(movie);
             Database.addDatabase(movie);
             System.out.println(JpaneTabs.MOVIESARRAY.size());

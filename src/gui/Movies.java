@@ -19,15 +19,14 @@ public final class Movies {
      * @param actors actors of the movie.
      * @param genre genre of the movie.
      * @param playTime play time of the movie.
-     * @param cover cover of the movie.
      */
-    public Movies(Integer identification, String name, ArrayList<String> actors, String genre, Integer playTime, String cover){
+    public Movies(Integer identification, String name, ArrayList<String> actors, String genre, Integer playTime){
         setMovieId(identification);
         setMovieName(name);
         setMovieActors(actors);
         setMovieGenre(genre);
         setMoviePlayTime(playTime);
-        setMovieCover(cover);
+        //setMovieCover(cover);
     }
     
     /**

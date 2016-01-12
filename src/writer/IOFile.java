@@ -2,7 +2,6 @@ package writer;
 
 import gui.Movies;
 import gui.JpaneTabs;
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -55,17 +54,14 @@ public class IOFile {
                 int identification = JpaneTabs.MOVIESARRAY.size();
                 String name = splitline[1];
                  
-                for (int i = 2; i< size - 3; i++){
+                for (int i = 2; i< size - 2; i++){
                     actors.add(splitline[i]);
                 }
 
-                String genre = splitline[size -3];
-                int playTime = Integer.parseInt(splitline[size-2]);
-                
-                //set standaard images.
-                String url = splitline[size - 1];
+                String genre = splitline[size -2];
+                int playTime = Integer.parseInt(splitline[size-1]);
 
-                Movies movie = new Movies(identification,name,actors,genre,playTime,url);
+                Movies movie = new Movies(identification,name,actors,genre,playTime);
                 JpaneTabs.MOVIESARRAY.add(movie);
             }
 	} catch (FileNotFoundException e) {

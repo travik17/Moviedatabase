@@ -1,10 +1,9 @@
 package gui;
 
-import info.movito.themoviedbapi.TmdbApi;
+import chrriis.dj.nativeswing.swtimpl.NativeInterface;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
-import info.movito.themoviedbapi.TmdbMovies;
 
 public class JpaneTabs extends JFrame {
     
@@ -16,6 +15,7 @@ public class JpaneTabs extends JFrame {
      */
     public JpaneTabs() {
         initComponents();
+        
     }
     
     /**
@@ -39,6 +39,7 @@ public class JpaneTabs extends JFrame {
      * @param args the command line arguments.
      */
     public static void main(String args[]) {
+        NativeInterface.open();
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -58,6 +59,14 @@ public class JpaneTabs extends JFrame {
                 frame.setVisible(true);
             }
         });
+        NativeInterface.runEventPump();
+        
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                NativeInterface.close();
+            }
+        }));
     }
     
     /**
@@ -74,11 +83,8 @@ public class JpaneTabs extends JFrame {
         jTabbedPane1.addTab("File Location", LocationTab);        
         jTabbedPane1.addTab("Database", DatabaseTab);        
         jTabbedPane1.addTab("New Entry", EntryTab);       
-        jTabbedPane1.addTab("Search", SearchTab);    
-        
-        TmdbMovies movies = new TmdbApi("0d11e0bc8db3815dc4cb914cba6e304d").getMovies();
+        jTabbedPane1.addTab("Search", SearchTab);
     }
-    
     /**
      * set grouplayout.
      * 
