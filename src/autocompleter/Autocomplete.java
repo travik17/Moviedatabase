@@ -85,7 +85,11 @@ public class Autocomplete implements DocumentListener {
         if (pos - word < 2){
             return;
         }
-
+        
+        fillCode(content, word, pos);
+    }
+    
+    private void fillCode(String content, int word, int pos){
         String prefix = content.substring(word + 1).toLowerCase();
         int number = Collections.binarySearch(keywords, prefix);
         if (number < 0 && -number <= keywords.size()) {

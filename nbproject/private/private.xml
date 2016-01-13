@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/NewEntry.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/writer/IOFile.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Search.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Database.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/search/SearchEdit.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/search/SearchInteraction.java</file>
             <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/autocompleter/Autocomplete.java</file>
-            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/Movies.java</file>
+            <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/SearchUI.java</file>
             <file>file:/C:/Users/Bas/Documents/NetBeansProjects/DatabaseMovies/src/gui/JpaneTabs.java</file>
         </group>
     </open-files>
