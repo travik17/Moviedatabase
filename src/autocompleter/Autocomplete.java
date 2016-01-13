@@ -3,6 +3,8 @@ package autocompleter;
 import java.awt.event.ActionEvent;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.JTextField;
@@ -61,32 +63,26 @@ public class Autocomplete implements DocumentListener {
      */
     @Override
     public void insertUpdate(final DocumentEvent event) {
-        String content = "test";
-        if (event.getLength() != 1){
-            return;
-        }
+        try {           
+            final int pos = event.getOffset();
+            String content = textField.getText(0, pos + 1);
+            
+            // Find where the word starts.
+            int word;
+            for (word = pos; word >= 0; word--) {
+                if (!Character.isLetter(content.charAt(word))) {
+                    break;
+                }
+            }
+            
+            // Too few chars.
+            if (pos - word < 2){
+                return;
+            }
 
-        final int pos = event.getOffset();
-        try {
-            content = textField.getText(0, pos + 1);
-        } catch (BadLocationException e) {
-            e.printStackTrace(System.out);
+            fillCode(content, word, pos);
+        } catch (BadLocationException ex) {
         }
-
-        // Find where the word starts.
-        int word;
-        for (word = pos; word >= 0; word--) {
-          if (!Character.isLetter(content.charAt(word))) {
-                break;
-          }
-        }
-
-        // Too few chars.
-        if (pos - word < 2){
-            return;
-        }
-        
-        fillCode(content, word, pos);
     }
     
     private void fillCode(String content, int word, int pos){
