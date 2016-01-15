@@ -15,10 +15,6 @@ import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Bas
- */
 public class SearchInteraction {
 
     public void actorSearch(JTable jTable1, JTextField SearchGenText) {                                                  
@@ -34,7 +30,7 @@ public class SearchInteraction {
                     listofactors.append(", ");
                 }
                 model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
-                    movies.PlayTime, "Image"});
+                    movies.PlayTime, "Click to see cover", "Click to see trailer"});
             } 
         }
     }
@@ -53,7 +49,7 @@ public class SearchInteraction {
                     listofactors.append(", ");
                 }
                 model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
-                    movies.PlayTime, "Image"});
+                    movies.PlayTime, "Click to see cover", "Click to see trailer"});
             }
         }
     }

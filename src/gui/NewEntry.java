@@ -20,6 +20,7 @@ public class NewEntry extends JPanel {
     private final JLabel GenreLabel1 = new JLabel();
     private final JLabel TimeLabel1 = new JLabel();
     private final JButton SaveEntry1 = new JButton();
+    private final JTextField jTextField1 = new JTextField();
     
     /**
      * Constructor.
@@ -83,29 +84,30 @@ public class NewEntry extends JPanel {
      */
     private void setHorizontal(GroupLayout layout){
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 774, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(161, 161, 161)
+                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(285, 285, 285)
+                        .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(208, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 228, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
-                            .addGap(120, 120, 120))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                .addComponent(NameLabel)
-                                .addComponent(ActorsLabel1)
-                                .addComponent(GenreLabel1)
-                                .addComponent(TimeLabel1))
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                .addComponent(NameEditText1)
-                                .addComponent(ActorsEditText1)
-                                .addComponent(TimeEditText1)
-                                .addComponent(jComboBox2, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addContainerGap(168, Short.MAX_VALUE)))
+                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(389, 389, 389)
+                                    .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(161, 161, 161)
+                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                        .addComponent(NameLabel)
+                                        .addComponent(ActorsLabel1)
+                                        .addComponent(GenreLabel1)
+                                        .addComponent(TimeLabel1))
+                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(NameEditText1)
+                                        .addComponent(jComboBox2, 0, 280, Short.MAX_VALUE)
+                                        .addComponent(TimeEditText1))))
+                            .addContainerGap(209, Short.MAX_VALUE)))
         );
     }
     
@@ -117,7 +119,10 @@ public class NewEntry extends JPanel {
     private void setVertical(GroupLayout layout){
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGap(0, 502, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(122, 122, 122)
+                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(80, 80, 80)
@@ -125,9 +130,7 @@ public class NewEntry extends JPanel {
                         .addComponent(NameLabel)
                         .addComponent(NameEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(ActorsLabel1)
-                        .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ActorsLabel1)
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(GenreLabel1)
@@ -136,9 +139,9 @@ public class NewEntry extends JPanel {
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(TimeLabel1)
                         .addComponent(TimeEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(69, 69, 69)
+                    .addGap(112, 112, 112)
                     .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(87, Short.MAX_VALUE)))
+                    .addContainerGap(92, Short.MAX_VALUE)))
         );
     }
     

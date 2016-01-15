@@ -36,7 +36,7 @@ public class DatabaseInteraction {
         } catch (NullPointerException e){}     
     }
     
-    private void columnTrailer(String name){
+    public void columnTrailer(String name){
         TmdbInteraction tmdb = new TmdbInteraction();
         Integer movieId = tmdb.tmdbid(name);
         String trailerPath = tmdb.trailerCreate(movieId);
@@ -49,7 +49,7 @@ public class DatabaseInteraction {
         }
     }
     
-    private void columnCover(String name){
+    public void columnCover(String name){
         TmdbInteraction tmdb = new TmdbInteraction();
         Integer movieId = tmdb.tmdbid(name);
         String path = tmdb.coverCreate(movieId);

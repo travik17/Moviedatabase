@@ -23,6 +23,8 @@ public class SearchUI extends JPanel {
     private final JLabel ActorSearchLabel = new JLabel();
     private final JButton ChangeActorButton = new JButton();
     private final JScrollPane jScrollPane1 = new JScrollPane();
+    private final JLabel jLabel3 = new JLabel();
+   
     /**
      * Constructor with tableChanged listener.
      */
@@ -60,6 +62,8 @@ public class SearchUI extends JPanel {
         ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
         GenreSearchLabel.setText("Search for genre: ");
         ActorSearchLabel.setText("Search for actor:");
+        jLabel3.setFont(new Font("Tahoma", 0, 14)); 
+        jLabel3.setText("<html>To edit the database dubble click on <br> the cell. press enter to confirm</html>");
         SearchGenCombo.setModel(new DefaultComboBoxModel<>(genres));
     }
     
@@ -76,7 +80,7 @@ public class SearchUI extends JPanel {
             }
         });
         
-        SearchGenText.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+        SearchGenText.setFont(new Font("Tahoma", 0, 18));
         SearchGenText.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -99,13 +103,16 @@ public class SearchUI extends JPanel {
     private void modelSet(){
         jTable1.setModel(new DefaultTableModel(
             new Object [][] {},
-            new String [] {"ID", "Name", "Actors", "Genre", "Play time", "Image"}){
+            new String [] {"ID", "Name", "Actors", "Genre", "Play time", "Cover", "Trailer"}){
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class};
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class};
+            boolean[] canEdit = new boolean [] {false, true, true, true, true, false, false};
+            
             @Override
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
+            public Class getColumnClass(int columnIndex) {return types [columnIndex];}
+            
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit [columnIndex];}
         });
         
         //set the autosorter,
@@ -127,7 +134,8 @@ public class SearchUI extends JPanel {
      * @param jPanel1Layout the jPanel layout
      */
     private void setHorizontallayout(final GroupLayout jPanel1Layout){
-        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
@@ -143,7 +151,14 @@ public class SearchUI extends JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(ChangeGenreButton)
                     .addComponent(ChangeActorButton))
-                .addContainerGap(259, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addContainerGap(111, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
     }
     
@@ -153,7 +168,8 @@ public class SearchUI extends JPanel {
      * @param jPanel1Layout the jPanel layout
      */
     private void setVerticallayout(GroupLayout jPanel1Layout){
-        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -164,8 +180,9 @@ public class SearchUI extends JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(ActorSearchLabel)
                     .addComponent(SearchGenText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeActorButton))
-                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ChangeActorButton)
+                    .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }
     
@@ -175,7 +192,7 @@ public class SearchUI extends JPanel {
      * @param layout the layout for parameters
      */
     private void setGrouplayout(GroupLayout layout){
-         layout.setHorizontalGroup(
+        layout.setHorizontalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
@@ -199,7 +216,7 @@ public class SearchUI extends JPanel {
     private void setAlignment(){
         DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i=0;i<4;i++){
+        for (int i=0;i<7;i++){
             jTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
         }
     }
