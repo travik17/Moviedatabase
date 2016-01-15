@@ -63,7 +63,8 @@ public class SearchUI extends JPanel {
         GenreSearchLabel.setText("Search for genre: ");
         ActorSearchLabel.setText("Search for actor:");
         jLabel3.setFont(new Font("Tahoma", 0, 14)); 
-        jLabel3.setText("<html>To edit the database dubble click on <br> the cell. press enter to confirm</html>");
+        jLabel3.setText("<html>To edit the database dubble click on <br> the cell. press enter to confirm <br>"
+                + "Id, Cover and Trailer can't be edited</html>");
         SearchGenCombo.setModel(new DefaultComboBoxModel<>(genres));
     }
     
@@ -175,13 +176,14 @@ public class SearchUI extends JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(GenreSearchLabel)
                     .addComponent(SearchGenCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ChangeGenreButton))
+                    .addComponent(ChangeGenreButton)
+                    .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, 4, Short.MAX_VALUE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(ActorSearchLabel)
                     .addComponent(SearchGenText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeActorButton)
-                    .addComponent(jLabel3, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
+                    )
                 .addContainerGap())
         );
     }

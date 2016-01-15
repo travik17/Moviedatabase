@@ -34,7 +34,7 @@ public class Datalocation extends JPanel {
      */
     private void setButtons() {
         //Load button
-        LoadLocBut.setText("Load file");
+        LoadLocBut.setText("Load .csv file");
         LoadLocBut.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -43,7 +43,7 @@ public class Datalocation extends JPanel {
         });
         
         //Save button
-        SaveLocBut.setText("Save file");
+        SaveLocBut.setText("Save .csv file");
         SaveLocBut.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {

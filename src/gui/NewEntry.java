@@ -11,7 +11,6 @@ public class NewEntry extends JPanel {
     private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     public ArrayList<Movies> Movies;
-    private final JTextField ActorsEditText1 = new JTextField();
     private final JTextField NameEditText1 = new JTextField();
     private final JTextField TimeEditText1 = new JTextField();
     private final JComboBox<String> jComboBox2 = new JComboBox<>();
@@ -20,7 +19,7 @@ public class NewEntry extends JPanel {
     private final JLabel GenreLabel1 = new JLabel();
     private final JLabel TimeLabel1 = new JLabel();
     private final JButton SaveEntry1 = new JButton();
-    private final JTextField jTextField1 = new JTextField();
+    private final JTextField ActorsEditText1 = new JTextField();
     
     /**
      * Constructor.
@@ -87,7 +86,7 @@ public class NewEntry extends JPanel {
                     layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(285, 285, 285)
-                        .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(208, Short.MAX_VALUE))
                     .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -121,7 +120,8 @@ public class NewEntry extends JPanel {
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(122, 122, 122)
-                .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+                  
+                .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -151,7 +151,8 @@ public class NewEntry extends JPanel {
      */
     private void saveEntry1ActionPerformed() {                                           
         final ArrayList<String> Actorlist = new ArrayList<>();
-
+        
+        Boolean errMessege = testIfempty();
         //get the data from the view.
         try{
             final String Actors = ActorsEditText1.getText();
@@ -164,9 +165,28 @@ public class NewEntry extends JPanel {
             DatabaseAdd.addDatabase(movie);
             System.out.println(JpaneTabs.MOVIESARRAY.size());
         } catch (NumberFormatException e){
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
+            if (errMessege == false){
+                final JPanel panel = new JPanel();
+                JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
                 JOptionPane.WARNING_MESSAGE);
+            }
         }
-    }                 
+    } 
+    
+    private boolean testIfempty(){
+        if (NameEditText1.getText().equals("")){
+            final JPanel panel = new JPanel();
+            JOptionPane.showMessageDialog(panel, "Name can't be empty", "Warning",
+                JOptionPane.WARNING_MESSAGE);
+            return true;
+        } else {
+            if (ActorsEditText1.getText().equals("")){
+                final JPanel panel = new JPanel();
+                JOptionPane.showMessageDialog(panel, "Actors can't be empty", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
+                return true;
+            }
+            return false;
+        }
+    }
 }
