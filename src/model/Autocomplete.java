@@ -1,13 +1,9 @@
-package autocompleter;
+package model;
 
 import java.awt.event.ActionEvent;
 import java.util.Collections;
 import java.util.List;
-import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
@@ -47,7 +43,7 @@ public class Autocomplete implements DocumentListener {
    */
     @Override
     public void removeUpdate(final DocumentEvent event) {
-        System.out.println("removeUpdate used");
+        //No actions required
     }
     
     /**
@@ -68,8 +64,9 @@ public class Autocomplete implements DocumentListener {
     @Override
     public void insertUpdate(final DocumentEvent event) {
         try {           
-            final int pos = event.getOffset();
+            int pos = event.getOffset();
             String content = textField.getText(0, pos + 1);
+            
             
             // Find where the word starts.
             int word;

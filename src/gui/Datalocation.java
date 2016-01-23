@@ -1,9 +1,9 @@
 package gui;
 
 import database.DatabaseAdd;
-import writer.FileTypeFilter;
+import model.FileTypeFilter;
 import java.io.File;
-import writer.IOFile;
+import model.IOFile;
 import javax.swing.*;
 
 /**
@@ -94,7 +94,8 @@ public class Datalocation extends JPanel {
         if (returnval == JFileChooser.APPROVE_OPTION){
             final File file = choose.getSelectedFile();
             IOFile.readfile(file);
-            DatabaseAdd.fillDatabase();
+            DatabaseAdd add = new DatabaseAdd();
+            add.fillDatabase();
         }
     } 
     
@@ -111,14 +112,29 @@ public class Datalocation extends JPanel {
         if (returnval == JFileChooser.APPROVE_OPTION){
             File file = choose.getSelectedFile();
             String path = file.toString();
-            if (file.toString().length() < 3){
-                file = new File(file.toString() + ".csv");
-            } else {
-                String substring = file.toString().substring(file.toString().length()-4);
-            }
-            
+            file = new File(checkCsv(path));
             IOFile.createfile(file);
         }  
+    }
+    
+    /**
+     * check if filename already ends with .csv
+     * 
+     * @param filename the entered filename
+     * @return the correct file name that ends with .csv
+     */
+    private String checkCsv(String filename){
+        if (filename.isEmpty() || filename.length() < 3){
+            return filename += ".csv";
+        } else {
+            String substring = filename.substring(filename.length() - 4);
+            if (substring.equalsIgnoreCase(".csv")){
+                return filename;
+            } else {
+                return filename += ".csv";
+            }
+            
+        }
     }
 
 }

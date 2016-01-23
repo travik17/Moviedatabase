@@ -2,6 +2,11 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Class to create a movies object
+ * 
+ * @author Mark
+ */
 public final class Movies {
     
     public Integer identification;

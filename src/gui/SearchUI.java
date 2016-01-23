@@ -1,34 +1,27 @@
 package gui;
 
-import search.SearchInteraction;
-import search.SearchEdit;
+import search.SearchTable;
 import java.awt.Font;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
- * 
+ * Class to create a GUI for search
  * 
  * @author Mark
  */
 public class SearchUI extends JPanel {
     
-    private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
-        "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
-    
-    
-    private final JComboBox<String> SearchGenCombo = new JComboBox<>();
-    private final JTextField SearchGenText = new JTextField();
+    private final JComboBox<String> SearchGenCombo = new JComboBox<>(JpaneTabs.GENRES);
+    private final JTextField SearchActorText = new JTextField();
     private final JTable jTable1 = new JTable();
     private final JPanel jPanel1 = new JPanel();
-    private final JLabel GenreSearchLabel = new JLabel();
-    private final JButton ChangeGenreButton = new JButton();
-    private final JLabel ActorSearchLabel = new JLabel();
-    private final JButton ChangeActorButton = new JButton();
+    private final JLabel GenreSearchLabel = new JLabel("Search for genre: ");
+    private final JButton ChangeGenreButton = new JButton("Search");
+    private final JLabel ActorSearchLabel = new JLabel("Search for actor: ");
+    private final JButton ChangeActorButton = new JButton("Search");
     private final JScrollPane jScrollPane1 = new JScrollPane();
-    private final JLabel jLabel3 = new JLabel();
+    private final JLabel jLabel3 = new JLabel("<html>To edit the database dubble click on <br> the cell. press enter to confirm <br>"
+                + "Id, Cover and Trailer can't be edited</html>");
    
     /**
      * Constructor with tableChanged listener.
@@ -42,9 +35,12 @@ public class SearchUI extends JPanel {
      */
     private void initComponents() {
         // set components.
-        setLabels();
-        setButton();
-        modelSet();
+        GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
+        ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
+        jLabel3.setFont(new Font("Tahoma", 0, 14));
+        SearchTable table = new SearchTable();
+        table.setButton(ChangeGenreButton, SearchGenCombo, SearchActorText, ChangeActorButton, jTable1);
+        table.modelSet(jTable1);
         
         //set layout of jTable.
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
@@ -59,80 +55,7 @@ public class SearchUI extends JPanel {
         setGrouplayout(layout);
     }
     
-    /**
-     * Set the labels for this view.
-     */
-    private void setLabels(){
-        GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
-        ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
-        GenreSearchLabel.setText("Search for genre: ");
-        ActorSearchLabel.setText("Search for actor:");
-        jLabel3.setFont(new Font("Tahoma", 0, 14)); 
-        jLabel3.setText("<html>To edit the database dubble click on <br> the cell. press enter to confirm <br>"
-                + "Id, Cover and Trailer can't be edited</html>");
-        SearchGenCombo.setModel(new DefaultComboBoxModel<>(genres));
-    }
-    
-    /**
-     * Set the buttons for this view.
-     */
-    private void setButton(){
-        final SearchInteraction interaction = new SearchInteraction();
-        ChangeGenreButton.setText("Search");
-        ChangeGenreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                interaction.genreSearch(jTable1, SearchGenCombo);
-            }
-        });
-        
-        SearchGenText.setFont(new Font("Tahoma", 0, 18));
-        SearchGenText.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                interaction.createAutocomplete(SearchGenText);
-            }
-        });
 
-        ChangeActorButton.setText("Search");
-        ChangeActorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                interaction.actorSearch(jTable1, SearchGenText);
-            }
-        });
-    }
-    
-    /**
-     * Set the model of jTable.
-     */
-    private void modelSet(){
-        jTable1.setModel(new DefaultTableModel(
-            new Object [][] {},
-            new String [] {"ID", "Name", "Actors", "Genre", "Play time", "Cover", "Trailer"}){
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class};
-            boolean[] canEdit = new boolean [] {false, true, true, true, true, false, false};
-            
-            @Override
-            public Class getColumnClass(int columnIndex) {return types [columnIndex];}
-            
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {return canEdit [columnIndex];}
-        });
-        
-        //set the autosorter,
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.getRowSorter().toggleSortOrder(1);
-        setAlignment();
-        jTable1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                SearchEdit edit = new SearchEdit();
-                edit.jTable1MouseClicked(jTable1);
-            }
-        });
-    }
     
     /**
      * set horizontal layout for jPanel.
@@ -140,15 +63,14 @@ public class SearchUI extends JPanel {
      * @param jPanel1Layout the jPanel layout
      */
     private void setHorizontallayout(final GroupLayout jPanel1Layout){
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(ActorSearchLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(SearchGenText))
+                        .addComponent(SearchActorText))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(GenreSearchLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
@@ -174,8 +96,7 @@ public class SearchUI extends JPanel {
      * @param jPanel1Layout the jPanel layout
      */
     private void setVerticallayout(GroupLayout jPanel1Layout){
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -186,7 +107,7 @@ public class SearchUI extends JPanel {
                 .addGap(30, 30, 30)
                 .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(ActorSearchLabel)
-                    .addComponent(SearchGenText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SearchActorText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(ChangeActorButton)
                     )
                 .addContainerGap())
@@ -215,16 +136,5 @@ public class SearchUI extends JPanel {
                 .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addContainerGap())
         );
-    }
-    
-    /**
-     * set alignment of the text in the jTable
-     */
-    private void setAlignment(){
-        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
-        rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
-        for (int i=0;i<7;i++){
-            jTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
-        }
     }
 }

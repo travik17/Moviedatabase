@@ -1,8 +1,13 @@
-package writer;
+package model;
 
 import java.io.File; 
 import javax.swing.filechooser.FileFilter; 
- 
+
+/**
+ * Class for file to limit the file extentions
+ * 
+ * @author Mark
+ */
 public class FileTypeFilter extends FileFilter { 
  
     private final String extension; 

@@ -15,7 +15,7 @@ public class DatabaseAdd {
     /**
      * Fill jTable after loading .csv.
      */
-    public static void fillDatabase(){
+    public void fillDatabase(){
         final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         
         ArrayList<Movies> moviesArray = JpaneTabs.MOVIESARRAY;
@@ -38,7 +38,7 @@ public class DatabaseAdd {
      * 
      * @param temp the movie to add to the jTable.
      */
-    public static void addDatabase(Movies temp){
+    public void addDatabase(Movies temp){
         StringBuilder listofactors = new StringBuilder();
         for (String s : temp.Actors){
             listofactors.append(s);

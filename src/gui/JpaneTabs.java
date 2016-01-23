@@ -6,9 +6,16 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.*;
 
+/**
+ * create add fill the tabbedpanel
+ * 
+ * @author Mark
+ */
 public class JpaneTabs extends JFrame {
     
-    public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();;
+    public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();
+    public final static String[] GENRES = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
+        "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     
     /**
      * Constructor.

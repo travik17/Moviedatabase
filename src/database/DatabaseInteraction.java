@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import model.Movies;
@@ -15,8 +10,16 @@ import java.net.URI;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * Class for actions with the database table
+ * 
+ * @author Mark
+ */
 public class DatabaseInteraction {
     
+    /**
+     * Get id and name from the row that was clicked then on column determine action
+     */
     public void jTable1MouseClicked(){
         final int row = jTable1.getSelectedRow();
         final int col = jTable1.getSelectedColumn();
@@ -26,16 +29,19 @@ public class DatabaseInteraction {
         String name = movie.Name;
 
         //set standaard images.
-        try{
-            if (col == 5){
-                columnCover(name);
-            }
-            if(col == 6){
-                columnTrailer(name);
-            }
-        } catch (NullPointerException e){}     
+        if (col == 5){
+            columnCover(name);
+        }
+        if (col == 6){
+            columnTrailer(name);
+        } 
     }
     
+    /**
+     * Create trailer swing if there is a trailer. If not show warning message
+     * 
+     * @param name The name of the movie
+     */
     public void columnTrailer(String name){
         TmdbInteraction tmdb = new TmdbInteraction();
         Integer movieId = tmdb.tmdbid(name);
@@ -49,6 +55,11 @@ public class DatabaseInteraction {
         }
     }
     
+    /**
+     * Create panel with cover if possible
+     * 
+     * @param name The name of the movie
+     */
     public void columnCover(String name){
         TmdbInteraction tmdb = new TmdbInteraction();
         Integer movieId = tmdb.tmdbid(name);
@@ -69,7 +80,12 @@ public class DatabaseInteraction {
         mydialog.add(label, BorderLayout.CENTER);
         mydialog.setVisible(true);
     }
-
+    
+    /**
+     * Create new frame for browserpanel
+     * 
+     * @param trailerPath The path of the trailer
+     */
     private void createSwing(String trailerPath){
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -77,13 +93,20 @@ public class DatabaseInteraction {
         frame.setVisible(true);
         frame.add(getBrowserPanel(trailerPath));
 }
-
+    
+    /**
+     * Returns browser panel for the trailer swing
+     * 
+     * @param trailerPath The path of the trailer
+     * @return The web panel to the trailer adress
+     */
     public static JPanel getBrowserPanel(String trailerPath) {
         JPanel webBrowserPanel = new JPanel(new BorderLayout());
         JWebBrowser webBrowser = new JWebBrowser();
         webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
         webBrowser.setBarsVisible(false);
         webBrowser.navigate("https://youtu.be/" + trailerPath);
+        System.out.println("https://youtu.be/" + trailerPath);
         return webBrowserPanel;
     }
 }

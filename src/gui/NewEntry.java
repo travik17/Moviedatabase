@@ -1,24 +1,26 @@
 package gui;
 
-import database.DatabaseAdd;
+import database.NewDatabaseEntry;
 import model.Movies;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
 
+/**
+ * Class to build the new entry gui
+ * 
+ * @author Mark
+ */
 public class NewEntry extends JPanel {
     
-    private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
-        "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     public ArrayList<Movies> Movies;
     private final JTextField NameEditText1 = new JTextField();
     private final JTextField TimeEditText1 = new JTextField();
-    private final JComboBox<String> jComboBox2 = new JComboBox<>();
-    private final JLabel NameLabel = new JLabel();
-    private final JLabel ActorsLabel1 = new JLabel();
-    private final JLabel GenreLabel1 = new JLabel();
-    private final JLabel TimeLabel1 = new JLabel();
-    private final JButton SaveEntry1 = new JButton();
+    private final JComboBox<String> jComboBox2 = new JComboBox<>(JpaneTabs.GENRES);
+    private final JLabel NameLabel = new JLabel("Name:");
+    private final JLabel ActorsLabel1 = new JLabel("Actors:");
+    private final JLabel GenreLabel1 = new JLabel("Genre:");
+    private final JLabel TimeLabel1 = new JLabel("Time (in min):");
+    private final JButton SaveEntry1 = new JButton("Save");
     private final JTextField ActorsEditText1 = new JTextField();
     
     /**
@@ -32,18 +34,13 @@ public class NewEntry extends JPanel {
      * Add view components.
      */
     private void initComponents() { 
-        setLabels();
-        setEditText();
-
-        SaveEntry1.setText("Save");
+        setFont();
         SaveEntry1.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveEntry1ActionPerformed();
-            }
-        });
-
-        jComboBox2.setModel(new DefaultComboBoxModel<>(genres));
+                NewDatabaseEntry entry = new NewDatabaseEntry();
+                entry.saveEntry1ActionPerformed(ActorsEditText1, NameEditText1, jComboBox2, TimeEditText1);
+            }});
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         setHorizontal(layout);
@@ -51,29 +48,17 @@ public class NewEntry extends JPanel {
     }    
     
     /**
-     * Set the labels of the current view.
+     * Set Fonts for labels and textfield
      */
-    private void setLabels(){
+    private void setFont(){
         final String font = "Tahoma";
         NameLabel.setFont(new java.awt.Font(font, 0, 18));
         ActorsLabel1.setFont(new java.awt.Font(font, 0, 18));
         GenreLabel1.setFont(new java.awt.Font(font, 0, 18));
         TimeLabel1.setFont(new java.awt.Font(font, 0, 18));
-        
-        NameLabel.setText("Name:");      
-        ActorsLabel1.setText("Actors:");        
-        GenreLabel1.setText("Genre:");        
-        TimeLabel1.setText("Time (in min):");        
-    }
-    
-    /**
-     * set the TextField of the current view.
-     */
-    private void setEditText(){
-        final String font = "Tahoma";
         NameEditText1.setFont(new java.awt.Font(font, 0, 18));
         ActorsEditText1.setFont(new java.awt.Font(font, 0, 18)); 
-        TimeEditText1.setFont(new java.awt.Font(font, 0, 18)); 
+        TimeEditText1.setFont(new java.awt.Font(font, 0, 18));         
     }
     
     /**
@@ -106,8 +91,7 @@ public class NewEntry extends JPanel {
                                         .addComponent(NameEditText1)
                                         .addComponent(jComboBox2, 0, 280, Short.MAX_VALUE)
                                         .addComponent(TimeEditText1))))
-                            .addContainerGap(209, Short.MAX_VALUE)))
-        );
+                            .addContainerGap(209, Short.MAX_VALUE))));
     }
     
     /**
@@ -119,8 +103,7 @@ public class NewEntry extends JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)
-                  
+                .addGap(122, 122, 122)   
                 .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(350, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -141,52 +124,6 @@ public class NewEntry extends JPanel {
                         .addComponent(TimeEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addGap(112, 112, 112)
                     .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(92, Short.MAX_VALUE)))
-        );
-    }
-    
-    /**
-     * Action when pressing the save button.
-     * Add the new movie to the movies array and to the add row.
-     */
-    private void saveEntry1ActionPerformed() {                                           
-        final ArrayList<String> Actorlist = new ArrayList<>();
-        
-        Boolean errMessege = testIfempty();
-        //get the data from the view.
-        try{
-            final String Actors = ActorsEditText1.getText();
-            final String[] splitter = Actors.split(",");
-            Actorlist.addAll(Arrays.asList(splitter));
-            Movies movie;
-            movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
-                jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()));
-            JpaneTabs.MOVIESARRAY.add(movie);
-            DatabaseAdd.addDatabase(movie);
-            System.out.println(JpaneTabs.MOVIESARRAY.size());
-        } catch (NumberFormatException e){
-            if (!errMessege){
-                final JPanel panel = new JPanel();
-                JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
-                JOptionPane.WARNING_MESSAGE);
-            }
-        }
+                    .addContainerGap(92, Short.MAX_VALUE))));
     } 
-    
-    private boolean testIfempty(){
-        if (NameEditText1.getText().equals("")){
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "Name can't be empty", "Warning",
-                JOptionPane.WARNING_MESSAGE);
-            return true;
-        } else {
-            if (ActorsEditText1.getText().equals("")){
-                final JPanel panel = new JPanel();
-                JOptionPane.showMessageDialog(panel, "Actors can't be empty", "Warning",
-                    JOptionPane.WARNING_MESSAGE);
-                return true;
-            }
-            return false;
-        }
-    }
 }

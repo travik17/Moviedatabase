@@ -1,11 +1,16 @@
-package writer;
+package model;
 
-import model.Movies;
 import gui.JpaneTabs;
 import java.io.*;
 import java.util.ArrayList;
 import javax.swing.*;
+import static org.apache.commons.lang3.StringUtils.strip;
 
+/**
+ * Class to write and read csv files
+ * 
+ * @author Mark
+ */
 public class IOFile {
     
     /**
@@ -55,7 +60,8 @@ public class IOFile {
                 String name = splitline[1];
                  
                 for (int i = 2; i< size - 2; i++){
-                    actors.add(splitline[i]);
+                    String test = strip(splitline[i]);
+                    actors.add(test);
                 }
 
                 String genre = splitline[size -2];

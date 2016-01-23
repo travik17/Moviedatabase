@@ -5,11 +5,18 @@ import model.Movies;
 import gui.JpaneTabs;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Class for actions on table changes
+ * 
+ * @author Mark
+ */
 public class SearchEdit {
     
     private JTable jTable;
@@ -43,6 +50,12 @@ public class SearchEdit {
             }});
     }
     
+    /**
+     * Switch to handle the different changes
+     * 
+     * @param row The row selected
+     * @param col The colomn selected 
+     */
     private void tableChanges(int row, int col){
         String idstring = jTable.getValueAt(row, 0).toString();
         Integer id = Integer.parseInt(idstring);
@@ -71,14 +84,23 @@ public class SearchEdit {
     private void stringsChange(int row, int col, Integer id){
         String value = jTable.getValueAt(row, col).toString();
         Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        if (col == 1){
-             movie.setMovieName(value);
-        }
-        if (col == 3){
-            movie.setMovieGenre(value);
-        }
-        if (col == 4){
-            movie.setMoviePlayTime(Integer.parseInt(value));
+        switch (col){
+            case 1:
+                break;
+            case 3:
+                if(Arrays.asList(JpaneTabs.GENRES).contains(value)){
+                    movie.setMovieGenre(value);
+                } else {
+                    final JPanel panel = new JPanel();
+                    JOptionPane.showMessageDialog(panel, "This is not a valid genre", "Warning",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+                break;
+            case 4:
+                movie.setMoviePlayTime(Integer.parseInt(value));
+                break;
+            default:
+                break;
         }
         JpaneTabs.MOVIESARRAY.set(id, movie);
     }
