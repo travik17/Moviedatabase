@@ -7,6 +7,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * Class that constructs the GUI of the database tab 
+ * 
+ * @author Mark
+ */
 public class DatabaseUI extends JPanel {
     
     public static JTable jTable1;

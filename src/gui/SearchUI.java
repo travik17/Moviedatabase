@@ -8,6 +8,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * 
+ * 
+ * @author Mark
+ */
 public class SearchUI extends JPanel {
     
     private final String[] genres = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",

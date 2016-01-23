@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package database;
 
 import model.Movies;
@@ -11,6 +6,11 @@ import static gui.DatabaseUI.jTable1;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
+/**
+ * This is the class that will be called if we want to add something to the database
+ * 
+ * @author Mark
+ */
 public class DatabaseAdd {
     /**
      * Fill jTable after loading .csv.

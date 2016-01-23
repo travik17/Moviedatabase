@@ -165,7 +165,7 @@ public class NewEntry extends JPanel {
             DatabaseAdd.addDatabase(movie);
             System.out.println(JpaneTabs.MOVIESARRAY.size());
         } catch (NumberFormatException e){
-            if (errMessege == false){
+            if (!errMessege){
                 final JPanel panel = new JPanel();
                 JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
                 JOptionPane.WARNING_MESSAGE);

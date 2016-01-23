@@ -6,6 +6,11 @@ import java.io.File;
 import writer.IOFile;
 import javax.swing.*;
 
+/**
+ * Class that constructs the GUI of the datalocation tab 
+ * 
+ * @author Mark
+ */
 public class Datalocation extends JPanel {
     
     private final JButton LoadLocBut = new JButton();
@@ -52,6 +57,11 @@ public class Datalocation extends JPanel {
         });
     }
     
+    /**
+     * Set the layout of the panel
+     * 
+     * @param layout The layout to which the params are added
+     */
     private void setGrouplayout(GroupLayout layout){
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -71,8 +81,11 @@ public class Datalocation extends JPanel {
         );
     }
     
+    /**
+     * Shows dialog to choose the file to load
+     */
     private void loadLocationButton1ActionPerformed() {  
-        String DefaultLoc = "E:\\torrentz\\test.csv";
+        String DefaultLoc = "C:\\Users\\" + System.getProperty("user.name") + "\\Documents";
         JFileChooser choose = new JFileChooser(DefaultLoc);
         choose.setDialogTitle("Open a file");
         choose.setFileFilter(new FileTypeFilter(".csv", "CSV file"));
@@ -84,7 +97,11 @@ public class Datalocation extends JPanel {
             DatabaseAdd.fillDatabase();
         }
     } 
-        private void saveLocationButton1ActionPerformed() {
+    
+    /**
+     * Shows dialog to choose folder to save the file
+     */
+    private void saveLocationButton1ActionPerformed() {
         String DefaultSLoc = "C:\\Users\\" + System.getProperty("user.name") + "\\Documents";
         JFileChooser choose = new JFileChooser(DefaultSLoc);
         choose.setDialogTitle("Save a file");
@@ -93,8 +110,15 @@ public class Datalocation extends JPanel {
         int returnval = choose.showSaveDialog(null);
         if (returnval == JFileChooser.APPROVE_OPTION){
             File file = choose.getSelectedFile();
-            file = new File(file.toString() + ".csv");
+            String path = file.toString();
+            if (file.toString().length() < 3){
+                file = new File(file.toString() + ".csv");
+            } else {
+                String substring = file.toString().substring(file.toString().length()-4);
+            }
+            
             IOFile.createfile(file);
         }  
-    }                                                                           
+    }
+
 }

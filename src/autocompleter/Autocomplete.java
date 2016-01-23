@@ -4,12 +4,19 @@ import java.awt.event.ActionEvent;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
 
+/**
+ * Class to autocomplete textfields
+ * 
+ * @author Mark
+ */
 public class Autocomplete implements DocumentListener {
     
     private static enum Mode {
@@ -79,9 +86,20 @@ public class Autocomplete implements DocumentListener {
 
             fillCode(content, word, pos);
         } catch (BadLocationException ex) {
+            final JPanel panel = new JPanel();
+            JOptionPane.showMessageDialog(panel, "A error occurd during the autocomplete "
+                    + "please remove the enter text and try again", "Warning",
+                    JOptionPane.WARNING_MESSAGE);
         }
     }
     
+    /**
+     * Find the first option of the completion and start the completion task
+     * 
+     * @param content The entered part of the string
+     * @param word  The size of this word
+     * @param pos The postion of the typed text
+     */
     private void fillCode(String content, int word, int pos){
         String prefix = content.substring(word + 1).toLowerCase();
         int number = Collections.binarySearch(keywords, prefix);
@@ -99,7 +117,10 @@ public class Autocomplete implements DocumentListener {
             mode = Mode.INSERT;
         }
     }
-
+    
+    /**
+     * This class execution of the actions to be taken when commiting
+     */
     public class CommitAction extends AbstractAction {
         /**
         * serialVersionUID.
@@ -129,7 +150,10 @@ public class Autocomplete implements DocumentListener {
             }
         }
     }
-
+    
+    /**
+     * The class that show shows the completion before the commit action
+     */
     private class CompletionTask implements Runnable {
         private final String completion;
         private final int position;
@@ -158,7 +182,9 @@ public class Autocomplete implements DocumentListener {
                 textField.moveCaretPosition(position);
                 mode = Mode.COMPLETION;
             } catch (IllegalArgumentException e){
-                System.out.println("IlegalArgumentException in CompletionTask: " + e.getMessage());
+                //We expect this to occur when no string has been give to set text or a illegal potions
+                //since this will only confuse the user if we act on this we wil give no reaction since
+                //this wil not influence the the textfield search posiblity.
             }
         }
     }
