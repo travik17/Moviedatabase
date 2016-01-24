@@ -14,7 +14,7 @@ import javax.swing.*;
 public class JpaneTabs extends JFrame {
     
     public final static ArrayList<Movies> MOVIESARRAY = new ArrayList<>();
-    public final static String[] GENRES = new String[] {"Action", "Adventure", "Comedy", "Crime", "Fantasy", "Historical", "Horror",
+    public final static String[] GENRES = new String[] {"Action", "Adventure", "Comedy", "Crime", "Drama", "Fantasy", "Historical", "Horror",
         "Mystery", "Philosophical", "Political", "Romance", "Science fiction", "Thriller", "Western", "Animation"};
     
     /**
@@ -85,11 +85,13 @@ public class JpaneTabs extends JFrame {
         final JPanel DatabaseTab = new DatabaseUI();
         final JPanel EntryTab = new NewEntry();
         final JPanel SearchTab = new SearchUI();
+        final JPanel EditTab = new EditDatabase();
         
         jTabbedPane1.addTab("File Location", LocationTab);        
         jTabbedPane1.addTab("Database", DatabaseTab);        
         jTabbedPane1.addTab("New Entry", EntryTab);       
         jTabbedPane1.addTab("Search", SearchTab);
+        jTabbedPane1.addTab("Edit", EditTab);
     }
     /**
      * set grouplayout.

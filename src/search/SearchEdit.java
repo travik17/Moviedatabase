@@ -3,14 +3,7 @@ package search;
 import database.DatabaseInteraction;
 import model.Movies;
 import gui.JpaneTabs;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTable;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 /**
  * Class for actions on table changes
@@ -41,84 +34,5 @@ public class SearchEdit {
         if (col == 6){
             interaction.columnTrailer(name);
         }
-        
-        final DefaultTableModel model = (DefaultTableModel) jTable.getModel();
-        model.addTableModelListener(new TableModelListener(){
-            @Override
-            public void tableChanged(TableModelEvent e){
-                tableChanges(row, col);
-            }});
-    }
-    
-    /**
-     * Switch to handle the different changes
-     * 
-     * @param row The row selected
-     * @param col The colomn selected 
-     */
-    private void tableChanges(int row, int col){
-        String idstring = jTable.getValueAt(row, 0).toString();
-        Integer id = Integer.parseInt(idstring);
-                
-        switch (col){
-            case 1:
-            case 3:
-            case 4:
-                stringsChange(row, col, id);
-                break;
-            case 2:
-                actorChange(row, col, id);
-                break;
-            default:
-                break;
-        }  
-    }
-    
-    /**
-     * jTable changes in column 1, 3 and 4.
-     * 
-     * @param row the row selected.
-     * @param col the col selected.
-     * @param id  the id of the array to change.
-     */
-    private void stringsChange(int row, int col, Integer id){
-        String value = jTable.getValueAt(row, col).toString();
-        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        switch (col){
-            case 1:
-                break;
-            case 3:
-                if(Arrays.asList(JpaneTabs.GENRES).contains(value)){
-                    movie.setMovieGenre(value);
-                } else {
-                    final JPanel panel = new JPanel();
-                    JOptionPane.showMessageDialog(panel, "This is not a valid genre", "Warning",
-                        JOptionPane.WARNING_MESSAGE);
-                }
-                break;
-            case 4:
-                movie.setMoviePlayTime(Integer.parseInt(value));
-                break;
-            default:
-                break;
-        }
-        JpaneTabs.MOVIESARRAY.set(id, movie);
-    }
-    
-    /**
-     * jTable changes in column 2.
-     * 
-     * @param row the row selected.
-     * @param col the col selected.
-     * @param id  the id of the array to change.
-     */
-    private void actorChange(int row, int col, Integer id){
-        ArrayList<String> Actorlist = new ArrayList<>();
-        String value = jTable.getValueAt(row, col).toString();
-        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
-        String[] splitter = value.split(",");
-        Actorlist.addAll(Arrays.asList(splitter));
-        movie.setMovieActors(Actorlist);
-        JpaneTabs.MOVIESARRAY.set(id, movie);                   
-    }
+    }  
 }

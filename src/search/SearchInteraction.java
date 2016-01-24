@@ -35,8 +35,7 @@ public class SearchInteraction {
                 }
                 model.addRow(new Object[]{movies.identification, movies.Name, listofactors.toString(), movies.Genre,
                     movies.PlayTime, "Click to see cover", "Click to see trailer"});
-            } else {
-            } 
+            }
         }
     }
     
