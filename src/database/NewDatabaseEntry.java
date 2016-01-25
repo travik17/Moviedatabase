@@ -33,8 +33,8 @@ public class NewDatabaseEntry {
                 final String[] splitter = Actors.split(",");
                 Actorlist.addAll(Arrays.asList(splitter));
                 Movies movie;
-                movie = new Movies(JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
-                    jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText()));
+                movie = new Movies(new Object[] {JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
+                    jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText())});
                 JpaneTabs.MOVIESARRAY.add(movie);
                 DatabaseAdd add = new DatabaseAdd();
                 add.addDatabase(movie);

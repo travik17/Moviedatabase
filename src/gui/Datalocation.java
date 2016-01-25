@@ -28,7 +28,6 @@ public class Datalocation extends JPanel {
      */
     private void initComponents() {
         setButtons();
-        
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         setGrouplayout(layout);
@@ -63,20 +62,20 @@ public class Datalocation extends JPanel {
      * @param layout The layout to which the params are added
      */
     private void setGrouplayout(GroupLayout layout){
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(111, 111, 111)
-                .addComponent(LoadLocBut, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(SaveLocBut, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(LoadLocBut, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
+                .addComponent(SaveLocBut, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
                 .addGap(126, 126, 126))
         );
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveLocBut, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoadLocBut, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveLocBut, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LoadLocBut, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(223, Short.MAX_VALUE))
         );
     }
@@ -118,20 +117,20 @@ public class Datalocation extends JPanel {
     }
     
     /**
-     * check if filename already ends with .csv
+     * check if name already ends with .csv
      * 
-     * @param filename the entered filename
+     * @param name the entered name
      * @return the correct file name that ends with .csv
      */
-    private String checkCsv(String filename){
-        if (filename.isEmpty() || filename.length() < 3){
-            return filename += ".csv";
+    private String checkCsv(String name){
+        if (name.isEmpty() || name.length() < 3){
+            return name += ".csv";
         } else {
-            String substring = filename.substring(filename.length() - 4);
+            String substring = name.substring(name.length() - 4);
             if (substring.equalsIgnoreCase(".csv")){
-                return filename;
+                return name;
             } else {
-                return filename += ".csv";
+                return name += ".csv";
             }
             
         }

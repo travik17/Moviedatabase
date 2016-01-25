@@ -38,9 +38,9 @@ public class SearchUI extends JPanel {
         GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
         ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
         jLabel3.setFont(new Font("Tahoma", 0, 14));
-        SearchTable table = new SearchTable();
-        table.setButton(ChangeGenreButton, SearchGenCombo, SearchActorText, ChangeActorButton, jTable1);
-        table.modelSet(jTable1);
+        SearchTable table = new SearchTable(jTable1);
+        table.setButton(ChangeGenreButton, SearchGenCombo, SearchActorText, ChangeActorButton);
+        table.modelSet();
         
         //set layout of jTable.
         GroupLayout jPanel1Layout = new GroupLayout(jPanel1);

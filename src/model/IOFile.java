@@ -67,7 +67,7 @@ public class IOFile {
                 String genre = splitline[size -2];
                 int playTime = Integer.parseInt(splitline[size-1]);
 
-                Movies movie = new Movies(identification,name,actors,genre,playTime);
+                Movies movie = new Movies(new Object[] {identification,name,actors,genre,playTime});
                 JpaneTabs.MOVIESARRAY.add(movie);
             }
 	} catch (FileNotFoundException e) {

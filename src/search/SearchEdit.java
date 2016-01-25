@@ -46,19 +46,19 @@ public class SearchEdit {
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButton1ActionPerformed();
             }
         });
         
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton2ActionPerformed(evt);
+                    jButton2ActionPerformed();
             }
         });
     }
     
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton1ActionPerformed() {                                         
         String name = fields[0].getText();
         found = false;
         for (int i=0; i<JpaneTabs.MOVIESARRAY.size();i++){
@@ -89,15 +89,15 @@ public class SearchEdit {
         fields[3].setText(movie.PlayTime.toString());
     }
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    private void jButton2ActionPerformed() {                                         
         try{
             String actors = fields[2].getText();
             final String[] splitter = actors.split(",");
             ArrayList<String> actorlist = new ArrayList();
             actorlist.addAll(Arrays.asList(splitter));
             fieldisEmpty();
-            Movies movie = new Movies(movieId, fields[1].getText(), actorlist, combo.getSelectedItem().toString(), 
-                    Integer.parseInt(fields[3].getText()));
+            Movies movie = new Movies(new Object[]{movieId, fields[1].getText(), actorlist, combo.getSelectedItem().toString(), 
+                    Integer.parseInt(fields[3].getText())});
             JpaneTabs.MOVIESARRAY.set(movieId, movie);
             found = false;
             DatabaseAdd add = new DatabaseAdd();

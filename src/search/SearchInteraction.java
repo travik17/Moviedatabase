@@ -1,7 +1,6 @@
 package search;
 
 import model.Movies;
-import model.Autocomplete;
 import gui.JpaneTabs;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -77,31 +76,5 @@ public class SearchInteraction {
                     movies.PlayTime, "Click to see cover", "Click to see trailer"});
             }
         }
-    }
-    
-    /**
-     * Create the autocomplete class and keywordlist for actor textfield
-     * 
-     * @param SearchGenText the selected textfield
-     */
-    public void createAutocomplete(JTextField SearchGenText){
-        //create the keywords file.
-        ArrayList<String> keywords = new ArrayList<>();
-        SearchGenText.setFocusTraversalKeysEnabled(false);
-        for (int i=0; i<JpaneTabs.MOVIESARRAY.size(); i++){
-            
-            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
-            for (int j=0; j<movies.Actors.size(); j++){
-                if(!keywords.contains(movies.Actors.get(j))){
-                    keywords.add(movies.Actors.get(j));
-                }
-            }
-        }
-        
-        //initialize class and commit key.
-        Autocomplete autoComplete = new Autocomplete(SearchGenText, keywords) {};
-        SearchGenText.getDocument().addDocumentListener(autoComplete);
-        SearchGenText.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "commit");
-        SearchGenText.getActionMap().put("commit", autoComplete.new CommitAction());
     }
 }
