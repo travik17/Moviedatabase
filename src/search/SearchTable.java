@@ -1,10 +1,13 @@
 package search;
 
+import database.DatabaseInteraction;
+import gui.JpaneTabs;
 import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import model.Movies;
 
 /**
  * Class to create the table and button actions of search
@@ -73,8 +76,7 @@ public class SearchTable {
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                SearchEdit edit = new SearchEdit();
-                edit.jTable1MouseClicked(jTable1);
+                jTable1MouseClicked(jTable1);
             }
         });
     }
@@ -87,6 +89,28 @@ public class SearchTable {
         rightRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         for (int i=0;i<7;i++){
             jTable1.getColumnModel().getColumn(i).setCellRenderer(rightRenderer);
+        }
+    }
+    
+    /**
+     * Actions when the jTable is clicked.
+     * 
+     * @param jTable1
+     */
+    private void jTable1MouseClicked(final JTable jTable1) { 
+        final int row = jTable1.getSelectedRow();
+        final int col = jTable1.getSelectedColumn();
+        String idstring = jTable1.getValueAt(row, 0).toString();
+        Integer id = Integer.parseInt(idstring);
+        Movies movie = JpaneTabs.MOVIESARRAY.get(id);
+        String name = movie.Name;
+        DatabaseInteraction interaction = new DatabaseInteraction();
+        
+        if (col == 5){
+            interaction.columnCover(name);
+        }
+        if (col == 6){
+            interaction.columnTrailer(name);
         }
     }
 }

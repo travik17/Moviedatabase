@@ -1,11 +1,8 @@
 package gui;
 
 import java.awt.Font;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.*;
-import model.Movies;
-import static org.apache.commons.lang3.StringUtils.strip;
+import search.SearchEdit;
 
 /**
  *
@@ -25,7 +22,6 @@ public class EditDatabase extends JPanel {
     private final JTextField nameTextfield = new JTextField();
     private final JTextField actorTextfield = new JTextField();
     private final JTextField timeTextfield = new JTextField();
-    private Integer movieId;
     
     /**
      * Creates new form NewJPanel
@@ -35,99 +31,20 @@ public class EditDatabase extends JPanel {
     }
                      
     private void initComponents() {
-        searchLabel.setFont(new Font("Tahoma", 0, 18)); 
-        searchText.setFont(new Font("Tahoma", 0, 18));
-        nameLabel.setFont(new Font("Tahoma", 0, 14)); 
-        nameTextfield.setFont(new Font("Tahoma", 0, 14)); 
-        actorsLabel.setFont(new Font("Tahoma", 0, 14)); 
-        actorTextfield.setFont(new Font("Tahoma", 0, 14)); 
-        GenreCombo.setFont(new Font("Tahoma", 0, 14)); 
-        genreLabel.setFont(new Font("Tahoma", 0, 14)); 
-        timeTextfield.setFont(new Font("Tahoma", 0, 14));
-        PlaytimeLabel.setFont(new Font("Tahoma", 0, 14));
+        JLabel[] labels = {searchLabel, nameLabel, actorsLabel, genreLabel, PlaytimeLabel};
+        JTextField[] fields = {searchText, nameTextfield, actorTextfield, timeTextfield};
+        SearchEdit edit = new SearchEdit();
+        
         saveButton.setFont(new Font("Tahoma", 0, 14));
-        
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
+        edit.editDatbaseButton(searchButton, saveButton);
+        edit.editDatbaselabel(labels, fields, GenreCombo);
+                
         GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         setHorizontal(layout);
         setVertical(layout);
     }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        String name = searchText.getText();
-        Boolean found = false;
-        for (int i=0; i<JpaneTabs.MOVIESARRAY.size();i++){
-            Movies movies = JpaneTabs.MOVIESARRAY.get(i);
-            if(name.equalsIgnoreCase(strip(movies.Name))){
-                movieId = i;
-                setTextfields(movies);
-                found = true;
-                break;
-            }
-        }
-        if (!found){
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "No movie with the name: " + name + " found", "Warning",
-                JOptionPane.WARNING_MESSAGE);
-        }
-    } 
-    
-    private void setTextfields(Movies movie){
-        nameTextfield.setText(movie.Name);
-        StringBuilder listofactors = new StringBuilder();
-            for (String s : movie.Actors){
-                listofactors.append(s);
-                listofactors.append(", ");
-            }
-        GenreCombo.setSelectedItem(movie.Genre);
-        actorTextfield.setText(listofactors.toString());
-        timeTextfield.setText(movie.PlayTime.toString());
-    }
-    
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        try{
-            String name = nameTextfield.getText();
-            String actors = actorTextfield.getText();
-            final String[] splitter = actors.split(",");
-            ArrayList<String> actorlist = new ArrayList();
-            actorlist.addAll(Arrays.asList(splitter));
-            Integer time = Integer.parseInt(timeTextfield.getText());
-            fieldisEmpty(name, actors);
-            Movies movie = JpaneTabs.MOVIESARRAY.get(movieId);
-            movie.setMovieName(name);
-            movie.setMovieActors(actorlist);
-            movie.setMovieGenre(GenreCombo.getSelectedItem().toString());
-            movie.setMoviePlayTime(time);
-        } catch (NumberFormatException e){
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
-                JOptionPane.WARNING_MESSAGE);
-        }
-        
-    }
-    
-    private void fieldisEmpty(String name, String actors){
-        if (name.equals("") || actors.equals("")){
-            final JPanel panel = new JPanel();
-            JOptionPane.showMessageDialog(panel, "No field can be empty", "Warning",
-                JOptionPane.WARNING_MESSAGE);
-        }
-    }
-    
+
     private void setHorizontal(GroupLayout layout){
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()

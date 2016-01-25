@@ -17,7 +17,6 @@ public class DatabaseAdd {
      */
     public void fillDatabase(){
         final DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        
         ArrayList<Movies> moviesArray = JpaneTabs.MOVIESARRAY;
         
         //set standaard images.
@@ -44,9 +43,22 @@ public class DatabaseAdd {
             listofactors.append(s);
             listofactors.append(", ");
         }
-        Object[] row = {temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-            temp.PlayTime, "Click to see cover", "Click to see trailer"};
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(row);
-    }  
+        model.addRow(new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
+            temp.PlayTime, "Click to see cover", "Click to see trailer"});
+    }
+    
+    public void updateDatabase(Movies temp, Integer row){
+        StringBuilder listofactors = new StringBuilder();
+            for (String s : temp.Actors){
+                listofactors.append(s);
+                listofactors.append(", ");
+            }
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.removeRow(row);
+        model.insertRow(row, new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
+            temp.PlayTime, "Click to see cover", "Click to see trailer"});
+        
+        
+    }
 }
