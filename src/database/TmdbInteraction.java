@@ -58,7 +58,7 @@ public class TmdbInteraction {
         List<Video> videos = movies.getVideos(i, "nl");
         String key;
         if (videos.isEmpty()){
-            key = null;
+            key = "empty";
         } else {
             Video video = videos.get(0);
             key = video.getKey();

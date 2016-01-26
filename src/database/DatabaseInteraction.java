@@ -47,7 +47,7 @@ public class DatabaseInteraction {
         Integer movieId = tmdb.tmdbid(name);
         String trailerPath = tmdb.trailerCreate(movieId);
         
-        if (trailerPath == null){
+        if ("empty".equals(trailerPath)){
             JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "No trailer available", "Warning", JOptionPane.WARNING_MESSAGE);
         } else {
