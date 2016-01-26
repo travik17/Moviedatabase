@@ -117,23 +117,22 @@ public class Datalocation extends JPanel {
     }
     
     /**
-     * check if name already ends with .csv
+     * check if check already ends with .csv
      * 
-     * @param name the entered name
-     * @return the correct file name that ends with .csv
+     * @param check the entered check
+     * @return the correct file check that ends with .csv
      */
-    private String checkCsv(String name){
-        if (name.isEmpty() || name.length() < 3){
+    private String checkCsv(String check){
+        String name = check;
+        if (check.isEmpty() || check.length() < 3){
             return name += ".csv";
         } else {
-            String substring = name.substring(name.length() - 4);
+            String substring = check.substring(check.length() - 4);
             if (substring.equalsIgnoreCase(".csv")){
                 return name;
             } else {
                 return name += ".csv";
-            }
-            
+            }  
         }
     }
-
 }

@@ -47,10 +47,6 @@ public class SearchTable {
         });
     }
     
-    public void setTextfield(){
-        
-    }
-    
     /**
      * Set the model of jTable.
      */
