@@ -135,4 +135,5 @@ public class Datalocation extends JPanel {
             }  
         }
     }
+
 }
