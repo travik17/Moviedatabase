@@ -33,9 +33,8 @@ public class JpaneTabs extends JFrame {
         jTabbedPane1.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
         addTabs(jTabbedPane1);
         
-        GroupLayout layout = new GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        setGroupLayout(layout, jTabbedPane1);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 550));
         pack();
     }                       
 
@@ -92,27 +91,5 @@ public class JpaneTabs extends JFrame {
         jTabbedPane1.addTab("New Entry", EntryTab);       
         jTabbedPane1.addTab("Search", SearchTab);
         jTabbedPane1.addTab("Edit", EditTab);
-    }
-    /**
-     * set grouplayout.
-     * 
-     * @param layout the layout to add the parameters.
-     * @param jTabbedPane1 The jTabbedPane for the layout
-     */
-    private void setGroupLayout(final GroupLayout layout, JTabbedPane jTabbedPane1){
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1, GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-    }                
+    }           
 }

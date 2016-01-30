@@ -5,7 +5,8 @@ import javax.swing.*;
 import search.SearchEdit;
 
 /**
- *
+ * class for the jpanel for editing the database
+ * 
  * @author Mark
  */
 public class EditDatabase extends JPanel {
@@ -17,7 +18,7 @@ public class EditDatabase extends JPanel {
     private final JLabel nameLabel = new JLabel("Name:");
     private final JLabel actorsLabel = new JLabel("Actors:");
     private final JLabel genreLabel = new JLabel("Genre:");
-    private final JLabel PlaytimeLabel = new JLabel("Play Time:");
+    private final JLabel PlaytimeLabel = new JLabel("    Time:");
     private final JTextField searchText = new JTextField();
     private final JTextField nameTextfield = new JTextField();
     private final JTextField actorTextfield = new JTextField();
@@ -29,85 +30,66 @@ public class EditDatabase extends JPanel {
     public EditDatabase() {
         initComponents();
     }
-                     
+    
+    /**
+     * Build the view
+     */
     private void initComponents() {
-        JLabel[] labels = {searchLabel, nameLabel, actorsLabel, genreLabel, PlaytimeLabel};
-        JTextField[] fields = {searchText, nameTextfield, actorTextfield, timeTextfield};
-        SearchEdit edit = new SearchEdit();
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        editDatbaseButton();
+        editDatbaselabel();
         
-        saveButton.setFont(new Font("Tahoma", 0, 14));
-        edit.editDatbaseButton(searchButton, saveButton);
-        edit.editDatbaselabel(labels, fields, GenreCombo);
-                
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        setHorizontal(layout);
-        setVertical(layout);
-    }
-
-    private void setHorizontal(GroupLayout layout){
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(saveButton)
-                        .addGap(327, 327, 327))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                            .addComponent(genreLabel)
-                            .addComponent(PlaytimeLabel)
-                            .addComponent(actorsLabel)
-                            .addComponent(nameLabel))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(actorTextfield, GroupLayout.Alignment.LEADING)
-                            .addComponent(GenreCombo, GroupLayout.Alignment.LEADING, 0, 681, Short.MAX_VALUE)
-                            .addComponent(timeTextfield, GroupLayout.Alignment.LEADING)
-                            .addComponent(nameTextfield))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(248, 248, 248)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(searchText, GroupLayout.PREFERRED_SIZE, 182, GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(searchButton, GroupLayout.PREFERRED_SIZE, 100, GroupLayout.PREFERRED_SIZE))
-                    .addComponent(searchLabel))
-                .addContainerGap(225, Short.MAX_VALUE))
-        );
+        add(searchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 20, 340, -1));
+        add(searchText, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 310, -1));
+        add(nameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, 30));
+        add(nameTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 580, -1));
+        add(actorsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, -1, 30));
+        add(actorTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 580, -1));
+        add(genreLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, 30));
+        add(GenreCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 580, -1));
+        add(PlaytimeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 380, 80, 30));
+        add(timeTextfield, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 580, -1));
     }
     
-    private void setVertical(GroupLayout layout){
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(searchLabel)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchText, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(nameTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameLabel))
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(actorTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(genreLabel)
-                            .addComponent(GenreCombo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(timeTextfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PlaytimeLabel))
-                        .addGap(36, 36, 36)
-                        .addComponent(saveButton))
-                    .addComponent(actorsLabel))
-                .addGap(113, 113, 113))
-        );
+    /**
+     * Set the buttons and the actions of them
+     */
+    private void editDatbaseButton(){
+        JTextField[] fields = {searchText, nameTextfield, actorTextfield, timeTextfield};
+        final SearchEdit edit = new SearchEdit(fields, GenreCombo);
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit.searchMovie();
+            }
+        });
+        add(searchButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 90, 30));
+        
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edit.saveChanges();
+            }
+        });
+        add(saveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 150, 40));
     }
+    
+    /**
+     * set the fonts for the components
+     */
+    private void editDatbaselabel(){
+        Font font = new Font("Tahoma", 0, 18);
+        searchLabel.setFont(font);
+        nameLabel.setFont(font);
+        actorsLabel.setFont(font);
+        genreLabel.setFont(font);
+        PlaytimeLabel.setFont(font);
+        searchText.setFont(font); 
+        nameTextfield.setFont(font);  
+        actorTextfield.setFont(font); 
+        timeTextfield.setFont(font);
+        saveButton.setFont(font);
+        GenreCombo.setFont(font); 
+    }
+    
 }

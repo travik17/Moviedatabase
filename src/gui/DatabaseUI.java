@@ -27,35 +27,10 @@ public class DatabaseUI extends JPanel {
      */
     private void initComponents() {
         JScrollPane jScrollPane1 = new JScrollPane();
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         createJtable();
         jScrollPane1.setViewportView(jTable1);
-
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        layoutSet(layout, jScrollPane1);
-    }
-    
-    /**
-     * set layout parameters for view.
-     * 
-     * @param layout The layout for which the parameters are.
-     * @param jScrollPane1 The scrollpane in the layout.
-     */
-    private void layoutSet(final GroupLayout layout, JScrollPane jScrollPane1){
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 500));
     }
     
     /**

@@ -2,7 +2,6 @@ package search;
 
 import database.DatabaseInteraction;
 import gui.JpaneTabs;
-import java.awt.Font;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,31 +19,6 @@ public class SearchTable {
     
     public SearchTable(JTable table){
         this.table = table;
-    }
-    
-    /**
-     * Set the buttons for this view.
-     * 
-     * @param ChangeGenreButton The genre button for the actions
-     * @param SearchGenCombo The combobox for the actions
-     * @param SearchActorText The Text for the actor search
-     * @param ChangeActorButton The actor button for the actions
-     */
-    public void setButton(JButton ChangeGenreButton, final JComboBox SearchGenCombo, final JTextField SearchActorText, JButton ChangeActorButton){
-        final SearchInteraction interaction = new SearchInteraction();
-        ChangeGenreButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                interaction.genreSearch(table, SearchGenCombo);
-            }
-        });
-        SearchActorText.setFont(new Font("Tahoma", 0, 18));
-        ChangeActorButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                interaction.actorSearch(table, SearchActorText);
-            }
-        });
     }
     
     /**
@@ -72,7 +46,7 @@ public class SearchTable {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
-                jTable1MouseClicked();
+                columnActions();
             }
         });
     }
@@ -91,7 +65,7 @@ public class SearchTable {
     /**
      * Actions when the jTable is clicked.
      */
-    private void jTable1MouseClicked() { 
+    private void columnActions() { 
         final int row = table.getSelectedRow();
         final int col = table.getSelectedColumn();
         String idstring = table.getValueAt(row, 0).toString();

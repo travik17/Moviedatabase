@@ -12,10 +12,7 @@ import javax.swing.*;
  * @author Mark
  */
 public class Datalocation extends JPanel {
-    
-    private final JButton LoadLocBut = new JButton();
-    private final JButton SaveLocBut = new JButton();
-    
+
     /**
      * Constructor.
      */
@@ -24,60 +21,27 @@ public class Datalocation extends JPanel {
     }
     
     /**
-     * Add view components.
+     * Add view components and set buttons.
      */
     private void initComponents() {
-        setButtons();
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        setGrouplayout(layout);
-    }
-    
-    /**
-     * Set text and actionlisteners of buttons in view.
-     */
-    private void setButtons() {
-        //Load button
-        LoadLocBut.setText("Load .csv file");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());   
+        final JButton LoadLocBut = new JButton("Load .csv file");
         LoadLocBut.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadLocationButton1ActionPerformed();
             }
         });
-        
-        //Save button
-        SaveLocBut.setText("Save .csv file");
+        add(LoadLocBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 180, 90));
+
+        final JButton SaveLocBut = new JButton("Save .csv file");
         SaveLocBut.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveLocationButton1ActionPerformed();
             }
         });
-    }
-    
-    /**
-     * Set the layout of the panel
-     * 
-     * @param layout The layout to which the params are added
-     */
-    private void setGrouplayout(GroupLayout layout){
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(111, 111, 111)
-                .addComponent(LoadLocBut, GroupLayout.PREFERRED_SIZE, 184, GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
-                .addComponent(SaveLocBut, GroupLayout.PREFERRED_SIZE, 175, GroupLayout.PREFERRED_SIZE)
-                .addGap(126, 126, 126))
-        );
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                    .addComponent(SaveLocBut, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LoadLocBut, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(223, Short.MAX_VALUE))
-        );
+        add(SaveLocBut, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 180, 180, 90));
     }
     
     /**

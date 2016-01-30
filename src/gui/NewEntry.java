@@ -16,10 +16,13 @@ public class NewEntry extends JPanel {
     private final JTextField NameEditText1 = new JTextField();
     private final JTextField TimeEditText1 = new JTextField();
     private final JComboBox<String> jComboBox2 = new JComboBox<>(JpaneTabs.GENRES);
+    private final JLabel textLabel = new JLabel("Id, cover and trailer will be automatically generated");
     private final JLabel NameLabel = new JLabel("Name:");
-    private final JLabel ActorsLabel1 = new JLabel("Actors:");
+    private final JLabel ActorsLabel1 = new JLabel("Actors");
+    private final JLabel ActorsLabel2 = new JLabel ("(separate by ,):");
     private final JLabel GenreLabel1 = new JLabel("Genre:");
-    private final JLabel TimeLabel1 = new JLabel("Time (in min):");
+    private final JLabel TimeLabel1 = new JLabel("Play time");
+    private final JLabel Timelabel2 = new JLabel("(in min): ");
     private final JButton SaveEntry1 = new JButton("Save");
     private final JTextField ActorsEditText1 = new JTextField();
     
@@ -35,95 +38,46 @@ public class NewEntry extends JPanel {
      */
     private void initComponents() { 
         setFont();
+        setButton();
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(NameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, 30));
+        add(ActorsLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, 30));
+        add(SaveEntry1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 410, 150, 40));
+        add(GenreLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, 30));
+        add(NameEditText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 540, -1));
+        add(ActorsEditText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 540, -1));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 540, -1));
+        add(TimeLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        add(Timelabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 300, -1, -1));
+        add(TimeEditText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 540, -1));
+        add(textLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, -1, -1));
+        add(ActorsLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+    }   
+    
+    private void setButton(){
         SaveEntry1.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewDatabaseEntry entry = new NewDatabaseEntry();
-                entry.saveEntry1ActionPerformed(ActorsEditText1, NameEditText1, jComboBox2, TimeEditText1);
-            }});
-        GroupLayout layout = new GroupLayout(this);
-        this.setLayout(layout);
-        setHorizontal(layout);
-        setVertical(layout);
-    }    
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            NewDatabaseEntry entry = new NewDatabaseEntry();
+            entry.saveEntry1ActionPerformed(ActorsEditText1, NameEditText1, jComboBox2, TimeEditText1);
+        }});
+    }
     
     /**
      * Set Fonts for labels and textfield
      */
     private void setFont(){
-        final String font = "Tahoma";
-        NameLabel.setFont(new java.awt.Font(font, 0, 18));
-        ActorsLabel1.setFont(new java.awt.Font(font, 0, 18));
-        GenreLabel1.setFont(new java.awt.Font(font, 0, 18));
-        TimeLabel1.setFont(new java.awt.Font(font, 0, 18));
-        NameEditText1.setFont(new java.awt.Font(font, 0, 18));
-        ActorsEditText1.setFont(new java.awt.Font(font, 0, 18)); 
-        TimeEditText1.setFont(new java.awt.Font(font, 0, 18));         
-    }
-    
-    /**
-     * set Horizontal layout parameters for view.
-     * 
-     * @param layout The layout for which the parameters are.
-     */
-    private void setHorizontal(GroupLayout layout){
-        layout.setHorizontalGroup(
-                    layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(208, Short.MAX_VALUE))
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(389, 389, 389)
-                                    .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(161, 161, 161)
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                        .addComponent(NameLabel)
-                                        .addComponent(ActorsLabel1)
-                                        .addComponent(GenreLabel1)
-                                        .addComponent(TimeLabel1))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(NameEditText1)
-                                        .addComponent(jComboBox2, 0, 280, Short.MAX_VALUE)
-                                        .addComponent(TimeEditText1))))
-                            .addContainerGap(209, Short.MAX_VALUE))));
-    }
-    
-    /**
-     * set Horizontal layout parameters for view.
-     * 
-     * @param layout The layout for which the parameters are.
-     */
-    private void setVertical(GroupLayout layout){
-        layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(122, 122, 122)   
-                .addComponent(ActorsEditText1, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(350, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(80, 80, 80)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(NameLabel)
-                        .addComponent(NameEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addComponent(ActorsLabel1)
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(GenreLabel1)
-                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(18, 18, 18)
-                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(TimeLabel1)
-                        .addComponent(TimeEditText1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                    .addGap(112, 112, 112)
-                    .addComponent(SaveEntry1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(92, Short.MAX_VALUE))));
-    } 
+        java.awt.Font font = new java.awt.Font("Tahoma", 0, 18);
+        NameLabel.setFont(font);
+        ActorsLabel1.setFont(font);
+        GenreLabel1.setFont(font);
+        TimeLabel1.setFont(font);
+        NameEditText1.setFont(font);
+        ActorsEditText1.setFont(font); 
+        TimeEditText1.setFont(font);
+        textLabel.setFont(font);
+        jComboBox2.setFont(font);
+        ActorsLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
+        Timelabel2.setFont(new java.awt.Font("Tahoma", 0, 14));         
+    }   
 }

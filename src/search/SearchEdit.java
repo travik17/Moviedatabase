@@ -3,62 +3,41 @@ package search;
 import database.DatabaseAdd;
 import model.Movies;
 import gui.JpaneTabs;
-import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import static org.apache.commons.lang3.StringUtils.strip;
 
 /**
- * Class for actions on table changes
+ * Class for editing database
  * 
  * @author Mark
  */
 public class SearchEdit {
-    
+       
     private boolean found = false;
     private Integer movieId;
-    private JTextField[] fields;
-    private JComboBox combo;
+    private final JTextField[] fields;
+    private final JComboBox combo;
     
-    public void editDatbaselabel(JLabel[] labels, JTextField[] importfields, JComboBox GenreCombo){
-        this.fields = importfields;
+    /**
+     * Constructor
+     * 
+     * @param texts the textfields for the class
+     * @param GenreCombo the combo for the class
+     */
+    public SearchEdit(JTextField[] texts, JComboBox GenreCombo){
+        this.fields = texts;
         this.combo = GenreCombo;
-        String font = "Tahoma";
-        labels[0].setFont(new Font(font, 0, 18));
-        labels[1].setFont(new Font(font, 0, 14));
-        labels[2].setFont(new Font(font, 0, 14));
-        labels[3].setFont(new Font(font, 0, 14));
-        labels[4].setFont(new Font(font, 0, 14));
-        fields[0].setFont(new Font(font, 0, 18)); 
-        fields[1].setFont(new Font(font, 0, 14));  
-        fields[2].setFont(new Font(font, 0, 14)); 
-        fields[3].setFont(new Font(font, 0, 14));
-        GenreCombo.setFont(new Font("Tahoma", 0, 14)); 
     }
     
-    public void editDatbaseButton(JButton searchButton, JButton saveButton){
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed();
-            }
-        });
-        
-        saveButton.addActionListener(new java.awt.event.ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    jButton2ActionPerformed();
-            }
-        });
-    }
-    
-    private void jButton1ActionPerformed() {                                         
+    /**
+     * Start the search for the movie with the given name
+     */
+    public void searchMovie() {                                         
         String name = fields[0].getText();
         found = false;
         for (int i=0; i<JpaneTabs.MOVIESARRAY.size();i++){
@@ -77,8 +56,13 @@ public class SearchEdit {
         }
     } 
     
+    /**
+     * set the text of the movie in the fields
+     * 
+     * @param movie The movie to set in the textfields
+     */
     private void setTextfields(Movies movie){
-        fields[1].setText(movie.Name);
+        fields[1].setText(strip(movie.Name));
         StringBuilder listofactors = new StringBuilder();
             for (String s : movie.Actors){
                 listofactors.append(s);
@@ -89,7 +73,10 @@ public class SearchEdit {
         fields[3].setText(movie.PlayTime.toString());
     }
     
-    private void jButton2ActionPerformed() {                                         
+    /**
+     * Save the information after changes are made
+     */
+    public void saveChanges() {                                         
         try{
             String actors = fields[2].getText();
             final String[] splitter = actors.split(",");
@@ -106,10 +93,12 @@ public class SearchEdit {
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Please enter a valid number", "Warning",
                 JOptionPane.WARNING_MESSAGE);
-        }
-        
+        }   
     }
     
+    /**
+     * Check if the fields are empty
+     */
     private void fieldisEmpty(){
         if (fields[1].getText().equals("") || fields[2].getText().equals("")){
             final JPanel panel = new JPanel();
