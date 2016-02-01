@@ -55,13 +55,13 @@ public class NewDatabaseEntry {
      * @return true if fields are empty
      */
     private boolean testIfempty(String name, String actors){
-        if (name.equals("")){
+        if ("".equals(name)){
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Name can't be empty", "Warning",
                 JOptionPane.WARNING_MESSAGE);
             return true;
         } else {
-            if (actors.equals("")){
+            if ("".equals(actors)){
                 final JPanel panel = new JPanel();
                 JOptionPane.showMessageDialog(panel, "Actors can't be empty", "Warning",
                     JOptionPane.WARNING_MESSAGE);
