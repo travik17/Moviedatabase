@@ -71,6 +71,14 @@ public class NewEntry extends JPanel {
         add(ActorsLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
     }
     
+    /**
+     * set buttons in this view
+     * 
+     * @param actors The actors of the movie
+     * @param name The name of the movie
+     * @param genre The genre of the movie
+     * @param time The time of the movie
+     */
     private void setButton(final String actors, final String name, final String genre, final Integer time){
         final JButton SaveEntry1 = new JButton("Save");
         SaveEntry1.addActionListener(new java.awt.event.ActionListener() {
