@@ -17,24 +17,23 @@ public class NewDatabaseEntry {
      * Action when pressing the save button.
      * Add the new movie to the movies array and to the add row.
      * 
-     * @param ActorsEditText1
-     * @param NameEditText1
-     * @param jComboBox2
-     * @param TimeEditText1 
+     * @param actors
+     * @param name
+     * @param genre
+     * @param time
      */
-    public void saveEntry1ActionPerformed(JTextField ActorsEditText1, JTextField NameEditText1, JComboBox jComboBox2, JTextField TimeEditText1) {                                           
+    public void saveEntry1ActionPerformed(String actors, String name, String genre, Integer time) {                                           
         final ArrayList<String> Actorlist = new ArrayList<>();
         
-        Boolean errMessege = testIfempty(NameEditText1, ActorsEditText1);
+        Boolean errMessege = testIfempty(name, actors);
         //get the data from the view.
         try{
             if (!errMessege){
-                final String Actors = ActorsEditText1.getText();
-                final String[] splitter = Actors.split(",");
+                final String[] splitter = actors.split(",");
                 Actorlist.addAll(Arrays.asList(splitter));
                 Movies movie;
-                movie = new Movies(new Object[] {JpaneTabs.MOVIESARRAY.size() - 1, NameEditText1.getText(), Actorlist,
-                    jComboBox2.getSelectedItem().toString(), Integer.parseInt(TimeEditText1.getText())});
+                movie = new Movies(new Object[] {JpaneTabs.MOVIESARRAY.size() - 1, name, Actorlist,
+                    genre, time});
                 JpaneTabs.MOVIESARRAY.add(movie);
                 DatabaseAdd add = new DatabaseAdd();
                 add.addDatabase(movie);
@@ -49,20 +48,20 @@ public class NewDatabaseEntry {
     } 
     
     /**
-     * Test for checking empty fields
+     * Test if field is empty
      * 
-     * @param NameEditText1
-     * @param ActorsEditText1
-     * @return boolean if errormessege has been shown
+     * @param name Name of the movie
+     * @param actors The actors of the movie
+     * @return true if fields are empty
      */
-    private boolean testIfempty(JTextField NameEditText1, JTextField ActorsEditText1){
-        if (NameEditText1.getText().equals("")){
+    private boolean testIfempty(String name, String actors){
+        if (name.equals("")){
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Name can't be empty", "Warning",
                 JOptionPane.WARNING_MESSAGE);
             return true;
         } else {
-            if (ActorsEditText1.getText().equals("")){
+            if (actors.equals("")){
                 final JPanel panel = new JPanel();
                 JOptionPane.showMessageDialog(panel, "Actors can't be empty", "Warning",
                     JOptionPane.WARNING_MESSAGE);

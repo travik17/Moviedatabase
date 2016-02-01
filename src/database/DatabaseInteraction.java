@@ -106,7 +106,6 @@ public class DatabaseInteraction {
         webBrowserPanel.add(webBrowser, BorderLayout.CENTER);
         webBrowser.setBarsVisible(false);
         webBrowser.navigate("https://youtu.be/" + trailerPath);
-        System.out.println("https://youtu.be/" + trailerPath);
         return webBrowserPanel;
     }
 }

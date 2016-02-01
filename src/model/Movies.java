@@ -27,7 +27,6 @@ public final class Movies {
         setMovieActors((ArrayList<String>) info[2]);
         setMovieGenre((String) info[3]);
         setMoviePlayTime((Integer) info[4]);
-        //setMovieCover(cover);
     }
     
     /**
@@ -119,23 +118,4 @@ public final class Movies {
     public Integer getMoviePlayTime(){
         return PlayTime;
     }
-    
-    /**
-     * set cover of the movie
-     * 
-     * @param cover the cover of the movie
-     */
-    public void setMovieCover(String cover){
-        this.Cover = cover;
-    }
-    
-    /**
-     * get cover of the movie
-     * 
-     * @return image with the cover of the movie
-     */
-    public String getMovieCover(){
-        return Cover;
-    }
-    
 }

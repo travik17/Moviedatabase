@@ -48,6 +48,12 @@ public class DatabaseAdd {
             temp.PlayTime, "Click to see cover", "Click to see trailer"});
     }
     
+    /**
+     * Edit a row in the database view
+     * 
+     * @param temp The movie for editing
+     * @param row The row of the movie in the database
+     */
     public void updateDatabase(Movies temp, Integer row){
         StringBuilder listofactors = new StringBuilder();
             for (String s : temp.Actors){
@@ -57,8 +63,6 @@ public class DatabaseAdd {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.removeRow(row);
         model.insertRow(row, new Object[]{temp.identification, temp.Name, listofactors.toString(), temp.Genre,
-            temp.PlayTime, "Click to see cover", "Click to see trailer"});
-        
-        
+            temp.PlayTime, "Click to see cover", "Click to see trailer"});   
     }
 }

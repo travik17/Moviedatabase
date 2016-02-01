@@ -13,17 +13,6 @@ import search.SearchInteraction;
  * @author Mark
  */
 public class SearchUI extends JPanel {
-    
-    private final JComboBox<String> SearchGenCombo = new JComboBox<>(JpaneTabs.GENRES);
-    private final JTextField SearchActorText = new JTextField();
-    private final JTable jTable1 = new JTable();
-    private final JLabel GenreSearchLabel = new JLabel("Search for genre: ");
-    private final JButton ChangeGenreButton = new JButton("Search");
-    private final JLabel ActorSearchLabel = new JLabel("Search for actor: ");
-    private final JButton ChangeActorButton = new JButton("Search");
-    private final JScrollPane jScrollPane1 = new JScrollPane();
-    private final JLabel jLabel3 = new JLabel("<html>To edit the database dubble click on <br> the cell. press enter to confirm <br>"
-                + "Id, Cover and Trailer can't be edited</html>");
    
     /**
      * Constructor with tableChanged listener.
@@ -37,13 +26,15 @@ public class SearchUI extends JPanel {
      */
     private void initComponents() {
         final JPanel jPanel1 = new JPanel();
+        final JScrollPane jScrollPane1 = new JScrollPane();
+        final JTable jTable1 = new JTable();
         
-        GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
-        ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
-        jLabel3.setFont(new Font("Tahoma", 0, 14));
-        setButton();
+        setGenrebutton(jPanel1, jTable1);
+        setActorbutton(jPanel1, jTable1);
+        
         SearchTable table = new SearchTable(jTable1);
         table.modelSet();
+        
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         setPaneComponents(jPanel1);
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 180));
@@ -58,31 +49,55 @@ public class SearchUI extends JPanel {
      */
     private void setPaneComponents(JPanel jPanel1){
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        final JLabel GenreSearchLabel = new JLabel("Search for genre: ");
+        final JLabel ActorSearchLabel = new JLabel("Search for actor: ");
+        
+        GenreSearchLabel.setFont(new Font("Tahoma", 0, 18));
+        ActorSearchLabel.setFont(new Font("Tahoma", 0, 18));
         jPanel1.add(GenreSearchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, -1, 30));
-        jPanel1.add(SearchGenCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 230, -1));
-        jPanel1.add(ChangeGenreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 100, 30));
-        jPanel1.add(ActorSearchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1));
-        jPanel1.add(SearchActorText, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 230, -1));
-        jPanel1.add(ChangeActorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 100, 30));
+        jPanel1.add(ActorSearchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, -1, -1)); 
     }
     
     /**
-     * Set the buttons for this view.
+     * Set the genre button for this view.
+     * 
+     * @param jPanel1 The panel for the button
+     * @param jTable1 The table for the buttons actions
      */
-    public void setButton(){
+    public void setGenrebutton(JPanel jPanel1, final JTable jTable1){
         final SearchInteraction interaction = new SearchInteraction();
+        
+        final JComboBox<String> SearchGenCombo = new JComboBox<>(JpaneTabs.GENRES);
+        jPanel1.add(SearchGenCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, 230, -1));
+        
+        final JButton ChangeGenreButton = new JButton("Search");
         ChangeGenreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 interaction.genreSearch(jTable1, SearchGenCombo);
-            }
-        });
+            }});
+        jPanel1.add(ChangeGenreButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 100, 30));
+    }
+    
+    /**
+     * Set the actor button for this view.
+     * 
+     * @param jPanel1 The panel for the button
+     * @param jTable1 The table for the buttons actions
+     */
+    private void setActorbutton(JPanel jPanel1, final JTable jTable1){
+        final SearchInteraction interaction = new SearchInteraction();
+        
+        final JTextField SearchActorText = new JTextField();
         SearchActorText.setFont(new Font("Tahoma", 0, 18));
+        jPanel1.add(SearchActorText, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 230, -1));
+        
+        final JButton ChangeActorButton = new JButton("Search");
         ChangeActorButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 interaction.actorSearch(jTable1, SearchActorText);
-            }
-        });
+            }});
+        jPanel1.add(ChangeActorButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 100, 30));
     }
 }

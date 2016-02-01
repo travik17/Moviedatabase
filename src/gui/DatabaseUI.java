@@ -57,8 +57,7 @@ public class DatabaseUI extends JPanel {
             @Override
             public void mouseClicked(MouseEvent evt) {
                 DatabaseInteraction interaction = new DatabaseInteraction();
-                interaction.jTable1MouseClicked();
-            }
+                interaction.jTable1MouseClicked();}
         });
     }
     
